@@ -24,11 +24,23 @@ const HabitList = () => {
    };
 
    const handleComplete = (toChange: string) => {
+      const date: Date = new Date();
+
+      const today: string = date.toLocaleDateString();
+
+      const yesterday: Date = date;
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayString: string = yesterday.toLocaleDateString();
+
       const newHabits: Habit[] = habits.map((i) => {
-         if (i.name === toChange) {
-            i.lastCompleted = new Date().toLocaleDateString();
+         if (i.name === toChange && i.lastCompleted !== today) {
+            if (i.lastCompleted === yesterdayString) {
+               i.streak += 1;
+            } else {
+               i.streak = 1;
+            }
+            i.lastCompleted = today;
             i.history = [...i.history, i.lastCompleted];
-            i.streak += 1;
             console.log(`${i.lastCompleted} ${i.history} ${i.streak}`);
          }
          return i;
@@ -72,9 +84,6 @@ const HabitList = () => {
                <li key={index} className={`flex items-center gap-3`}>
                   <input
                      onChange={() => handleComplete(i.name)}
-                     //  checked={
-                     //     i.lastCompleted === new Date().toLocaleDateString()
-                     //  }
                      aria-label="Marcar como concluído"
                      type="checkbox"
                   />
