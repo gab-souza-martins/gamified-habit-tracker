@@ -1,4 +1,5 @@
 "use client";
+import HabitList from "./Components/HabitList";
 import TodoList from "./Components/TodoList";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
       <>
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
 
+         <HabitList />
          <TodoList />
       </>
    );
