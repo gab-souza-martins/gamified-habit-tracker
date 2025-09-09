@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
 
 const TodoList = () => {
    const [todos, setTodos] = React.useState<string[]>([]);
@@ -12,6 +13,11 @@ const TodoList = () => {
       setTodoName("");
    };
 
+   const handleRemove = (toRemove: string) => {
+      const newTodos: string[] = todos.filter((t) => t !== toRemove);
+      setTodos(newTodos);
+   };
+
    return (
       <>
          <h2 className="text-xl">Afazeres</h2>
@@ -20,6 +26,7 @@ const TodoList = () => {
             <input
                onChange={(e) => setTodoName(e.target.value)}
                value={todoName}
+               aria-label="Digite o afazer"
                type="text"
                placeholder="Afazer"
                className="border rounded-md p-1"
@@ -36,7 +43,19 @@ const TodoList = () => {
 
          <ul>
             {todos.map((t, index) => (
-               <li key={index}>{t}</li>
+               <li key={index} className="flex items-center gap-3">
+                  <span>{t}</span>
+                  <button
+                     onClick={(e) => {
+                        e.preventDefault();
+                        handleRemove(t);
+                     }}
+                     aria-label="Remover afazer"
+                     className="cursor-pointer p-2"
+                  >
+                     <FaX />
+                  </button>
+               </li>
             ))}
          </ul>
       </>
