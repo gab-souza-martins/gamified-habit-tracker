@@ -23,6 +23,21 @@ const HabitList = () => {
       setHabitName("");
    };
 
+   const handleComplete = (toChange: string) => {
+      const newHabits: Habit[] = habits.map((i) => {
+         if (i.name === toChange) {
+            i.lastCompleted = new Date().toLocaleDateString();
+            i.history = [...i.history, i.lastCompleted];
+            i.streak += 1;
+            console.log(`${i.lastCompleted} ${i.history} ${i.streak}`);
+         }
+         return i;
+      });
+
+      setHabits(newHabits);
+      localStorage.setItem("habits", JSON.stringify(newHabits));
+   };
+
    const handleRemove = (toRemove: string) => {
       const newHabits: Habit[] = habits.filter((i) => i.name !== toRemove);
       setHabits(newHabits);
@@ -55,6 +70,15 @@ const HabitList = () => {
          <ul>
             {habits.map((i, index) => (
                <li key={index} className={`flex items-center gap-3`}>
+                  <input
+                     onChange={() => handleComplete(i.name)}
+                     //  checked={
+                     //     i.lastCompleted === new Date().toLocaleDateString()
+                     //  }
+                     aria-label="Marcar como concluído"
+                     type="checkbox"
+                  />
+
                   <span>{i.name}</span>
 
                   <button
