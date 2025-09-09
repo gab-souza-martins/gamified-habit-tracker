@@ -7,10 +7,17 @@ const TodoList = () => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
    const [todoName, setTodoName] = React.useState<string>("");
 
+   React.useEffect(() => {
+      const saved: string | null = localStorage.getItem("todos");
+      const parsed: Todo[] = saved ? JSON.parse(saved) : [];
+      setTodos(parsed);
+   }, []);
+
    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       const newTodos: Todo[] = [...todos, { name: todoName, done: false }];
       setTodos(newTodos);
+      localStorage.setItem("todos", JSON.stringify(todos));
       setTodoName("");
    };
 
@@ -23,11 +30,13 @@ const TodoList = () => {
       });
 
       setTodos(newTodos);
+      localStorage.setItem("todos", JSON.stringify(todos));
    };
 
    const handleRemove = (toRemove: string) => {
       const newTodos: Todo[] = todos.filter((t) => t.name !== toRemove);
       setTodos(newTodos);
+      localStorage.setItem("todos", JSON.stringify(todos));
    };
 
    return (
