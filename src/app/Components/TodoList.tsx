@@ -1,20 +1,21 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
+import Todo from "../Types/TodoType";
 
 const TodoList = () => {
-   const [todos, setTodos] = React.useState<string[]>([]);
+   const [todos, setTodos] = React.useState<Todo[]>([]);
    const [todoName, setTodoName] = React.useState<string>("");
 
    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      const newTodos: string[] = [...todos, todoName];
+      const newTodos: Todo[] = [...todos, { name: todoName, done: false }];
       setTodos(newTodos);
       setTodoName("");
    };
 
    const handleRemove = (toRemove: string) => {
-      const newTodos: string[] = todos.filter((t) => t !== toRemove);
+      const newTodos: Todo[] = todos.filter((t) => t.name !== toRemove);
       setTodos(newTodos);
    };
 
@@ -44,11 +45,11 @@ const TodoList = () => {
          <ul>
             {todos.map((t, index) => (
                <li key={index} className="flex items-center gap-3">
-                  <span>{t}</span>
+                  <span>{t.name}</span>
                   <button
                      onClick={(e) => {
                         e.preventDefault();
-                        handleRemove(t);
+                        handleRemove(t.name);
                      }}
                      aria-label="Remover afazer"
                      className="cursor-pointer p-2"
