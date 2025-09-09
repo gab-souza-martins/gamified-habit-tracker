@@ -17,7 +17,7 @@ const TodoList = () => {
       e.preventDefault();
       const newTodos: Todo[] = [...todos, { name: todoName, done: false }];
       setTodos(newTodos);
-      localStorage.setItem("todos", JSON.stringify(todos));
+      localStorage.setItem("todos", JSON.stringify(newTodos));
       setTodoName("");
    };
 
@@ -30,13 +30,13 @@ const TodoList = () => {
       });
 
       setTodos(newTodos);
-      localStorage.setItem("todos", JSON.stringify(todos));
+      localStorage.setItem("todos", JSON.stringify(newTodos));
    };
 
    const handleRemove = (toRemove: string) => {
       const newTodos: Todo[] = todos.filter((t) => t.name !== toRemove);
       setTodos(newTodos);
-      localStorage.setItem("todos", JSON.stringify(todos));
+      localStorage.setItem("todos", JSON.stringify(newTodos));
    };
 
    return (
