@@ -14,6 +14,17 @@ const TodoList = () => {
       setTodoName("");
    };
 
+   const handleDone = (toChange: string, isDone: boolean) => {
+      const newTodos: Todo[] = todos.map((t) => {
+         if (t.name === toChange) {
+            t.done = isDone;
+         }
+         return t;
+      });
+
+      setTodos(newTodos);
+   };
+
    const handleRemove = (toRemove: string) => {
       const newTodos: Todo[] = todos.filter((t) => t.name !== toRemove);
       setTodos(newTodos);
@@ -44,8 +55,21 @@ const TodoList = () => {
 
          <ul>
             {todos.map((t, index) => (
-               <li key={index} className="flex items-center gap-3">
+               <li
+                  key={index}
+                  className={`flex items-center gap-3 ${
+                     t.done ? "text-gray-400 line-through" : ""
+                  }`}
+               >
+                  <input
+                     onChange={(e) => handleDone(t.name, e.target.checked)}
+                     checked={t.done}
+                     aria-label="Marcar como concluído"
+                     type="checkbox"
+                  />
+
                   <span>{t.name}</span>
+
                   <button
                      onClick={(e) => {
                         e.preventDefault();
