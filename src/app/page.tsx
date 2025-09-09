@@ -1,3 +1,4 @@
+"use client";
 import TodoList from "./Components/TodoList";
 
 const Home = () => {
