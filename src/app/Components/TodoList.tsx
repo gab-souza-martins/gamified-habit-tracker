@@ -22,11 +22,11 @@ const TodoList = () => {
    };
 
    const handleDone = (toChange: string, isDone: boolean) => {
-      const newTodos: Todo[] = todos.map((t) => {
-         if (t.name === toChange) {
-            t.done = isDone;
+      const newTodos: Todo[] = todos.map((i) => {
+         if (i.name === toChange) {
+            i.done = isDone;
          }
-         return t;
+         return i;
       });
 
       setTodos(newTodos);
@@ -34,7 +34,7 @@ const TodoList = () => {
    };
 
    const handleRemove = (toRemove: string) => {
-      const newTodos: Todo[] = todos.filter((t) => t.name !== toRemove);
+      const newTodos: Todo[] = todos.filter((i) => i.name !== toRemove);
       setTodos(newTodos);
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
@@ -63,26 +63,26 @@ const TodoList = () => {
          </form>
 
          <ul>
-            {todos.map((t, index) => (
+            {todos.map((i, index) => (
                <li
                   key={index}
                   className={`flex items-center gap-3 ${
-                     t.done ? "text-gray-400 line-through" : ""
+                     i.done ? "text-gray-400 line-through" : ""
                   }`}
                >
                   <input
-                     onChange={(e) => handleDone(t.name, e.target.checked)}
-                     checked={t.done}
+                     onChange={(e) => handleDone(i.name, e.target.checked)}
+                     checked={i.done}
                      aria-label="Marcar como concluído"
                      type="checkbox"
                   />
 
-                  <span>{t.name}</span>
+                  <span>{i.name}</span>
 
                   <button
                      onClick={(e) => {
                         e.preventDefault();
-                        handleRemove(t.name);
+                        handleRemove(i.name);
                      }}
                      aria-label="Remover afazer"
                      className="cursor-pointer p-2"
