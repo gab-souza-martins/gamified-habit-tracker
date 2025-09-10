@@ -10,8 +10,6 @@ const HabitList = () => {
       const saved: string | null = localStorage.getItem("habits");
       const parsed: Habit[] = saved ? JSON.parse(saved) : [];
 
-      // *Verifica quais hábitos foram completos em outro dia e os resetam
-
       const newHabits: Habit[] = parsed.map((i) => {
          if (i.lastCompleted !== new Date().toLocaleDateString()) {
             i.done = false;
@@ -39,6 +37,30 @@ const HabitList = () => {
       setHabitName("");
    };
 
+   const addCompletion = (
+      toChange: string,
+      today: string,
+      yesterday: string
+   ) => {
+      const newHabits: Habit[] = habits.map((i) => {
+         if (i.name === toChange) {
+            if (i.lastCompleted !== today) {
+               if (i.lastCompleted === yesterday) {
+                  i.streak += 1;
+               } else {
+                  i.streak = 1;
+               }
+               i.lastCompleted = today;
+               i.history = [...i.history, i.lastCompleted];
+               i.done = true;
+               console.log(`${i.lastCompleted} ${i.history} ${i.streak}`); //*Para teste
+            }
+         }
+         return i;
+      });
+      setHabits(newHabits);
+      localStorage.setItem("habits", JSON.stringify(newHabits));
+   };
    const handleComplete = (toChange: string, isDone: boolean) => {
       const date: Date = new Date();
 
@@ -48,25 +70,9 @@ const HabitList = () => {
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayString: string = yesterday.toLocaleDateString();
 
-      const newHabits: Habit[] = habits.map((i) => {
-         if (i.name === toChange) {
-            if (i.lastCompleted !== today) {
-               if (i.lastCompleted === yesterdayString) {
-                  i.streak += 1;
-               } else {
-                  i.streak = 1;
-               }
-               i.lastCompleted = today;
-               i.history = [...i.history, i.lastCompleted];
-               console.log(`${i.lastCompleted} ${i.history} ${i.streak}`);
-            }
-            i.done = isDone;
-         }
-         return i;
-      });
-
-      setHabits(newHabits);
-      localStorage.setItem("habits", JSON.stringify(newHabits));
+      if (isDone) {
+         addCompletion(toChange, today, yesterdayString);
+      }
    };
 
    const handleRemove = (toRemove: string) => {
