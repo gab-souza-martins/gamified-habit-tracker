@@ -10,6 +10,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaEdit } from "react-icons/fa";
+import ConfirmRemove from "./ConfirmRemove";
 
 const TodoList = () => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -109,7 +110,8 @@ const TodoList = () => {
             <button
                onClick={(e) => {
                   e.preventDefault();
-                  handleRemove(i.id);
+                  setIdToRemove(i.id);
+                  setIsConfirmRemoveOpen(true);
                }}
                aria-label="Remover afazer"
                className="cursor-pointer p-2"
@@ -153,14 +155,27 @@ const TodoList = () => {
       setEditValue("");
    };
 
-   const handleRemove = (toRemove: string) => {
-      const newTodos: Todo[] = todos.filter((i) => i.id !== toRemove);
+   const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
+      React.useState<boolean>(false);
+   const [idToRemove, setIdToRemove] = React.useState<string>("");
+
+   const handleRemove = () => {
+      const newTodos: Todo[] = todos.filter((i) => i.id !== idToRemove);
       setTodos(newTodos);
       localStorage.setItem("todos", JSON.stringify(newTodos));
+   };
+   const handleCloseConfirmRemove = () => {
+      setIsConfirmRemoveOpen(false);
    };
 
    return (
       <>
+         {isConfirmRemoveOpen && (
+            <ConfirmRemove
+               confirmRemove={handleRemove}
+               closeRemove={handleCloseConfirmRemove}
+            />
+         )}
          <h2 className="text-xl">Afazeres</h2>
 
          <form className="flex items-center gap-2">
