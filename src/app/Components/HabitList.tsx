@@ -4,8 +4,10 @@ import { FaPlus, FaX } from "react-icons/fa6";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
    SortableContext,
+   useSortable,
    verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const HabitList = () => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -48,16 +50,34 @@ const HabitList = () => {
       setHabitName("");
    };
 
-   const SortableItem = ({ i }) => {
+   const SortableItem = ({ i }: { i: Habit }) => {
+      const { attributes, listeners, setNodeRef, transform, transition } =
+         useSortable({ id: i.id });
+
+      const style = {
+         transition,
+         transform: CSS.Transform.toString(transform),
+      };
+
       return (
-         <div className="flex items-center gap-3">
+         <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            className="flex items-center gap-3"
+         >
             <input
                onChange={(e) => handleComplete(i.name, e.target.checked)}
                checked={i.done}
                aria-label="Marcar como concluído"
                type="checkbox"
             />
-            <span className={`${i.done ? "text-gray-400 line-through" : ""}`}>
+            <span
+               {...listeners}
+               className={`cursor-pointer ${
+                  i.done ? "text-gray-400 line-through" : ""
+               }`}
+            >
                {i.name}
             </span>
             <span className="text-gray-500">Sequência atual: {i.streak}</span>

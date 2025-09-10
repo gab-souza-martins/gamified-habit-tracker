@@ -4,8 +4,10 @@ import Todo from "../Types/TodoType";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
    SortableContext,
+   useSortable,
    verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const TodoList = () => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -36,12 +38,21 @@ const TodoList = () => {
       setTodoName("");
    };
 
-   const SortableItem = ({ i }) => {
+   const SortableItem = ({ i }: { i: Todo }) => {
+      const { attributes, listeners, setNodeRef, transform, transition } =
+         useSortable({ id: i.id });
+
+      const style = {
+         transition,
+         transform: CSS.Transform.toString(transform),
+      };
+
       return (
          <div
-            className={`flex items-center gap-3 ${
-               i.done ? "text-gray-400 line-through" : ""
-            }`}
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            className="flex items-center gap-3"
          >
             <input
                onChange={(e) => handleDone(i.name, e.target.checked)}
@@ -50,7 +61,14 @@ const TodoList = () => {
                type="checkbox"
             />
 
-            <span>{i.name}</span>
+            <span
+               {...listeners}
+               className={`cursor-pointer ${
+                  i.done ? "text-gray-400 line-through" : ""
+               }`}
+            >
+               {i.name}
+            </span>
 
             <button
                onClick={(e) => {
