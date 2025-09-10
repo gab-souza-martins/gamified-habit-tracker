@@ -43,18 +43,16 @@ const HabitList = () => {
       yesterday: string
    ) => {
       const newHabits: Habit[] = habits.map((i) => {
-         if (i.name === toChange) {
-            if (i.lastCompleted !== today) {
-               if (i.lastCompleted === yesterday) {
-                  i.streak += 1;
-               } else {
-                  i.streak = 1;
-               }
-               i.lastCompleted = today;
-               i.history = [...i.history, i.lastCompleted];
-               i.done = true;
-               console.log(`${i.lastCompleted} ${i.history} ${i.streak}`); //*Para teste
+         if (i.name === toChange && i.lastCompleted !== today) {
+            if (i.lastCompleted === yesterday) {
+               i.history = [...i.history, today];
+            } else {
+               i.history = [today];
             }
+            i.streak = i.history.length;
+            i.lastCompleted = i.history[i.history.length - 1];
+            i.done = true;
+            console.log(`${i.lastCompleted} ${i.history} ${i.streak}`); //*Para teste
          }
          return i;
       });
