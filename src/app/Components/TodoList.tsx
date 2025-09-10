@@ -1,6 +1,5 @@
 import React from "react";
-import { FaPlus } from "react-icons/fa";
-import { FaX } from "react-icons/fa6";
+import { FaPlus, FaX } from "react-icons/fa6";
 import Todo from "../Types/TodoType";
 
 const TodoList = () => {

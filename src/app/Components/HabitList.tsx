@@ -28,7 +28,8 @@ const HabitList = () => {
             name: habitName,
             done: false,
             streak: 0,
-            lastCompleted: null,
+            highestStreak: 0,
+            lastCompleted: "",
             history: [],
          },
       ];
@@ -48,6 +49,8 @@ const HabitList = () => {
                i.lastCompleted === yesterday ? [...i.history, today] : [today];
 
             i.streak = i.history.length;
+            i.highestStreak = i.streak >= i.streak ? i.streak : i.highestStreak;
+
             i.lastCompleted = i.history[i.history.length - 1];
             i.done = true;
             console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
@@ -138,6 +141,9 @@ const HabitList = () => {
                   </span>
                   <span className="text-gray-500">
                      Sequência atual: {i.streak}
+                  </span>
+                  <span className="text-gray-500">
+                     Maior sequência: {i.highestStreak}
                   </span>
 
                   <button
