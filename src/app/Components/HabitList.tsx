@@ -99,15 +99,10 @@ const HabitList = () => {
       );
    };
 
-   const addCompletion = (
-      toChange: string,
-      today: string,
-      yesterday: string
-   ) => {
+   const addCompletion = (toChange: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.name === toChange && i.lastCompleted !== today) {
-            i.history =
-               i.lastCompleted === yesterday ? [...i.history, today] : [today];
+            i.history = [...i.history, today];
 
             i.streak = i.history.length;
             i.highestStreak = i.streak >= i.streak ? i.streak : i.highestStreak;
@@ -141,16 +136,10 @@ const HabitList = () => {
    };
 
    const handleComplete = (habit: string, isDone: boolean) => {
-      const date: Date = new Date();
-
-      const today: string = date.toLocaleDateString();
-
-      const yesterday: Date = date;
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayString: string = yesterday.toLocaleDateString();
+      const today: string = new Date().toLocaleDateString();
 
       if (isDone) {
-         addCompletion(habit, today, yesterdayString);
+         addCompletion(habit, today);
       } else {
          removeCompletion(habit, today);
       }
@@ -192,10 +181,12 @@ const HabitList = () => {
                   if (active.id === over.id) {
                      return;
                   }
-                  setHabits((item) => {
-                     const oldIndex = item.findIndex((i) => i.id === active.id);
-                     const newIndex = item.findIndex((i) => i.id === over.id);
-                     return arrayMove(habits, oldIndex, newIndex);
+                  setHabits((list) => {
+                     const oldIndex = list.findIndex((i) => i.id === active.id);
+                     const newIndex = list.findIndex((i) => i.id === over.id);
+                     const newList = arrayMove(habits, oldIndex, newIndex);
+                     localStorage.setItem("habits", JSON.stringify(newList));
+                     return newList;
                   });
                }
             }}

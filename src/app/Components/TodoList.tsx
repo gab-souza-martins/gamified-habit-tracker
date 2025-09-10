@@ -133,10 +133,12 @@ const TodoList = () => {
                   if (active.id === over.id) {
                      return;
                   }
-                  setTodos((item) => {
-                     const oldIndex = item.findIndex((i) => i.id === active.id);
-                     const newIndex = item.findIndex((i) => i.id === over.id);
-                     return arrayMove(todos, oldIndex, newIndex);
+                  setTodos((list) => {
+                     const oldIndex = list.findIndex((i) => i.id === active.id);
+                     const newIndex = list.findIndex((i) => i.id === over.id);
+                     const newList = arrayMove(todos, oldIndex, newIndex);
+                     localStorage.setItem("todos", JSON.stringify(newList));
+                     return newList;
                   });
                }
             }}
