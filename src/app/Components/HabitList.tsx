@@ -22,19 +22,23 @@ const HabitList = () => {
 
    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      const newHabits: Habit[] = [
-         ...habits,
-         {
-            name: habitName,
-            done: false,
-            streak: 0,
-            highestStreak: 0,
-            lastCompleted: "",
-            history: [],
-         },
-      ];
-      setHabits(newHabits);
-      localStorage.setItem("habits", JSON.stringify(newHabits));
+      if (habitName.trim() !== "") {
+         const newHabits: Habit[] = [
+            ...habits,
+            {
+               name: habitName.trim(),
+               done: false,
+               streak: 0,
+               highestStreak: 0,
+               lastCompleted: "",
+               history: [],
+            },
+         ];
+         setHabits(newHabits);
+         localStorage.setItem("habits", JSON.stringify(newHabits));
+      } else {
+         console.log("Nenhum input encontrado");
+      }
       setHabitName("");
    };
 

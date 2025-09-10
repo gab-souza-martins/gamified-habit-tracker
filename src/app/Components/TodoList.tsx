@@ -14,9 +14,16 @@ const TodoList = () => {
 
    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      const newTodos: Todo[] = [...todos, { name: todoName, done: false }];
-      setTodos(newTodos);
-      localStorage.setItem("todos", JSON.stringify(newTodos));
+      if (todoName.trim() !== "") {
+         const newTodos: Todo[] = [
+            ...todos,
+            { name: todoName.trim(), done: false },
+         ];
+         setTodos(newTodos);
+         localStorage.setItem("todos", JSON.stringify(newTodos));
+      } else {
+         console.log("Nenhum input encontrado");
+      }
       setTodoName("");
    };
 
