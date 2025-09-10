@@ -1,6 +1,11 @@
 import React from "react";
 import { FaPlus, FaX } from "react-icons/fa6";
 import Todo from "../Types/TodoType";
+import { closestCenter, DndContext } from "@dnd-kit/core";
+import {
+   SortableContext,
+   verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const TodoList = () => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -49,6 +54,8 @@ const TodoList = () => {
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
 
+   const onDragEnd = () => {};
+
    return (
       <>
          <h2 className="text-xl">Afazeres</h2>
@@ -72,36 +79,41 @@ const TodoList = () => {
             </button>
          </form>
 
-         <ul>
-            {todos.map((i) => (
-               <li
-                  key={i.id}
-                  className={`flex items-center gap-3 ${
-                     i.done ? "text-gray-400 line-through" : ""
-                  }`}
-               >
-                  <input
-                     onChange={(e) => handleDone(i.name, e.target.checked)}
-                     checked={i.done}
-                     aria-label="Marcar como concluído"
-                     type="checkbox"
-                  />
-
-                  <span>{i.name}</span>
-
-                  <button
-                     onClick={(e) => {
-                        e.preventDefault();
-                        handleRemove(i.name);
-                     }}
-                     aria-label="Remover afazer"
-                     className="cursor-pointer p-2"
+         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+            <SortableContext
+               items={todos}
+               strategy={verticalListSortingStrategy}
+            >
+               {todos.map((i) => (
+                  <div
+                     key={i.id}
+                     className={`flex items-center gap-3 ${
+                        i.done ? "text-gray-400 line-through" : ""
+                     }`}
                   >
-                     <FaX />
-                  </button>
-               </li>
-            ))}
-         </ul>
+                     <input
+                        onChange={(e) => handleDone(i.name, e.target.checked)}
+                        checked={i.done}
+                        aria-label="Marcar como concluído"
+                        type="checkbox"
+                     />
+
+                     <span>{i.name}</span>
+
+                     <button
+                        onClick={(e) => {
+                           e.preventDefault();
+                           handleRemove(i.name);
+                        }}
+                        aria-label="Remover afazer"
+                        className="cursor-pointer p-2"
+                     >
+                        <FaX />
+                     </button>
+                  </div>
+               ))}
+            </SortableContext>
+         </DndContext>
       </>
    );
 };

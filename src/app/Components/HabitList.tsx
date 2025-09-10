@@ -1,6 +1,11 @@
 import React from "react";
 import Habit from "../Types/HabitType";
 import { FaPlus, FaX } from "react-icons/fa6";
+import { closestCenter, DndContext } from "@dnd-kit/core";
+import {
+   SortableContext,
+   verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const HabitList = () => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -106,6 +111,8 @@ const HabitList = () => {
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
 
+   const onDragEnd = () => {};
+
    return (
       <>
          <h2 className="text-xl">Hábitos</h2>
@@ -129,41 +136,48 @@ const HabitList = () => {
             </button>
          </form>
 
-         <ul>
-            {habits.map((i) => (
-               <li key={i.id} className="flex items-center gap-3">
-                  <input
-                     onChange={(e) => handleComplete(i.name, e.target.checked)}
-                     checked={i.done}
-                     aria-label="Marcar como concluído"
-                     type="checkbox"
-                  />
-
-                  <span
-                     className={`${i.done ? "text-gray-400 line-through" : ""}`}
-                  >
-                     {i.name}
-                  </span>
-                  <span className="text-gray-500">
-                     Sequência atual: {i.streak}
-                  </span>
-                  <span className="text-gray-500">
-                     Maior sequência: {i.highestStreak}
-                  </span>
-
-                  <button
-                     onClick={(e) => {
-                        e.preventDefault();
-                        handleRemove(i.name);
-                     }}
-                     aria-label="Remover hábito"
-                     className="cursor-pointer p-2"
-                  >
-                     <FaX />
-                  </button>
-               </li>
-            ))}
-         </ul>
+         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+            <SortableContext
+               items={habits}
+               strategy={verticalListSortingStrategy}
+            >
+               {habits.map((i) => (
+                  <div key={i.id} className="flex items-center gap-3">
+                     <input
+                        onChange={(e) =>
+                           handleComplete(i.name, e.target.checked)
+                        }
+                        checked={i.done}
+                        aria-label="Marcar como concluído"
+                        type="checkbox"
+                     />
+                     <span
+                        className={`${
+                           i.done ? "text-gray-400 line-through" : ""
+                        }`}
+                     >
+                        {i.name}
+                     </span>
+                     <span className="text-gray-500">
+                        Sequência atual: {i.streak}
+                     </span>
+                     <span className="text-gray-500">
+                        Maior sequência: {i.highestStreak}
+                     </span>
+                     <button
+                        onClick={(e) => {
+                           e.preventDefault();
+                           handleRemove(i.name);
+                        }}
+                        aria-label="Remover hábito"
+                        className="cursor-pointer p-2"
+                     >
+                        <FaX />
+                     </button>
+                  </div>
+               ))}
+            </SortableContext>
+         </DndContext>
       </>
    );
 };
