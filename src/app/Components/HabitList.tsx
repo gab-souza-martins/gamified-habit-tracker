@@ -10,6 +10,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaEdit } from "react-icons/fa";
+import ConfirmRemove from "./ConfirmRemove";
 
 const HabitList = () => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -125,7 +126,8 @@ const HabitList = () => {
             <button
                onClick={(e) => {
                   e.preventDefault();
-                  handleRemove(i.id);
+                  setIdToRemove(i.id);
+                  setIsConfirmRemoveOpen(true);
                }}
                aria-label="Remover hábito"
                className="cursor-pointer p-2"
@@ -201,14 +203,27 @@ const HabitList = () => {
       setEditValue("");
    };
 
-   const handleRemove = (toRemove: string) => {
-      const newHabits: Habit[] = habits.filter((i) => i.id !== toRemove);
+   const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
+      React.useState<boolean>(false);
+   const [idToRemove, setIdToRemove] = React.useState<string>("");
+
+   const handleRemove = () => {
+      const newHabits: Habit[] = habits.filter((i) => i.id !== idToRemove);
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
+   };
+   const handleCloseConfirmRemove = () => {
+      setIsConfirmRemoveOpen(false);
    };
 
    return (
       <>
+         {isConfirmRemoveOpen && (
+            <ConfirmRemove
+               confirmRemove={handleRemove}
+               closeRemove={handleCloseConfirmRemove}
+            />
+         )}
          <h2 className="text-xl">Hábitos</h2>
 
          <form className="flex items-center gap-2">
