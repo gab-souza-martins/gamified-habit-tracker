@@ -3,6 +3,7 @@ import { FaPlus, FaX } from "react-icons/fa6";
 import Todo from "../Types/TodoType";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
+   arrayMove,
    SortableContext,
    useSortable,
    verticalListSortingStrategy,
@@ -102,8 +103,6 @@ const TodoList = () => {
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
 
-   const onDragEnd = () => {};
-
    return (
       <>
          <h2 className="text-xl">Afazeres</h2>
@@ -127,7 +126,21 @@ const TodoList = () => {
             </button>
          </form>
 
-         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+         <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={({ active, over }) => {
+               if (over !== null) {
+                  if (active.id === over.id) {
+                     return;
+                  }
+                  setTodos((item) => {
+                     const oldIndex = item.findIndex((i) => i.id === active.id);
+                     const newIndex = item.findIndex((i) => i.id === over.id);
+                     return arrayMove(todos, oldIndex, newIndex);
+                  });
+               }
+            }}
+         >
             <SortableContext
                items={todos}
                strategy={verticalListSortingStrategy}
