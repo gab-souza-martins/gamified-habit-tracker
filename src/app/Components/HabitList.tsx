@@ -16,14 +16,20 @@ const HabitList = () => {
       e.preventDefault();
       const newHabits: Habit[] = [
          ...habits,
-         { name: habitName, streak: 0, lastCompleted: null, history: [] },
+         {
+            name: habitName,
+            done: false,
+            streak: 0,
+            lastCompleted: null,
+            history: [],
+         },
       ];
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
       setHabitName("");
    };
 
-   const handleComplete = (toChange: string) => {
+   const handleComplete = (toChange: string, isDone: boolean) => {
       const date: Date = new Date();
 
       const today: string = date.toLocaleDateString();
@@ -33,15 +39,18 @@ const HabitList = () => {
       const yesterdayString: string = yesterday.toLocaleDateString();
 
       const newHabits: Habit[] = habits.map((i) => {
-         if (i.name === toChange && i.lastCompleted !== today) {
-            if (i.lastCompleted === yesterdayString) {
-               i.streak += 1;
-            } else {
-               i.streak = 1;
+         if (i.name === toChange) {
+            if (i.lastCompleted !== today) {
+               if (i.lastCompleted === yesterdayString) {
+                  i.streak += 1;
+               } else {
+                  i.streak = 1;
+               }
+               i.lastCompleted = today;
+               i.history = [...i.history, i.lastCompleted];
+               console.log(`${i.lastCompleted} ${i.history} ${i.streak}`);
             }
-            i.lastCompleted = today;
-            i.history = [...i.history, i.lastCompleted];
-            console.log(`${i.lastCompleted} ${i.history} ${i.streak}`);
+            i.done = isDone;
          }
          return i;
       });
@@ -81,9 +90,15 @@ const HabitList = () => {
 
          <ul>
             {habits.map((i, index) => (
-               <li key={index} className={`flex items-center gap-3`}>
+               <li
+                  key={index}
+                  className={`flex items-center gap-3 ${
+                     i.done ? "text-gray-400 line-through" : ""
+                  }`}
+               >
                   <input
-                     onChange={() => handleComplete(i.name)}
+                     onChange={(e) => handleComplete(i.name, e.target.checked)}
+                     checked={i.done}
                      aria-label="Marcar como concluído"
                      type="checkbox"
                   />
