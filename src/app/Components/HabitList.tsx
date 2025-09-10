@@ -9,7 +9,17 @@ const HabitList = () => {
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("habits");
       const parsed: Habit[] = saved ? JSON.parse(saved) : [];
-      setHabits(parsed);
+
+      // *Verifica quais hábitos foram completos em outro dia e os resetam
+
+      const newHabits: Habit[] = parsed.map((i) => {
+         if (i.lastCompleted !== new Date().toLocaleDateString()) {
+            i.done = false;
+         }
+         return i;
+      });
+
+      setHabits(newHabits);
    }, []);
 
    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
