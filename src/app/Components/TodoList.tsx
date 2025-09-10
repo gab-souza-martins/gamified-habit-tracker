@@ -36,6 +36,36 @@ const TodoList = () => {
       setTodoName("");
    };
 
+   const SortableItem = ({ i }) => {
+      return (
+         <div
+            className={`flex items-center gap-3 ${
+               i.done ? "text-gray-400 line-through" : ""
+            }`}
+         >
+            <input
+               onChange={(e) => handleDone(i.name, e.target.checked)}
+               checked={i.done}
+               aria-label="Marcar como concluído"
+               type="checkbox"
+            />
+
+            <span>{i.name}</span>
+
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  handleRemove(i.name);
+               }}
+               aria-label="Remover afazer"
+               className="cursor-pointer p-2"
+            >
+               <FaX />
+            </button>
+         </div>
+      );
+   };
+
    const handleDone = (toChange: string, isDone: boolean) => {
       const newTodos: Todo[] = todos.map((i) => {
          if (i.name === toChange) {
@@ -85,32 +115,7 @@ const TodoList = () => {
                strategy={verticalListSortingStrategy}
             >
                {todos.map((i) => (
-                  <div
-                     key={i.id}
-                     className={`flex items-center gap-3 ${
-                        i.done ? "text-gray-400 line-through" : ""
-                     }`}
-                  >
-                     <input
-                        onChange={(e) => handleDone(i.name, e.target.checked)}
-                        checked={i.done}
-                        aria-label="Marcar como concluído"
-                        type="checkbox"
-                     />
-
-                     <span>{i.name}</span>
-
-                     <button
-                        onClick={(e) => {
-                           e.preventDefault();
-                           handleRemove(i.name);
-                        }}
-                        aria-label="Remover afazer"
-                        className="cursor-pointer p-2"
-                     >
-                        <FaX />
-                     </button>
-                  </div>
+                  <SortableItem key={i.id} i={i} />
                ))}
             </SortableContext>
          </DndContext>

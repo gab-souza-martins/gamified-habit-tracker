@@ -48,6 +48,36 @@ const HabitList = () => {
       setHabitName("");
    };
 
+   const SortableItem = ({ i }) => {
+      return (
+         <div className="flex items-center gap-3">
+            <input
+               onChange={(e) => handleComplete(i.name, e.target.checked)}
+               checked={i.done}
+               aria-label="Marcar como concluído"
+               type="checkbox"
+            />
+            <span className={`${i.done ? "text-gray-400 line-through" : ""}`}>
+               {i.name}
+            </span>
+            <span className="text-gray-500">Sequência atual: {i.streak}</span>
+            <span className="text-gray-500">
+               Maior sequência: {i.highestStreak}
+            </span>
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  handleRemove(i.name);
+               }}
+               aria-label="Remover hábito"
+               className="cursor-pointer p-2"
+            >
+               <FaX />
+            </button>
+         </div>
+      );
+   };
+
    const addCompletion = (
       toChange: string,
       today: string,
@@ -142,39 +172,7 @@ const HabitList = () => {
                strategy={verticalListSortingStrategy}
             >
                {habits.map((i) => (
-                  <div key={i.id} className="flex items-center gap-3">
-                     <input
-                        onChange={(e) =>
-                           handleComplete(i.name, e.target.checked)
-                        }
-                        checked={i.done}
-                        aria-label="Marcar como concluído"
-                        type="checkbox"
-                     />
-                     <span
-                        className={`${
-                           i.done ? "text-gray-400 line-through" : ""
-                        }`}
-                     >
-                        {i.name}
-                     </span>
-                     <span className="text-gray-500">
-                        Sequência atual: {i.streak}
-                     </span>
-                     <span className="text-gray-500">
-                        Maior sequência: {i.highestStreak}
-                     </span>
-                     <button
-                        onClick={(e) => {
-                           e.preventDefault();
-                           handleRemove(i.name);
-                        }}
-                        aria-label="Remover hábito"
-                        className="cursor-pointer p-2"
-                     >
-                        <FaX />
-                     </button>
-                  </div>
+                  <SortableItem key={i.id} i={i} />
                ))}
             </SortableContext>
          </DndContext>
