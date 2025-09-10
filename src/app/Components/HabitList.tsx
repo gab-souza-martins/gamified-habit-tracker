@@ -9,6 +9,7 @@ import {
    verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { FaEdit } from "react-icons/fa";
 
 const HabitList = () => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
@@ -73,18 +74,45 @@ const HabitList = () => {
                aria-label="Marcar como concluído"
                type="checkbox"
             />
-            <span
-               {...listeners}
-               className={`cursor-pointer ${
-                  i.done ? "text-gray-400 line-through" : ""
-               }`}
-            >
-               {i.name}
-            </span>
+            {editId === i.id && (
+               <input
+                  onChange={(e) => setEditValue(e.target.value)}
+                  value={editValue}
+                  aria-label="Editar nome"
+                  type="text"
+                  placeholder="Editar"
+                  className="border rounded-md p-1"
+               />
+            )}
+
+            {editId !== i.id && (
+               <span
+                  {...listeners}
+                  className={`cursor-pointer ${
+                     i.done ? "text-gray-400 line-through" : ""
+                  }`}
+               >
+                  {i.name}
+               </span>
+            )}
+
             <span className="text-gray-500">Sequência atual: {i.streak}</span>
             <span className="text-gray-500">
                Maior sequência: {i.highestStreak}
             </span>
+
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  setEditId(i.id);
+                  setEditValue(i.name);
+               }}
+               aria-label="Editar hábito"
+               className="cursor-pointer p-2"
+            >
+               <FaEdit />
+            </button>
+
             <button
                onClick={(e) => {
                   e.preventDefault();
@@ -99,6 +127,15 @@ const HabitList = () => {
       );
    };
 
+   const handleComplete = (habit: string, isDone: boolean) => {
+      const today: string = new Date().toLocaleDateString();
+
+      if (isDone) {
+         addCompletion(habit, today);
+      } else {
+         removeCompletion(habit, today);
+      }
+   };
    const addCompletion = (toChange: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.name === toChange && i.lastCompleted !== today) {
@@ -116,7 +153,6 @@ const HabitList = () => {
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
-
    const removeCompletion = (toChange: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.name === toChange && i.lastCompleted === today) {
@@ -135,15 +171,8 @@ const HabitList = () => {
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
 
-   const handleComplete = (habit: string, isDone: boolean) => {
-      const today: string = new Date().toLocaleDateString();
-
-      if (isDone) {
-         addCompletion(habit, today);
-      } else {
-         removeCompletion(habit, today);
-      }
-   };
+   const [editId, setEditId] = React.useState<string>("");
+   const [editValue, setEditValue] = React.useState<string>("");
 
    const handleRemove = (toRemove: string) => {
       const newHabits: Habit[] = habits.filter((i) => i.name !== toRemove);
