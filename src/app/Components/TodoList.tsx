@@ -9,6 +9,7 @@ import {
    verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { FaEdit } from "react-icons/fa";
 
 const TodoList = () => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
@@ -62,14 +63,48 @@ const TodoList = () => {
                type="checkbox"
             />
 
-            <span
-               {...listeners}
-               className={`cursor-pointer ${
-                  i.done ? "text-gray-400 line-through" : ""
-               }`}
+            {editId === i.id && (
+               <input
+                  onChange={(e) => setEditValue(e.target.value)}
+                  onKeyDown={(e) => {
+                     if (e.key === "Escape") {
+                        handleLeaveEdit();
+                     } else if (e.key === "Enter") {
+                        handleEdit();
+                     }
+                  }}
+                  onBlur={handleEdit}
+                  value={editValue}
+                  autoFocus
+                  aria-label="Editar nome"
+                  type="text"
+                  placeholder="Editar"
+                  className="border rounded-md p-1"
+               />
+            )}
+
+            {editId !== i.id && (
+               <span
+                  {...listeners}
+                  className={`cursor-pointer ${
+                     i.done ? "text-gray-400 line-through" : ""
+                  }`}
+               >
+                  {i.name}
+               </span>
+            )}
+
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  setEditId(i.id);
+                  setEditValue(i.name);
+               }}
+               aria-label="Editar afazer"
+               className="cursor-pointer p-2"
             >
-               {i.name}
-            </span>
+               <FaEdit />
+            </button>
 
             <button
                onClick={(e) => {
@@ -95,6 +130,27 @@ const TodoList = () => {
 
       setTodos(newTodos);
       localStorage.setItem("todos", JSON.stringify(newTodos));
+   };
+
+   const [editId, setEditId] = React.useState<string>("");
+   const [editValue, setEditValue] = React.useState<string>("");
+
+   const handleEdit = () => {
+      if (editValue.trim() !== "") {
+         const newTodos: Todo[] = todos.map((i) => {
+            if (i.id === editId) {
+               i.name = editValue.trim();
+            }
+            return i;
+         });
+         setTodos(newTodos);
+         localStorage.setItem("todos", JSON.stringify(newTodos));
+         handleLeaveEdit();
+      }
+   };
+   const handleLeaveEdit = () => {
+      setEditId("");
+      setEditValue("");
    };
 
    const handleRemove = (toRemove: string) => {
