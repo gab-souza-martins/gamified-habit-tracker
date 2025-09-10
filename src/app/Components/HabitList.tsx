@@ -50,7 +50,7 @@ const HabitList = () => {
             i.streak = i.history.length;
             i.lastCompleted = i.history[i.history.length - 1];
             i.done = true;
-            console.log(`${i.lastCompleted} ${i.history} ${i.streak}`); //*Para teste
+            console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
          }
          return i;
       });
@@ -68,7 +68,7 @@ const HabitList = () => {
 
             i.streak = i.history.length;
             i.done = false;
-            console.log(`${i.lastCompleted} ${i.history} ${i.streak}`); //*Para teste
+            console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
          }
          return i;
       });
@@ -123,12 +123,7 @@ const HabitList = () => {
 
          <ul>
             {habits.map((i, index) => (
-               <li
-                  key={index}
-                  className={`flex items-center gap-3 ${
-                     i.done ? "text-gray-400 line-through" : ""
-                  }`}
-               >
+               <li key={index} className="flex items-center gap-3">
                   <input
                      onChange={(e) => handleComplete(i.name, e.target.checked)}
                      checked={i.done}
@@ -136,7 +131,14 @@ const HabitList = () => {
                      type="checkbox"
                   />
 
-                  <span>{i.name}</span>
+                  <span
+                     className={`${i.done ? "text-gray-400 line-through" : ""}`}
+                  >
+                     {i.name}
+                  </span>
+                  <span className="text-gray-500">
+                     Sequência atual: {i.streak}
+                  </span>
 
                   <button
                      onClick={(e) => {
