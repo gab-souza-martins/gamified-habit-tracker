@@ -77,6 +77,14 @@ const HabitList = () => {
             {editId === i.id && (
                <input
                   onChange={(e) => setEditValue(e.target.value)}
+                  onKeyDown={(e) => {
+                     if (e.key === "Escape") {
+                        handleLeaveEdit();
+                     } else if (e.key === "Enter") {
+                        i.name = editValue;
+                        handleLeaveEdit();
+                     }
+                  }}
                   value={editValue}
                   autoFocus
                   aria-label="Editar nome"
@@ -174,6 +182,11 @@ const HabitList = () => {
 
    const [editId, setEditId] = React.useState<string>("");
    const [editValue, setEditValue] = React.useState<string>("");
+
+   const handleLeaveEdit = () => {
+      setEditId("");
+      setEditValue("");
+   };
 
    const handleRemove = (toRemove: string) => {
       const newHabits: Habit[] = habits.filter((i) => i.name !== toRemove);
