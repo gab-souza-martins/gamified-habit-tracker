@@ -44,11 +44,9 @@ const HabitList = () => {
    ) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.name === toChange && i.lastCompleted !== today) {
-            if (i.lastCompleted === yesterday) {
-               i.history = [...i.history, today];
-            } else {
-               i.history = [today];
-            }
+            i.history =
+               i.lastCompleted === yesterday ? [...i.history, today] : [today];
+
             i.streak = i.history.length;
             i.lastCompleted = i.history[i.history.length - 1];
             i.done = true;
@@ -59,7 +57,26 @@ const HabitList = () => {
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
-   const handleComplete = (toChange: string, isDone: boolean) => {
+
+   const removeCompletion = (toChange: string, today: string) => {
+      const newHabits: Habit[] = habits.map((i) => {
+         if (i.name === toChange && i.lastCompleted === today) {
+            i.history.splice(i.history.length - 1, 1);
+
+            i.lastCompleted =
+               i.history.length === 0 ? "" : i.history[i.history.length - 1];
+
+            i.streak = i.history.length;
+            i.done = false;
+            console.log(`${i.lastCompleted} ${i.history} ${i.streak}`); //*Para teste
+         }
+         return i;
+      });
+      setHabits(newHabits);
+      localStorage.setItem("habits", JSON.stringify(newHabits));
+   };
+
+   const handleComplete = (habit: string, isDone: boolean) => {
       const date: Date = new Date();
 
       const today: string = date.toLocaleDateString();
@@ -69,7 +86,9 @@ const HabitList = () => {
       const yesterdayString: string = yesterday.toLocaleDateString();
 
       if (isDone) {
-         addCompletion(toChange, today, yesterdayString);
+         addCompletion(habit, today, yesterdayString);
+      } else {
+         removeCompletion(habit, today);
       }
    };
 
