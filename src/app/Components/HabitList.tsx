@@ -81,10 +81,10 @@ const HabitList = () => {
                      if (e.key === "Escape") {
                         handleLeaveEdit();
                      } else if (e.key === "Enter") {
-                        i.name = editValue;
-                        handleLeaveEdit();
+                        handleEdit();
                      }
                   }}
+                  onBlur={handleEdit}
                   value={editValue}
                   autoFocus
                   aria-label="Editar nome"
@@ -183,6 +183,19 @@ const HabitList = () => {
    const [editId, setEditId] = React.useState<string>("");
    const [editValue, setEditValue] = React.useState<string>("");
 
+   const handleEdit = () => {
+      if (editValue.trim() !== "") {
+         const newHabits: Habit[] = habits.map((i) => {
+            if (i.id === editId) {
+               i.name = editValue.trim();
+            }
+            return i;
+         });
+         setHabits(newHabits);
+         localStorage.setItem("habits", JSON.stringify(newHabits));
+         handleLeaveEdit();
+      }
+   };
    const handleLeaveEdit = () => {
       setEditId("");
       setEditValue("");
