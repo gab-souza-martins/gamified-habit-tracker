@@ -17,7 +17,11 @@ const TodoList = () => {
       if (todoName.trim() !== "") {
          const newTodos: Todo[] = [
             ...todos,
-            { name: todoName.trim(), done: false },
+            {
+               id: crypto.randomUUID(),
+               name: todoName.trim(),
+               done: false,
+            },
          ];
          setTodos(newTodos);
          localStorage.setItem("todos", JSON.stringify(newTodos));
@@ -69,9 +73,9 @@ const TodoList = () => {
          </form>
 
          <ul>
-            {todos.map((i, index) => (
+            {todos.map((i) => (
                <li
-                  key={index}
+                  key={i.id}
                   className={`flex items-center gap-3 ${
                      i.done ? "text-gray-400 line-through" : ""
                   }`}

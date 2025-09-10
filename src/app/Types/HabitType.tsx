@@ -1,4 +1,5 @@
 interface Habit {
+   id: string;
    name: string;
    done: boolean;
    streak: number;

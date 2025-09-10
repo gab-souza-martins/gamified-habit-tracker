@@ -26,6 +26,7 @@ const HabitList = () => {
          const newHabits: Habit[] = [
             ...habits,
             {
+               id: crypto.randomUUID(),
                name: habitName.trim(),
                done: false,
                streak: 0,
@@ -129,8 +130,8 @@ const HabitList = () => {
          </form>
 
          <ul>
-            {habits.map((i, index) => (
-               <li key={index} className="flex items-center gap-3">
+            {habits.map((i) => (
+               <li key={i.id} className="flex items-center gap-3">
                   <input
                      onChange={(e) => handleComplete(i.name, e.target.checked)}
                      checked={i.done}
