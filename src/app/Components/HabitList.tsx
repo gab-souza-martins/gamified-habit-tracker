@@ -78,6 +78,7 @@ const HabitList = () => {
                <input
                   onChange={(e) => setEditValue(e.target.value)}
                   value={editValue}
+                  autoFocus
                   aria-label="Editar nome"
                   type="text"
                   placeholder="Editar"
