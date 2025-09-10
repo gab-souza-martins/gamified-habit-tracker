@@ -57,7 +57,7 @@ const TodoList = () => {
             className="flex items-center gap-3"
          >
             <input
-               onChange={(e) => handleDone(i.name, e.target.checked)}
+               onChange={(e) => handleDone(i.id, e.target.checked)}
                checked={i.done}
                aria-label="Marcar como concluído"
                type="checkbox"
@@ -109,7 +109,7 @@ const TodoList = () => {
             <button
                onClick={(e) => {
                   e.preventDefault();
-                  handleRemove(i.name);
+                  handleRemove(i.id);
                }}
                aria-label="Remover afazer"
                className="cursor-pointer p-2"
@@ -120,9 +120,9 @@ const TodoList = () => {
       );
    };
 
-   const handleDone = (toChange: string, isDone: boolean) => {
+   const handleDone = (todo: string, isDone: boolean) => {
       const newTodos: Todo[] = todos.map((i) => {
-         if (i.name === toChange) {
+         if (i.id === todo) {
             i.done = isDone;
          }
          return i;
@@ -154,7 +154,7 @@ const TodoList = () => {
    };
 
    const handleRemove = (toRemove: string) => {
-      const newTodos: Todo[] = todos.filter((i) => i.name !== toRemove);
+      const newTodos: Todo[] = todos.filter((i) => i.id !== toRemove);
       setTodos(newTodos);
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };

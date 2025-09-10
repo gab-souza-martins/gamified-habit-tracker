@@ -69,7 +69,7 @@ const HabitList = () => {
             className="flex items-center gap-3"
          >
             <input
-               onChange={(e) => handleComplete(i.name, e.target.checked)}
+               onChange={(e) => handleComplete(i.id, e.target.checked)}
                checked={i.done}
                aria-label="Marcar como concluído"
                type="checkbox"
@@ -125,7 +125,7 @@ const HabitList = () => {
             <button
                onClick={(e) => {
                   e.preventDefault();
-                  handleRemove(i.name);
+                  handleRemove(i.id);
                }}
                aria-label="Remover hábito"
                className="cursor-pointer p-2"
@@ -145,9 +145,9 @@ const HabitList = () => {
          removeCompletion(habit, today);
       }
    };
-   const addCompletion = (toChange: string, today: string) => {
+   const addCompletion = (habit: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
-         if (i.name === toChange && i.lastCompleted !== today) {
+         if (i.id === habit && i.lastCompleted !== today) {
             i.history = [...i.history, today];
 
             i.streak = i.history.length;
@@ -162,9 +162,9 @@ const HabitList = () => {
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
-   const removeCompletion = (toChange: string, today: string) => {
+   const removeCompletion = (habit: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
-         if (i.name === toChange && i.lastCompleted === today) {
+         if (i.id === habit && i.lastCompleted === today) {
             i.history.splice(i.history.length - 1, 1);
 
             i.lastCompleted =
@@ -202,7 +202,7 @@ const HabitList = () => {
    };
 
    const handleRemove = (toRemove: string) => {
-      const newHabits: Habit[] = habits.filter((i) => i.name !== toRemove);
+      const newHabits: Habit[] = habits.filter((i) => i.id !== toRemove);
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
