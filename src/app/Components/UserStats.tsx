@@ -1,14 +1,15 @@
 import React from "react";
+import Stats from "../Types/StatsType";
 
 interface UserStatsProps {
-   exp: number;
+   stats: Stats;
 }
 
-const UserStats: React.FC<UserStatsProps> = ({ exp }) => {
+const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <>
-         <p>Nível: 1</p>
-         <p>Experiência: {exp ?? 0}</p>
+         <p>Nível: {stats.level ?? 1}</p>
+         <p>Experiência: {stats.exp ?? 0}</p>
       </>
    );
 };

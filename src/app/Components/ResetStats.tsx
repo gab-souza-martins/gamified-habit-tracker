@@ -8,7 +8,7 @@ const RemoveAllItems = () => {
       React.useState<boolean>(false);
 
    const handleRemove = () => {
-      localStorage.removeItem("exp");
+      localStorage.removeItem("stats");
       window.location.reload();
    };
    const handleCloseConfirmRemove = () => {

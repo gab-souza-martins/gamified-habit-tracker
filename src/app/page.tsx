@@ -5,25 +5,34 @@ import RemoveAllItems from "./Components/RemoveAllItems";
 import TodoList from "./Components/TodoList";
 import UserStats from "./Components/UserStats";
 import ResetStats from "./Components/ResetStats";
+import Stats from "./Types/StatsType";
 
 const Home = () => {
-   const [currentExp, setCurrentExp] = React.useState<number>(0);
+   const [currentStats, setCurrentStats] = React.useState<Stats>({
+      level: 1,
+      exp: 0,
+   });
 
    React.useEffect(() => {
-      const saved: string | null = localStorage.getItem("exp");
-      const parsed: number = saved ? JSON.parse(saved) : 0;
-      setCurrentExp(parsed);
+      const saved: string | null = localStorage.getItem("stats");
+      const parsed: Stats = saved ? JSON.parse(saved) : { level: 1, exp: 0 };
+      setCurrentStats(parsed);
    }, []);
 
    const handleIncreaseExp = (exp: number) => {
-      const newExp: number = currentExp + exp;
-      setCurrentExp(newExp >= 0 ? newExp : 0);
-      localStorage.setItem("exp", JSON.stringify(newExp));
+      const newExp: number = currentStats.exp + exp;
+      const newStats: Stats = { ...currentStats, exp: newExp };
+      setCurrentStats(newStats);
+      localStorage.setItem("stats", JSON.stringify(newStats));
    };
    const handleDecreaseExp = (exp: number) => {
-      const newExp: number = currentExp - exp;
-      setCurrentExp(newExp >= 0 ? newExp : 0);
-      localStorage.setItem("exp", JSON.stringify(newExp));
+      const newExp: number = currentStats.exp - exp;
+      const newStats: Stats = {
+         ...currentStats,
+         exp: newExp >= 0 ? newExp : 0,
+      };
+      setCurrentStats(newStats);
+      localStorage.setItem("stats", JSON.stringify(newStats));
    };
 
    return (
@@ -32,7 +41,7 @@ const Home = () => {
          <RemoveAllItems />
          <ResetStats />
          <br />
-         <UserStats exp={currentExp} />
+         <UserStats stats={currentStats} />
          <br />
          <HabitList />
          <TodoList
