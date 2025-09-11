@@ -11,10 +11,10 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { FaEdit } from "react-icons/fa";
 import ConfirmRemove from "./ConfirmRemove";
+import ItemForm from "./ItemForm";
 
 const HabitList = () => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
-   const [habitName, setHabitName] = React.useState<string>("");
 
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("habits");
@@ -30,14 +30,15 @@ const HabitList = () => {
       setHabits(newHabits);
    }, []);
 
-   const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      if (habitName.trim() !== "") {
+   const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
+
+   const handleAdd = (name: string) => {
+      if (name.trim() !== "") {
          const newHabits: Habit[] = [
             ...habits,
             {
                id: crypto.randomUUID(),
-               name: habitName.trim(),
+               name: name.trim(),
                done: false,
                streak: 0,
                highestStreak: 0,
@@ -50,7 +51,6 @@ const HabitList = () => {
       } else {
          console.log("Nenhum input encontrado");
       }
-      setHabitName("");
    };
 
    const SortableItem = ({ i }: { i: Habit }) => {
@@ -212,38 +212,36 @@ const HabitList = () => {
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
-   const handleCloseConfirmRemove = () => {
+   const handleCloseModal = () => {
+      setIsAddFormOpen(false);
       setIsConfirmRemoveOpen(false);
    };
 
    return (
       <>
+         {isAddFormOpen && (
+            <ItemForm onAdd={handleAdd} closeForm={handleCloseModal} />
+         )}
+
          {isConfirmRemoveOpen && (
             <ConfirmRemove
                confirmRemove={handleRemove}
-               closeRemove={handleCloseConfirmRemove}
+               closeRemove={handleCloseModal}
             />
          )}
+
          <h2 className="text-xl">Hábitos</h2>
 
-         <form className="flex items-center gap-2">
-            <input
-               onChange={(e) => setHabitName(e.target.value)}
-               value={habitName}
-               aria-label="Digite o hábito"
-               type="text"
-               placeholder="Hábito"
-               className="border rounded-md p-1"
-            />
-
-            <button
-               onClick={handleAdd}
-               aria-label="Adicionar hábito"
-               className="cursor-pointer bg-cyan-300 rounded-md shadow-md p-2"
-            >
-               <FaPlus />
-            </button>
-         </form>
+         <button
+            onClick={() => setIsAddFormOpen(true)}
+            aria-label="Adicionar hábito"
+            className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
+                      bg-cyan-300 shadow-sm hover:bg-cyan-400 hover:shadow-xl transition duration-75 ease-in-out
+                      active:bg-cyan-500 active:shadow-md focus:outline-2 focus:outline-cyan-300 focus:outline-offset-2"
+         >
+            <FaPlus />
+            <span>Adicionar</span>
+         </button>
 
          <DndContext
             collisionDetection={closestCenter}
