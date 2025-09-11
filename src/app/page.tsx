@@ -4,6 +4,7 @@ import HabitList from "./Components/HabitList";
 import RemoveAllItems from "./Components/RemoveAllItems";
 import TodoList from "./Components/TodoList";
 import UserStats from "./Components/UserStats";
+import ResetStats from "./Components/ResetStats";
 
 const Home = () => {
    const [currentExp, setCurrentExp] = React.useState<number>(0);
@@ -29,6 +30,7 @@ const Home = () => {
       <>
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
          <RemoveAllItems />
+         <ResetStats />
          <br />
          <UserStats exp={currentExp} />
          <br />
