@@ -12,6 +12,9 @@ const ItemForm: React.FC<ItemFormProps> = ({ onAdd, closeForm }) => {
 
    const handleAdd = () => {
       onAdd(name);
+      if (name.trim() === "") {
+         return;
+      }
       closeForm();
    };
 
