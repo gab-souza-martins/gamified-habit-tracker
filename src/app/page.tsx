@@ -20,8 +20,14 @@ const Home = () => {
    }, []);
 
    const handleIncreaseExp = (exp: number) => {
-      const newExp: number = currentStats.exp + exp;
-      const newStats: Stats = { ...currentStats, exp: newExp };
+      let newLevel: number = currentStats.level;
+      let newExp: number = currentStats.exp + exp;
+      if (newExp >= 10) {
+         newLevel = currentStats.level + 1;
+         newExp -= 10;
+      }
+
+      const newStats: Stats = { level: newLevel, exp: newExp };
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
    };
