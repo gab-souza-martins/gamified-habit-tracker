@@ -17,12 +17,12 @@ const Home = () => {
 
    const handleIncreaseExp = (exp: number) => {
       const newExp: number = currentExp + exp;
-      setCurrentExp(newExp);
+      setCurrentExp(newExp >= 0 ? newExp : 0);
       localStorage.setItem("exp", JSON.stringify(newExp));
    };
    const handleDecreaseExp = (exp: number) => {
       const newExp: number = currentExp - exp;
-      setCurrentExp(newExp);
+      setCurrentExp(newExp >= 0 ? newExp : 0);
       localStorage.setItem("exp", JSON.stringify(newExp));
    };
 
