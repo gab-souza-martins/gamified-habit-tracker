@@ -11,6 +11,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { FaEdit } from "react-icons/fa";
 import ConfirmRemove from "./ConfirmRemove";
+import ItemForm from "./ItemForm";
 
 interface TodoListProps {
    increaseExp: (exp: number) => void;
@@ -180,12 +181,15 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
 
    return (
       <>
+         <ItemForm />
+
          {isConfirmRemoveOpen && (
             <ConfirmRemove
                confirmRemove={handleRemove}
                closeRemove={handleCloseConfirmRemove}
             />
          )}
+
          <h2 className="text-xl">Afazeres</h2>
 
          <form className="flex items-center gap-2">

@@ -30,6 +30,7 @@ const Home = () => {
       if (newExp >= newExpToNextLevel) {
          newLevel += 1;
          newExp -= newExpToNextLevel;
+
          if (newExpToNextLevel < 50) {
             newExpToNextLevel += 5;
          }
@@ -43,6 +44,7 @@ const Home = () => {
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
    };
+
    const handleDecreaseExp = (exp: number) => {
       const newExp: number = currentStats.exp - exp;
       const newStats: Stats = {
