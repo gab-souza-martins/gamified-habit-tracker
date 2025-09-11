@@ -223,6 +223,7 @@ const HabitList = () => {
             <ItemForm
                mode="add"
                onAdd={handleAdd}
+               onEdit={handleEdit}
                closeForm={handleCloseModal}
             />
          )}

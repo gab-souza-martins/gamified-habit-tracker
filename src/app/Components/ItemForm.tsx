@@ -4,15 +4,34 @@ import { FaBan, FaFloppyDisk, FaPlus } from "react-icons/fa6";
 
 interface ItemFormProps {
    mode: "add" | "edit";
+   initialEditValues?: string;
    onAdd: (name: string) => void;
+   onEdit: (name: string) => void;
    closeForm: () => void;
 }
 
-const ItemForm: React.FC<ItemFormProps> = ({ mode, onAdd, closeForm }) => {
+const ItemForm: React.FC<ItemFormProps> = ({
+   mode,
+   initialEditValues,
+   onAdd,
+   onEdit,
+   closeForm,
+}) => {
    const [name, setName] = React.useState<string>("");
 
+   React.useEffect(() => {
+      if (initialEditValues) {
+         setName(initialEditValues);
+      }
+   }, [initialEditValues]);
+
    const handleAdd = () => {
-      onAdd(name);
+      if (mode === "add") {
+         onAdd(name);
+      } else {
+         onEdit(name);
+      }
+
       if (name.trim() === "") {
          return;
       }

@@ -69,42 +69,21 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
                type="checkbox"
             />
 
-            {editId === i.id && (
-               <input
-                  onChange={(e) => setEditValue(e.target.value)}
-                  onKeyDown={(e) => {
-                     if (e.key === "Escape") {
-                        handleLeaveEdit();
-                     } else if (e.key === "Enter") {
-                        handleEdit();
-                     }
-                  }}
-                  onBlur={handleEdit}
-                  value={editValue}
-                  autoFocus
-                  aria-label="Editar nome"
-                  type="text"
-                  placeholder="Editar"
-                  className="border rounded-md p-1"
-               />
-            )}
-
-            {editId !== i.id && (
-               <span
-                  {...listeners}
-                  className={`cursor-pointer ${
-                     i.done ? "text-gray-400 line-through" : ""
-                  }`}
-               >
-                  {i.name}
-               </span>
-            )}
+            <span
+               {...listeners}
+               className={`cursor-pointer ${
+                  i.done ? "text-gray-400 line-through" : ""
+               }`}
+            >
+               {i.name}
+            </span>
 
             <button
                onClick={(e) => {
                   e.preventDefault();
                   setEditId(i.id);
                   setEditValue(i.name);
+                  setIsEditFormOpen(true);
                }}
                aria-label="Editar afazer"
                className="cursor-pointer p-2"
@@ -144,25 +123,21 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
 
+   const [isEditFormOpen, setIsEditFormOpen] = React.useState<boolean>(false);
    const [editId, setEditId] = React.useState<string>("");
    const [editValue, setEditValue] = React.useState<string>("");
 
-   const handleEdit = () => {
-      if (editValue.trim() !== "") {
+   const handleEdit = (name: string) => {
+      if (name.trim() !== "") {
          const newTodos: Todo[] = todos.map((i) => {
             if (i.id === editId) {
-               i.name = editValue.trim();
+               i.name = name.trim();
             }
             return i;
          });
          setTodos(newTodos);
          localStorage.setItem("todos", JSON.stringify(newTodos));
-         handleLeaveEdit();
       }
-   };
-   const handleLeaveEdit = () => {
-      setEditId("");
-      setEditValue("");
    };
 
    const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
@@ -176,6 +151,7 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
    };
    const handleCloseModal = () => {
       setIsAddFormOpen(false);
+      setIsEditFormOpen(false);
       setIsConfirmRemoveOpen(false);
    };
 
@@ -185,6 +161,17 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
             <ItemForm
                mode="add"
                onAdd={handleAdd}
+               onEdit={handleEdit}
+               closeForm={handleCloseModal}
+            />
+         )}
+
+         {isEditFormOpen && (
+            <ItemForm
+               mode="edit"
+               initialEditValues={editValue}
+               onAdd={handleAdd}
+               onEdit={handleEdit}
                closeForm={handleCloseModal}
             />
          )}
