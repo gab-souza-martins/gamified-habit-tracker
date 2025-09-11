@@ -220,7 +220,11 @@ const HabitList = () => {
    return (
       <>
          {isAddFormOpen && (
-            <ItemForm onAdd={handleAdd} closeForm={handleCloseModal} />
+            <ItemForm
+               mode="add"
+               onAdd={handleAdd}
+               closeForm={handleCloseModal}
+            />
          )}
 
          {isConfirmRemoveOpen && (

@@ -1,13 +1,14 @@
 import React from "react";
 import RedOutlineBtn from "./RedOutlineBtn";
-import { FaBan, FaPlus } from "react-icons/fa6";
+import { FaBan, FaFloppyDisk, FaPlus } from "react-icons/fa6";
 
 interface ItemFormProps {
+   mode: "add" | "edit";
    onAdd: (name: string) => void;
    closeForm: () => void;
 }
 
-const ItemForm: React.FC<ItemFormProps> = ({ onAdd, closeForm }) => {
+const ItemForm: React.FC<ItemFormProps> = ({ mode, onAdd, closeForm }) => {
    const [name, setName] = React.useState<string>("");
 
    const handleAdd = () => {
@@ -48,9 +49,10 @@ const ItemForm: React.FC<ItemFormProps> = ({ onAdd, closeForm }) => {
                                bg-cyan-300 shadow-sm hover:bg-cyan-400 hover:shadow-xl transition duration-75 ease-in-out
                                active:bg-cyan-500 active:shadow-md focus:outline-2 focus:outline-cyan-300 focus:outline-offset-2"
                   >
-                     <FaPlus />
-                     <span>Adicionar</span>
+                     {mode === "add" ? <FaPlus /> : <FaFloppyDisk />}
+                     <span>{mode === "add" ? "Adicionar" : "Salvar"}</span>
                   </button>
+
                   <RedOutlineBtn
                      btnIcon={<FaBan />}
                      btnText="Cancelar"
