@@ -28,6 +28,8 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
       setTodos(parsed);
    }, []);
 
+   const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
+
    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if (todoName.trim() !== "") {
@@ -175,41 +177,31 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
       setTodos(newTodos);
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
-   const handleCloseConfirmRemove = () => {
+   const handleCloseModal = () => {
+      setIsAddFormOpen(false);
       setIsConfirmRemoveOpen(false);
    };
 
    return (
       <>
-         <ItemForm />
+         {isAddFormOpen && <ItemForm closeForm={handleCloseModal} />}
 
          {isConfirmRemoveOpen && (
             <ConfirmRemove
                confirmRemove={handleRemove}
-               closeRemove={handleCloseConfirmRemove}
+               closeRemove={handleCloseModal}
             />
          )}
 
          <h2 className="text-xl">Afazeres</h2>
 
-         <form className="flex items-center gap-2">
-            <input
-               onChange={(e) => setTodoName(e.target.value)}
-               value={todoName}
-               aria-label="Digite o afazer"
-               type="text"
-               placeholder="Afazer"
-               className="border rounded-md p-1"
-            />
-
-            <button
-               onClick={handleAdd}
-               aria-label="Adicionar afazer"
-               className="cursor-pointer bg-cyan-300 rounded-md shadow-md p-2"
-            >
-               <FaPlus />
-            </button>
-         </form>
+         <button
+            onClick={() => setIsAddFormOpen(true)}
+            aria-label="Adicionar afazer"
+            className="cursor-pointer bg-cyan-300 rounded-md shadow-md p-2"
+         >
+            <FaPlus />
+         </button>
 
          <DndContext
             collisionDetection={closestCenter}

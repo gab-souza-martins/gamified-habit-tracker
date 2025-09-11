@@ -1,6 +1,12 @@
 import React from "react";
+import RedOutlineBtn from "./RedOutlineBtn";
+import { FaBan } from "react-icons/fa6";
 
-const ItemForm = () => {
+interface ItemFormProps {
+   closeForm: () => void;
+}
+
+const ItemForm: React.FC<ItemFormProps> = ({ closeForm }) => {
    const [name, setName] = React.useState<string>("");
 
    return (
@@ -21,6 +27,12 @@ const ItemForm = () => {
                   aria-label="Nome"
                   aria-required
                   placeholder="Nome"
+               />
+
+               <RedOutlineBtn
+                  btnIcon={<FaBan />}
+                  btnText="Cancelar"
+                  onClickEvent={closeForm}
                />
             </form>
          </div>
