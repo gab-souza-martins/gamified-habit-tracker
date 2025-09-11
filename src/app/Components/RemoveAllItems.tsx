@@ -1,6 +1,7 @@
-import ConfirmRemove from "./ConfirmRemove";
 import React from "react";
+import ConfirmRemove from "./ConfirmRemove";
 import RedOutlineBtn from "./RedOutlineBtn";
+import { FaTrash } from "react-icons/fa6";
 
 const RemoveAllItems = () => {
    const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
@@ -25,6 +26,7 @@ const RemoveAllItems = () => {
          )}
 
          <RedOutlineBtn
+            btnIcon={<FaTrash />}
             btnText="Remover itens"
             onClickEvent={() => setIsConfirmRemoveOpen(true)}
          />
