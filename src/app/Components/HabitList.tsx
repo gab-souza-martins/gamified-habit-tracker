@@ -75,36 +75,15 @@ const HabitList = () => {
                aria-label="Marcar como concluído"
                type="checkbox"
             />
-            {editId === i.id && (
-               <input
-                  onChange={(e) => setEditValue(e.target.value)}
-                  onKeyDown={(e) => {
-                     if (e.key === "Escape") {
-                        handleLeaveEdit();
-                     } else if (e.key === "Enter") {
-                        handleEdit();
-                     }
-                  }}
-                  onBlur={handleEdit}
-                  value={editValue}
-                  autoFocus
-                  aria-label="Editar nome"
-                  type="text"
-                  placeholder="Editar"
-                  className="border rounded-md p-1"
-               />
-            )}
 
-            {editId !== i.id && (
-               <span
-                  {...listeners}
-                  className={`cursor-pointer ${
-                     i.done ? "text-gray-400 line-through" : ""
-                  }`}
-               >
-                  {i.name}
-               </span>
-            )}
+            <span
+               {...listeners}
+               className={`cursor-pointer ${
+                  i.done ? "text-gray-400 line-through" : ""
+               }`}
+            >
+               {i.name}
+            </span>
 
             <span className="text-gray-500">Sequência atual: {i.streak}</span>
             <span className="text-gray-500">
@@ -116,6 +95,7 @@ const HabitList = () => {
                   e.preventDefault();
                   setEditId(i.id);
                   setEditValue(i.name);
+                  setIsEditFormOpen(true);
                }}
                aria-label="Editar hábito"
                className="cursor-pointer p-2"
@@ -182,25 +162,21 @@ const HabitList = () => {
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
 
+   const [isEditFormOpen, setIsEditFormOpen] = React.useState<boolean>(false);
    const [editId, setEditId] = React.useState<string>("");
    const [editValue, setEditValue] = React.useState<string>("");
 
-   const handleEdit = () => {
-      if (editValue.trim() !== "") {
+   const handleEdit = (name: string) => {
+      if (name.trim() !== "") {
          const newHabits: Habit[] = habits.map((i) => {
             if (i.id === editId) {
-               i.name = editValue.trim();
+               i.name = name.trim();
             }
             return i;
          });
          setHabits(newHabits);
          localStorage.setItem("habits", JSON.stringify(newHabits));
-         handleLeaveEdit();
       }
-   };
-   const handleLeaveEdit = () => {
-      setEditId("");
-      setEditValue("");
    };
 
    const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
@@ -213,6 +189,7 @@ const HabitList = () => {
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
    const handleCloseModal = () => {
+      setIsEditFormOpen(false);
       setIsAddFormOpen(false);
       setIsConfirmRemoveOpen(false);
    };
@@ -222,6 +199,16 @@ const HabitList = () => {
          {isAddFormOpen && (
             <ItemForm
                mode="add"
+               onAdd={handleAdd}
+               onEdit={handleEdit}
+               closeForm={handleCloseModal}
+            />
+         )}
+
+         {isEditFormOpen && (
+            <ItemForm
+               mode="edit"
+               initialEditValues={editValue}
                onAdd={handleAdd}
                onEdit={handleEdit}
                closeForm={handleCloseModal}

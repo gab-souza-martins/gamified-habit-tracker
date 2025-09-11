@@ -58,7 +58,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
                   placeholder="Nome"
                />
 
-               <div className="flex items-center gap-2">
+               <div className="flex gap-2">
                   <button
                      onClick={(e) => {
                         e.preventDefault();
@@ -69,7 +69,9 @@ const ItemForm: React.FC<ItemFormProps> = ({
                                active:bg-cyan-500 active:shadow-md focus:outline-2 focus:outline-cyan-300 focus:outline-offset-2"
                   >
                      {mode === "add" ? <FaPlus /> : <FaFloppyDisk />}
-                     <span>{mode === "add" ? "Adicionar" : "Salvar"}</span>
+                     <span className="font-semibold">
+                        {mode === "add" ? "Adicionar" : "Salvar"}
+                     </span>
                   </button>
 
                   <RedOutlineBtn
