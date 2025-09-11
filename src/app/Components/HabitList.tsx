@@ -13,7 +13,12 @@ import { FaEdit } from "react-icons/fa";
 import ConfirmRemove from "./ConfirmRemove";
 import ItemForm from "./ItemForm";
 
-const HabitList = () => {
+interface HabitListProps {
+   increaseExp: (exp: number) => void;
+   decreaseExp: (exp: number) => void;
+}
+
+const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
 
    React.useEffect(() => {
@@ -123,8 +128,10 @@ const HabitList = () => {
 
       if (isDone) {
          addCompletion(habit, today);
+         increaseExp(1);
       } else {
          removeCompletion(habit, today);
+         decreaseExp(1);
       }
    };
    const addCompletion = (habit: string, today: string) => {

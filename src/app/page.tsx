@@ -63,7 +63,10 @@ const Home = () => {
          <br />
          <UserStats stats={currentStats} />
          <br />
-         <HabitList />
+         <HabitList
+            increaseExp={handleIncreaseExp}
+            decreaseExp={handleDecreaseExp}
+         />
          <TodoList
             increaseExp={handleIncreaseExp}
             decreaseExp={handleDecreaseExp}
