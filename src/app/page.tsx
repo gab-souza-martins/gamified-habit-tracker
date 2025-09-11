@@ -11,23 +11,35 @@ const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
       level: 1,
       exp: 0,
+      expToNextLevel: 10,
    });
 
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("stats");
-      const parsed: Stats = saved ? JSON.parse(saved) : { level: 1, exp: 0 };
+      const parsed: Stats = saved
+         ? JSON.parse(saved)
+         : { level: 1, exp: 0, expToNextLevel: 10 };
       setCurrentStats(parsed);
    }, []);
 
    const handleIncreaseExp = (exp: number) => {
       let newLevel: number = currentStats.level;
+      let newExpToNextLevel: number = currentStats.expToNextLevel;
       let newExp: number = currentStats.exp + exp;
-      if (newExp >= 10) {
-         newLevel = currentStats.level + 1;
-         newExp -= 10;
+
+      if (newExp >= newExpToNextLevel) {
+         newLevel += 1;
+         newExp -= newExpToNextLevel;
+         if (newExpToNextLevel < 50) {
+            newExpToNextLevel += 5;
+         }
       }
 
-      const newStats: Stats = { level: newLevel, exp: newExp };
+      const newStats: Stats = {
+         level: newLevel,
+         exp: newExp,
+         expToNextLevel: newExpToNextLevel,
+      };
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
    };

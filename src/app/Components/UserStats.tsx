@@ -8,8 +8,10 @@ interface UserStatsProps {
 const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <>
-         <p>Nível: {stats.level ?? 1}</p>
-         <p>Experiência: {stats.exp ?? 0}/10</p>
+         <p>Nível: {stats.level}</p>
+         <p>
+            Experiência: {stats.exp}/{stats.expToNextLevel}
+         </p>
       </>
    );
 };
