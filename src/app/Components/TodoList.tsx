@@ -20,7 +20,6 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
-   const [todoName, setTodoName] = React.useState<string>("");
 
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("todos");
@@ -30,14 +29,13 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
 
-   const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      if (todoName.trim() !== "") {
+   const handleAdd = (name: string) => {
+      if (name.trim() !== "") {
          const newTodos: Todo[] = [
             ...todos,
             {
                id: crypto.randomUUID(),
-               name: todoName.trim(),
+               name: name.trim(),
                done: false,
             },
          ];
@@ -46,7 +44,6 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
       } else {
          console.log("Nenhum input encontrado");
       }
-      setTodoName("");
    };
 
    const SortableItem = ({ i }: { i: Todo }) => {
@@ -184,7 +181,9 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
 
    return (
       <>
-         {isAddFormOpen && <ItemForm closeForm={handleCloseModal} />}
+         {isAddFormOpen && (
+            <ItemForm onAdd={handleAdd} closeForm={handleCloseModal} />
+         )}
 
          {isConfirmRemoveOpen && (
             <ConfirmRemove
@@ -198,9 +197,12 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
          <button
             onClick={() => setIsAddFormOpen(true)}
             aria-label="Adicionar afazer"
-            className="cursor-pointer bg-cyan-300 rounded-md shadow-md p-2"
+            className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
+                      bg-cyan-300 shadow-sm hover:bg-cyan-400 hover:shadow-xl transition duration-75 ease-in-out
+                      active:bg-cyan-500 active:shadow-md focus:outline-2 focus:outline-cyan-300 focus:outline-offset-2"
          >
             <FaPlus />
+            <span>Adicionar</span>
          </button>
 
          <DndContext
