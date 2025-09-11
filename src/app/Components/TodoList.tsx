@@ -12,7 +12,12 @@ import { CSS } from "@dnd-kit/utilities";
 import { FaEdit } from "react-icons/fa";
 import ConfirmRemove from "./ConfirmRemove";
 
-const TodoList = () => {
+interface TodoListProps {
+   increaseExp: (exp: number) => void;
+   decreaseExp: (exp: number) => void;
+}
+
+const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
    const [todoName, setTodoName] = React.useState<string>("");
 
@@ -126,6 +131,11 @@ const TodoList = () => {
       const newTodos: Todo[] = todos.map((i) => {
          if (i.id === todo) {
             i.done = isDone;
+            if (isDone) {
+               increaseExp(1);
+            } else {
+               decreaseExp(1);
+            }
          }
          return i;
       });
