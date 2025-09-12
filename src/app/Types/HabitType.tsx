@@ -5,7 +5,7 @@ interface Habit {
    name: string;
    attribute: AttributeName;
    difficulty: number;
-   importante: number;
+   importance: number;
 
    done: boolean;
    history: string[];

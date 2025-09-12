@@ -5,9 +5,24 @@ import AttributeName from "../Types/AttributeNameType";
 
 interface ItemFormProps {
    mode: "add" | "edit";
-   initialEditValues?: { name: string; attribute: AttributeName }; // !adicionar dificuldade e importância
-   onAdd: (name: string, attribute: AttributeName) => void;
-   onEdit: (name: string, attribute: AttributeName) => void;
+   initialEditValues?: {
+      name: string;
+      attribute: AttributeName;
+      difficulty: number;
+      importance: number;
+   };
+   onAdd: (
+      name: string,
+      attribute: AttributeName,
+      difficulty: number,
+      importance: number
+   ) => void;
+   onEdit: (
+      name: string,
+      attribute: AttributeName,
+      difficulty: number,
+      importance: number
+   ) => void;
    closeForm: () => void;
 }
 
@@ -27,15 +42,16 @@ const ItemForm: React.FC<ItemFormProps> = ({
       if (initialEditValues) {
          setName(initialEditValues.name);
          setAttribute(initialEditValues.attribute);
-         // !adicionar dificuldade e importância
+         setDifficulty(initialEditValues.difficulty);
+         setImportance(initialEditValues.importance);
       }
    }, [initialEditValues]);
 
    const handleAdd = () => {
       if (mode === "add") {
-         onAdd(name, attribute);
+         onAdd(name, attribute, difficulty, importance);
       } else {
-         onEdit(name, attribute);
+         onEdit(name, attribute, difficulty, importance);
       }
 
       if (name.trim() === "") {
@@ -64,7 +80,12 @@ const ItemForm: React.FC<ItemFormProps> = ({
                   placeholder="Nome"
                />
 
+               {/* Atributos */}
                <div className="flex items-center gap-3">
+                  <label htmlFor="attributeSelect" className="font-semibold">
+                     Atributo
+                  </label>
+
                   <label>
                      <input
                         onChange={(e) =>
@@ -100,6 +121,82 @@ const ItemForm: React.FC<ItemFormProps> = ({
                         name="attributeSelect"
                      />
                      Espírito
+                  </label>
+               </div>
+
+               {/* Dificuldade */}
+               <div className="flex items-center gap-3">
+                  <label htmlFor="difficultySelect" className="font-semibold">
+                     Dificuldade
+                  </label>
+
+                  <label>
+                     <input
+                        onChange={(e) => setDifficulty(Number(e.target.value))}
+                        checked={difficulty === 1}
+                        value={1}
+                        type="radio"
+                        name="difficultySelect"
+                     />
+                     Fácil
+                  </label>
+                  <label>
+                     <input
+                        onChange={(e) => setDifficulty(Number(e.target.value))}
+                        checked={difficulty === 2}
+                        value={2}
+                        type="radio"
+                        name="difficultySelect"
+                     />
+                     Médio
+                  </label>
+                  <label>
+                     <input
+                        onChange={(e) => setDifficulty(Number(e.target.value))}
+                        checked={difficulty === 3}
+                        value={3}
+                        type="radio"
+                        name="difficultySelect"
+                     />
+                     Difícil
+                  </label>
+               </div>
+
+               {/* Importância */}
+               <div className="flex items-center gap-3">
+                  <label htmlFor="importanceSelect" className="font-semibold">
+                     Importância
+                  </label>
+
+                  <label>
+                     <input
+                        onChange={(e) => setImportance(Number(e.target.value))}
+                        checked={importance === 1}
+                        value={1}
+                        type="radio"
+                        name="importanceSelect"
+                     />
+                     Trivial
+                  </label>
+                  <label>
+                     <input
+                        onChange={(e) => setImportance(Number(e.target.value))}
+                        checked={importance === 2}
+                        value={2}
+                        type="radio"
+                        name="importanceSelect"
+                     />
+                     Importante
+                  </label>
+                  <label>
+                     <input
+                        onChange={(e) => setImportance(Number(e.target.value))}
+                        checked={importance === 3}
+                        value={3}
+                        type="radio"
+                        name="importanceSelect"
+                     />
+                     Urgente
                   </label>
                </div>
 

@@ -30,7 +30,12 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
 
-   const handleAdd = (name: string, attribute: AttributeName) => {
+   const handleAdd = (
+      name: string,
+      attribute: AttributeName,
+      difficulty: number,
+      importance: number
+   ) => {
       if (name.trim() !== "") {
          const newTodos: Todo[] = [
             ...todos,
@@ -38,6 +43,8 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
                id: crypto.randomUUID(),
                name: name.trim(),
                attribute: attribute,
+               difficulty: difficulty,
+               importance: importance,
                done: false,
             },
          ];

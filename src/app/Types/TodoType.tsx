@@ -5,7 +5,7 @@ interface Todo {
    name: string;
    attribute: AttributeName;
    difficulty: number;
-   importante: number;
+   importance: number;
    done: boolean;
 }
 export default Todo;

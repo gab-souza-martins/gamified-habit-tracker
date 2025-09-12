@@ -38,7 +38,12 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
 
-   const handleAdd = (name: string, attribute: AttributeName) => {
+   const handleAdd = (
+      name: string,
+      attribute: AttributeName,
+      difficulty: number,
+      importance: number
+   ) => {
       if (name.trim() !== "") {
          const newHabits: Habit[] = [
             ...habits,
@@ -46,6 +51,8 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
                id: crypto.randomUUID(),
                name: name.trim(),
                attribute: attribute,
+               difficulty: difficulty,
+               importance: importance,
                done: false,
                streak: 0,
                highestStreak: 0,
