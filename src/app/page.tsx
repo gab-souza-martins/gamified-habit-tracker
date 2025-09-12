@@ -59,10 +59,18 @@ const Home = () => {
       attribute: "body" | "mind" | "spirit",
       exp: number
    ) => {
+      const newLevel: number = currentStats[attribute].level; // *Aqui para consertar bug
+      const newExpToNextLevel: number = currentStats[attribute].expToNextLevel; // *Aqui para consertar bug
+
       const newExp: number = currentStats[attribute].exp - exp;
+
       const newStats: Stats = {
          ...currentStats,
-         [attribute]: { ...[attribute], exp: newExp >= 0 ? newExp : 0 },
+         [attribute]: {
+            level: newLevel,
+            exp: newExp >= 0 ? newExp : 0,
+            expToNextLevel: newExpToNextLevel,
+         },
       };
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
