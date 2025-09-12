@@ -14,8 +14,8 @@ import ConfirmRemove from "./ConfirmRemove";
 import ItemForm from "./ItemForm";
 
 interface HabitListProps {
-   increaseExp: (exp: number) => void;
-   decreaseExp: (exp: number) => void;
+   increaseExp: (attribute: "body" | "mind" | "spirit", exp: number) => void;
+   decreaseExp: (attribute: "body" | "mind" | "spirit", exp: number) => void;
 }
 
 const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
@@ -128,10 +128,10 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
       if (isDone) {
          addCompletion(habit, today);
-         increaseExp(1);
+         increaseExp("body", 1);
       } else {
          removeCompletion(habit, today);
-         decreaseExp(1);
+         decreaseExp("body", 1);
       }
    };
    const addCompletion = (habit: string, today: string) => {

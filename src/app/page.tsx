@@ -26,38 +26,47 @@ const Home = () => {
       setCurrentStats(parsed);
    }, []);
 
-   // const handleIncreaseExp = (exp: number) => {
-   //    let newLevel: number = currentStats.level;
-   //    let newExpToNextLevel: number = currentStats.expToNextLevel;
-   //    let newExp: number = currentStats.exp + exp;
+   const handleIncreaseExp = (
+      attribute: "body" | "mind" | "spirit",
+      exp: number
+   ) => {
+      let newLevel: number = currentStats[attribute].level;
+      let newExpToNextLevel: number = currentStats[attribute].expToNextLevel;
+      let newExp: number = currentStats[attribute].exp + exp;
 
-   //    if (newExp >= newExpToNextLevel) {
-   //       newLevel += 1;
-   //       newExp -= newExpToNextLevel;
+      if (newExp >= newExpToNextLevel) {
+         newLevel += 1;
+         newExp -= newExpToNextLevel;
 
-   //       if (newExpToNextLevel < 50) {
-   //          newExpToNextLevel += 5;
-   //       }
-   //    }
+         if (newExpToNextLevel < 50) {
+            newExpToNextLevel += 5;
+         }
+      }
 
-   //    const newStats: Stats = {
-   //       level: newLevel,
-   //       exp: newExp,
-   //       expToNextLevel: newExpToNextLevel,
-   //    };
-   //    setCurrentStats(newStats);
-   //    localStorage.setItem("stats", JSON.stringify(newStats));
-   // };
+      const newStats: Stats = {
+         ...currentStats,
+         [attribute]: {
+            level: newLevel,
+            exp: newExp,
+            expToNextLevel: newExpToNextLevel,
+         },
+      };
+      setCurrentStats(newStats);
+      localStorage.setItem("stats", JSON.stringify(newStats));
+   };
 
-   // const handleDecreaseExp = (exp: number) => {
-   //    const newExp: number = currentStats.exp - exp;
-   //    const newStats: Stats = {
-   //       ...currentStats,
-   //       exp: newExp >= 0 ? newExp : 0,
-   //    };
-   //    setCurrentStats(newStats);
-   //    localStorage.setItem("stats", JSON.stringify(newStats));
-   // };
+   const handleDecreaseExp = (
+      attribute: "body" | "mind" | "spirit",
+      exp: number
+   ) => {
+      const newExp: number = currentStats[attribute].exp - exp;
+      const newStats: Stats = {
+         ...currentStats,
+         [attribute]: { ...[attribute], exp: newExp >= 0 ? newExp : 0 },
+      };
+      setCurrentStats(newStats);
+      localStorage.setItem("stats", JSON.stringify(newStats));
+   };
 
    return (
       <>
@@ -68,12 +77,12 @@ const Home = () => {
          <UserStats stats={currentStats} />
          <br />
          <HabitList
-         // increaseExp={handleIncreaseExp}
-         // decreaseExp={handleDecreaseExp}
+            increaseExp={handleIncreaseExp}
+            decreaseExp={handleDecreaseExp}
          />
          <TodoList
-         // increaseExp={handleIncreaseExp}
-         // decreaseExp={handleDecreaseExp}
+            increaseExp={handleIncreaseExp}
+            decreaseExp={handleDecreaseExp}
          />
       </>
    );
