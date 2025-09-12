@@ -8,9 +8,17 @@ interface UserStatsProps {
 const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <>
-         <p>Nível: {stats.level}</p>
          <p>
-            Experiência: {stats.exp}/{stats.expToNextLevel}
+            Corpo {stats.body.level}: {stats.body.exp}/
+            {stats.body.expToNextLevel}
+         </p>
+         <p>
+            Mente {stats.mind.level}: {stats.mind.exp}/
+            {stats.mind.expToNextLevel}
+         </p>
+         <p>
+            Espírito {stats.spirit.level}: {stats.spirit.exp}/
+            {stats.spirit.expToNextLevel}
          </p>
       </>
    );

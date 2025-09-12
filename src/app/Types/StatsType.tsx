@@ -1,6 +1,8 @@
+import Attribute from "./AttributeType";
+
 interface Stats {
-   level: number;
-   exp: number;
-   expToNextLevel: number;
+   body: Attribute;
+   mind: Attribute;
+   spirit: Attribute;
 }
 export default Stats;
