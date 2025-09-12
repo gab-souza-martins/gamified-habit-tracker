@@ -9,51 +9,55 @@ import Stats from "./Types/StatsType";
 
 const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
-      level: 1,
-      exp: 0,
-      expToNextLevel: 10,
+      body: { level: 1, exp: 0, expToNextLevel: 10 },
+      mind: { level: 1, exp: 0, expToNextLevel: 10 },
+      spirit: { level: 1, exp: 0, expToNextLevel: 10 },
    });
 
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("stats");
       const parsed: Stats = saved
          ? JSON.parse(saved)
-         : { level: 1, exp: 0, expToNextLevel: 10 };
+         : {
+              body: { level: 1, exp: 0, expToNextLevel: 10 },
+              mind: { level: 1, exp: 0, expToNextLevel: 10 },
+              spirit: { level: 1, exp: 0, expToNextLevel: 10 },
+           };
       setCurrentStats(parsed);
    }, []);
 
-   const handleIncreaseExp = (exp: number) => {
-      let newLevel: number = currentStats.level;
-      let newExpToNextLevel: number = currentStats.expToNextLevel;
-      let newExp: number = currentStats.exp + exp;
+   // const handleIncreaseExp = (exp: number) => {
+   //    let newLevel: number = currentStats.level;
+   //    let newExpToNextLevel: number = currentStats.expToNextLevel;
+   //    let newExp: number = currentStats.exp + exp;
 
-      if (newExp >= newExpToNextLevel) {
-         newLevel += 1;
-         newExp -= newExpToNextLevel;
+   //    if (newExp >= newExpToNextLevel) {
+   //       newLevel += 1;
+   //       newExp -= newExpToNextLevel;
 
-         if (newExpToNextLevel < 50) {
-            newExpToNextLevel += 5;
-         }
-      }
+   //       if (newExpToNextLevel < 50) {
+   //          newExpToNextLevel += 5;
+   //       }
+   //    }
 
-      const newStats: Stats = {
-         level: newLevel,
-         exp: newExp,
-         expToNextLevel: newExpToNextLevel,
-      };
-      setCurrentStats(newStats);
-      localStorage.setItem("stats", JSON.stringify(newStats));
-   };
+   //    const newStats: Stats = {
+   //       level: newLevel,
+   //       exp: newExp,
+   //       expToNextLevel: newExpToNextLevel,
+   //    };
+   //    setCurrentStats(newStats);
+   //    localStorage.setItem("stats", JSON.stringify(newStats));
+   // };
 
-   const handleDecreaseExp = (exp: number) => {
-      const newExp: number = currentStats.exp - exp;
-      const newStats: Stats = {
-         ...currentStats,
-         exp: newExp >= 0 ? newExp : 0,
-      };
-      setCurrentStats(newStats);
-      localStorage.setItem("stats", JSON.stringify(newStats));
-   };
+   // const handleDecreaseExp = (exp: number) => {
+   //    const newExp: number = currentStats.exp - exp;
+   //    const newStats: Stats = {
+   //       ...currentStats,
+   //       exp: newExp >= 0 ? newExp : 0,
+   //    };
+   //    setCurrentStats(newStats);
+   //    localStorage.setItem("stats", JSON.stringify(newStats));
+   // };
 
    return (
       <>
@@ -64,12 +68,12 @@ const Home = () => {
          <UserStats stats={currentStats} />
          <br />
          <HabitList
-            increaseExp={handleIncreaseExp}
-            decreaseExp={handleDecreaseExp}
+         // increaseExp={handleIncreaseExp}
+         // decreaseExp={handleDecreaseExp}
          />
          <TodoList
-            increaseExp={handleIncreaseExp}
-            decreaseExp={handleDecreaseExp}
+         // increaseExp={handleIncreaseExp}
+         // decreaseExp={handleDecreaseExp}
          />
       </>
    );
