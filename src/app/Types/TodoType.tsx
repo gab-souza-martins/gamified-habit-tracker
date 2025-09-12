@@ -1,7 +1,9 @@
+import AttributeName from "./AttributeNameType";
+
 interface Todo {
    id: string;
    name: string;
-   attribute: "body" | "mind" | "spirit";
+   attribute: AttributeName;
    done: boolean;
 }
 export default Todo;

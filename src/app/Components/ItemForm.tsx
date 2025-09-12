@@ -1,6 +1,7 @@
 import React from "react";
 import RedOutlineBtn from "./RedOutlineBtn";
 import { FaBan, FaFloppyDisk, FaPlus } from "react-icons/fa6";
+import AttributeName from "../Types/AttributeNameType";
 
 interface ItemFormProps {
    mode: "add" | "edit";
@@ -18,9 +19,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
    closeForm,
 }) => {
    const [name, setName] = React.useState<string>("");
-   const [attribute, setAttribute] = React.useState<"body" | "mind" | "spirit">(
-      "body"
-   );
+   const [attribute, setAttribute] = React.useState<AttributeName>("body");
 
    React.useEffect(() => {
       if (initialEditValues) {

@@ -12,10 +12,11 @@ import { CSS } from "@dnd-kit/utilities";
 import { FaEdit } from "react-icons/fa";
 import ConfirmRemove from "./ConfirmRemove";
 import ItemForm from "./ItemForm";
+import AttributeName from "../Types/AttributeNameType";
 
 interface TodoListProps {
-   increaseExp: (attribute: "body" | "mind" | "spirit", exp: number) => void;
-   decreaseExp: (attribute: "body" | "mind" | "spirit", exp: number) => void;
+   increaseExp: (attribute: AttributeName, exp: number) => void;
+   decreaseExp: (attribute: AttributeName, exp: number) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {

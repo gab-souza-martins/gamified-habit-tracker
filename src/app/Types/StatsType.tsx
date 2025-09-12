@@ -1,8 +1,8 @@
-import Attribute from "./AttributeType";
+import AttributeObject from "./AttributeObjectType";
 
 interface Stats {
-   body: Attribute;
-   mind: Attribute;
-   spirit: Attribute;
+   body: AttributeObject;
+   mind: AttributeObject;
+   spirit: AttributeObject;
 }
 export default Stats;

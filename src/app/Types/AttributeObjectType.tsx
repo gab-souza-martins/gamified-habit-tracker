@@ -1,6 +1,6 @@
-interface Attribute {
+interface AttributeObject {
    level: number;
    exp: number;
    expToNextLevel: number;
 }
-export default Attribute;
+export default AttributeObject;

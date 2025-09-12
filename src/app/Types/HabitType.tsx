@@ -1,7 +1,9 @@
+import AttributeName from "./AttributeNameType";
+
 interface Habit {
    id: string;
    name: string;
-   attribute: "body" | "mind" | "spirit";
+   attribute: AttributeName;
    done: boolean;
    streak: number;
    highestStreak: number;

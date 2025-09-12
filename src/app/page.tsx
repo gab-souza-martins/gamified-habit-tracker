@@ -6,6 +6,7 @@ import TodoList from "./Components/TodoList";
 import UserStats from "./Components/UserStats";
 import ResetStats from "./Components/ResetStats";
 import Stats from "./Types/StatsType";
+import AttributeName from "./Types/AttributeNameType";
 
 const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
@@ -26,10 +27,7 @@ const Home = () => {
       setCurrentStats(parsed);
    }, []);
 
-   const handleIncreaseExp = (
-      attribute: "body" | "mind" | "spirit",
-      exp: number
-   ) => {
+   const handleIncreaseExp = (attribute: AttributeName, exp: number) => {
       let newLevel: number = currentStats[attribute].level;
       let newExpToNextLevel: number = currentStats[attribute].expToNextLevel;
       let newExp: number = currentStats[attribute].exp + exp;
@@ -55,10 +53,7 @@ const Home = () => {
       localStorage.setItem("stats", JSON.stringify(newStats));
    };
 
-   const handleDecreaseExp = (
-      attribute: "body" | "mind" | "spirit",
-      exp: number
-   ) => {
+   const handleDecreaseExp = (attribute: AttributeName, exp: number) => {
       const newLevel: number = currentStats[attribute].level; // *Aqui para consertar bug
       const newExpToNextLevel: number = currentStats[attribute].expToNextLevel; // *Aqui para consertar bug
 
