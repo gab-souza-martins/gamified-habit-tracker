@@ -38,13 +38,14 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
 
-   const handleAdd = (name: string) => {
+   const handleAdd = (name: string, attribute: AttributeName) => {
       if (name.trim() !== "") {
          const newHabits: Habit[] = [
             ...habits,
             {
                id: crypto.randomUUID(),
                name: name.trim(),
+               attribute: attribute,
                done: false,
                streak: 0,
                highestStreak: 0,
@@ -100,7 +101,8 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
                onClick={(e) => {
                   e.preventDefault();
                   setEditId(i.id);
-                  setEditValue(i.name);
+                  setEditName(i.name);
+                  setEditAttribute(i.attribute);
                   setIsEditFormOpen(true);
                }}
                aria-label="Editar hábito"
@@ -172,7 +174,9 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isEditFormOpen, setIsEditFormOpen] = React.useState<boolean>(false);
    const [editId, setEditId] = React.useState<string>("");
-   const [editValue, setEditValue] = React.useState<string>("");
+   const [editName, setEditName] = React.useState<string>("");
+   const [editAttribute, setEditAttribute] =
+      React.useState<AttributeName>("body");
 
    const handleEdit = (name: string) => {
       if (name.trim() !== "") {
@@ -216,7 +220,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
          {isEditFormOpen && (
             <ItemForm
                mode="edit"
-               initialEditValues={editValue}
+               initialEditValues={{ name: editName, attribute: editAttribute }}
                onAdd={handleAdd}
                onEdit={handleEdit}
                closeForm={handleCloseModal}

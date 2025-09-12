@@ -5,9 +5,9 @@ import AttributeName from "../Types/AttributeNameType";
 
 interface ItemFormProps {
    mode: "add" | "edit";
-   initialEditValues?: string;
-   onAdd: (name: string) => void;
-   onEdit: (name: string) => void;
+   initialEditValues?: { name: string; attribute: AttributeName };
+   onAdd: (name: string, attribute: AttributeName) => void;
+   onEdit: (name: string, attribute: AttributeName) => void;
    closeForm: () => void;
 }
 
@@ -23,15 +23,16 @@ const ItemForm: React.FC<ItemFormProps> = ({
 
    React.useEffect(() => {
       if (initialEditValues) {
-         setName(initialEditValues);
+         setName(initialEditValues.name);
+         setAttribute(initialEditValues.attribute);
       }
    }, [initialEditValues]);
 
    const handleAdd = () => {
       if (mode === "add") {
-         onAdd(name);
+         onAdd(name, attribute);
       } else {
-         onEdit(name);
+         onEdit(name, attribute);
       }
 
       if (name.trim() === "") {
@@ -59,6 +60,45 @@ const ItemForm: React.FC<ItemFormProps> = ({
                   aria-required
                   placeholder="Nome"
                />
+
+               <div className="flex items-center gap-3">
+                  <label>
+                     <input
+                        onChange={(e) =>
+                           setAttribute(e.target.value as AttributeName)
+                        }
+                        defaultChecked={attribute === "body"}
+                        value="body"
+                        type="radio"
+                        name="attributeSelect"
+                     />
+                     Corpo
+                  </label>
+                  <label>
+                     <input
+                        onChange={(e) =>
+                           setAttribute(e.target.value as AttributeName)
+                        }
+                        defaultChecked={attribute === "mind"}
+                        value="mind"
+                        type="radio"
+                        name="attributeSelect"
+                     />
+                     Mente
+                  </label>
+                  <label>
+                     <input
+                        onChange={(e) =>
+                           setAttribute(e.target.value as AttributeName)
+                        }
+                        defaultChecked={attribute === "spirit"}
+                        value="spirit"
+                        type="radio"
+                        name="attributeSelect"
+                     />
+                     Espírito
+                  </label>
+               </div>
 
                <div className="flex gap-2">
                   <button

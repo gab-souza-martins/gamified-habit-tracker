@@ -30,13 +30,14 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isAddFormOpen, setIsAddFormOpen] = React.useState<boolean>(false);
 
-   const handleAdd = (name: string) => {
+   const handleAdd = (name: string, attribute: AttributeName) => {
       if (name.trim() !== "") {
          const newTodos: Todo[] = [
             ...todos,
             {
                id: crypto.randomUUID(),
                name: name.trim(),
+               attribute: attribute,
                done: false,
             },
          ];
@@ -83,7 +84,8 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
                onClick={(e) => {
                   e.preventDefault();
                   setEditId(i.id);
-                  setEditValue(i.name);
+                  setEditName(i.name);
+                  setEditAttribute(i.attribute);
                   setIsEditFormOpen(true);
                }}
                aria-label="Editar afazer"
@@ -126,7 +128,9 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isEditFormOpen, setIsEditFormOpen] = React.useState<boolean>(false);
    const [editId, setEditId] = React.useState<string>("");
-   const [editValue, setEditValue] = React.useState<string>("");
+   const [editName, setEditName] = React.useState<string>("");
+   const [editAttribute, setEditAttribute] =
+      React.useState<AttributeName>("body");
 
    const handleEdit = (name: string) => {
       if (name.trim() !== "") {
@@ -170,7 +174,7 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
          {isEditFormOpen && (
             <ItemForm
                mode="edit"
-               initialEditValues={editValue}
+               initialEditValues={{ name: editName, attribute: editAttribute }}
                onAdd={handleAdd}
                onEdit={handleEdit}
                closeForm={handleCloseModal}
