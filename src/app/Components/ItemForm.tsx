@@ -2,15 +2,11 @@ import React from "react";
 import RedOutlineBtn from "./RedOutlineBtn";
 import { FaBan, FaFloppyDisk, FaPlus } from "react-icons/fa6";
 import AttributeName from "../Types/AttributeNameType";
+import EditValues from "../Types/EditValuesType";
 
 interface ItemFormProps {
    mode: "add" | "edit";
-   initialEditValues?: {
-      name: string;
-      attribute: AttributeName;
-      difficulty: number;
-      importance: number;
-   };
+   initialEditValues?: EditValues;
    onAdd: (
       name: string,
       attribute: AttributeName,

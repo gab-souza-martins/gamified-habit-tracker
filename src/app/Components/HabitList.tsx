@@ -13,6 +13,7 @@ import { FaEdit } from "react-icons/fa";
 import ConfirmRemove from "./ConfirmRemove";
 import ItemForm from "./ItemForm";
 import AttributeName from "../Types/AttributeNameType";
+import EditValues from "../Types/EditValuesType";
 
 interface HabitListProps {
    increaseExp: (attribute: AttributeName, exp: number) => void;
@@ -111,8 +112,12 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
                onClick={(e) => {
                   e.preventDefault();
                   setEditId(i.id);
-                  setEditName(i.name);
-                  setEditAttribute(i.attribute);
+                  setEditValues({
+                     name: i.name,
+                     attribute: i.attribute,
+                     difficulty: i.difficulty,
+                     importance: i.importance,
+                  });
                   setIsEditFormOpen(true);
                }}
                aria-label="Editar hábito"
@@ -184,16 +189,21 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
    const [isEditFormOpen, setIsEditFormOpen] = React.useState<boolean>(false);
    const [editId, setEditId] = React.useState<string>("");
-   const [editName, setEditName] = React.useState<string>("");
-   const [editAttribute, setEditAttribute] =
-      React.useState<AttributeName>("body");
+   const [editValues, setEditValues] = React.useState<EditValues>();
 
-   const handleEdit = (name: string, attribute: AttributeName) => {
+   const handleEdit = (
+      name: string,
+      attribute: AttributeName,
+      difficulty: number,
+      importance: number
+   ) => {
       if (name.trim() !== "") {
          const newHabits: Habit[] = habits.map((i) => {
             if (i.id === editId) {
                i.name = name.trim();
                i.attribute = attribute;
+               i.difficulty = difficulty;
+               i.importance = importance;
             }
             return i;
          });
@@ -231,7 +241,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
          {isEditFormOpen && (
             <ItemForm
                mode="edit"
-               initialEditValues={{ name: editName, attribute: editAttribute }}
+               initialEditValues={editValues}
                onAdd={handleAdd}
                onEdit={handleEdit}
                closeForm={handleCloseModal}
