@@ -67,7 +67,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
                         onChange={(e) =>
                            setAttribute(e.target.value as AttributeName)
                         }
-                        defaultChecked={attribute === "body"}
+                        checked={attribute === "body"}
                         value="body"
                         type="radio"
                         name="attributeSelect"
@@ -79,7 +79,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
                         onChange={(e) =>
                            setAttribute(e.target.value as AttributeName)
                         }
-                        defaultChecked={attribute === "mind"}
+                        checked={attribute === "mind"}
                         value="mind"
                         type="radio"
                         name="attributeSelect"
@@ -91,7 +91,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
                         onChange={(e) =>
                            setAttribute(e.target.value as AttributeName)
                         }
-                        defaultChecked={attribute === "spirit"}
+                        checked={attribute === "spirit"}
                         value="spirit"
                         type="radio"
                         name="attributeSelect"

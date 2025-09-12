@@ -181,11 +181,12 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
    const [editAttribute, setEditAttribute] =
       React.useState<AttributeName>("body");
 
-   const handleEdit = (name: string) => {
+   const handleEdit = (name: string, attribute: AttributeName) => {
       if (name.trim() !== "") {
          const newHabits: Habit[] = habits.map((i) => {
             if (i.id === editId) {
                i.name = name.trim();
+               i.attribute = attribute;
             }
             return i;
          });

@@ -135,11 +135,12 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
    const [editAttribute, setEditAttribute] =
       React.useState<AttributeName>("body");
 
-   const handleEdit = (name: string) => {
+   const handleEdit = (name: string, attribute: AttributeName) => {
       if (name.trim() !== "") {
          const newTodos: Todo[] = todos.map((i) => {
             if (i.id === editId) {
                i.name = name.trim();
+               i.attribute = attribute;
             }
             return i;
          });
