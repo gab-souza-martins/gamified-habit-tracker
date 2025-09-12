@@ -18,6 +18,9 @@ const ItemForm: React.FC<ItemFormProps> = ({
    closeForm,
 }) => {
    const [name, setName] = React.useState<string>("");
+   const [attribute, setAttribute] = React.useState<"body" | "mind" | "spirit">(
+      "body"
+   );
 
    React.useEffect(() => {
       if (initialEditValues) {
