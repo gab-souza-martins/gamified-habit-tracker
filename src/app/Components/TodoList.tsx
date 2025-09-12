@@ -117,9 +117,9 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
          if (i.id === todo) {
             i.done = isDone;
             if (isDone) {
-               increaseExp("body", 1);
+               increaseExp(i.attribute, 1);
             } else {
-               decreaseExp("body", 1);
+               decreaseExp(i.attribute, 1);
             }
          }
          return i;

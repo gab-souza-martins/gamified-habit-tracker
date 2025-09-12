@@ -134,10 +134,8 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
       if (isDone) {
          addCompletion(habit, today);
-         increaseExp("body", 1);
       } else {
          removeCompletion(habit, today);
-         decreaseExp("body", 1);
       }
    };
    const addCompletion = (habit: string, today: string) => {
@@ -150,6 +148,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
             i.lastCompleted = i.history[i.history.length - 1];
             i.done = true;
+            increaseExp(i.attribute, 1);
             console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
          }
          return i;
@@ -167,6 +166,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
             i.streak = i.history.length;
             i.done = false;
+            decreaseExp(i.attribute, 1);
             console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
          }
          return i;
