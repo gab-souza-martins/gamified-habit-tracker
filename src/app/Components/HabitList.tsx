@@ -1,6 +1,6 @@
 import React from "react";
 import Habit from "../Types/HabitType";
-import { FaPlus, FaX } from "react-icons/fa6";
+import { FaBrain, FaHandFist, FaHeart, FaPlus, FaX } from "react-icons/fa6";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
    arrayMove,
@@ -85,10 +85,13 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
             <span
                {...listeners}
-               className={`cursor-pointer ${
+               className={`cursor-pointer flex items-center gap-2 ${
                   i.done ? "text-gray-400 line-through" : ""
                }`}
             >
+               {i.attribute === "body" && <FaHandFist />}
+               {i.attribute === "mind" && <FaBrain />}
+               {i.attribute === "spirit" && <FaHeart />}
                {i.name}
             </span>
 
