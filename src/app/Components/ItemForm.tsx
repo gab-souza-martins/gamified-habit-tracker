@@ -5,7 +5,7 @@ import AttributeName from "../Types/AttributeNameType";
 
 interface ItemFormProps {
    mode: "add" | "edit";
-   initialEditValues?: { name: string; attribute: AttributeName };
+   initialEditValues?: { name: string; attribute: AttributeName }; // !adicionar dificuldade e importância
    onAdd: (name: string, attribute: AttributeName) => void;
    onEdit: (name: string, attribute: AttributeName) => void;
    closeForm: () => void;
@@ -20,11 +20,14 @@ const ItemForm: React.FC<ItemFormProps> = ({
 }) => {
    const [name, setName] = React.useState<string>("");
    const [attribute, setAttribute] = React.useState<AttributeName>("body");
+   const [difficulty, setDifficulty] = React.useState<number>(1);
+   const [importance, setImportance] = React.useState<number>(1);
 
    React.useEffect(() => {
       if (initialEditValues) {
          setName(initialEditValues.name);
          setAttribute(initialEditValues.attribute);
+         // !adicionar dificuldade e importância
       }
    }, [initialEditValues]);
 
