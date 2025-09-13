@@ -142,23 +142,35 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
    };
 
    const handleComplete = (habit: string, isDone: boolean) => {
-      const today: string = new Date().toLocaleDateString();
+      const today: Date = new Date();
+
+      const yesterday: Date = today;
+      yesterday.setDate(yesterday.getDate() - 1);
 
       if (isDone) {
-         addCompletion(habit, today);
+         addCompletion(
+            habit,
+            today.toLocaleDateString(),
+            yesterday.toLocaleDateString()
+         );
       } else {
-         removeCompletion(habit, today);
+         removeCompletion(
+            habit,
+            today.toLocaleDateString(),
+            yesterday.toLocaleDateString()
+         );
       }
    };
-   const addCompletion = (habit: string, today: string) => {
+   const addCompletion = (habit: string, today: string, yesterday: string) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.id === habit && i.lastCompleted !== today) {
             i.history = [...i.history, today];
 
-            i.streak = i.history.length;
+            i.lastCompleted = i.history[i.history.length - 1];
+
+            i.streak = i.lastCompleted === yesterday ? i.streak + 1 : 1;
             i.highestStreak = i.streak >= i.streak ? i.streak : i.highestStreak;
 
-            i.lastCompleted = i.history[i.history.length - 1];
             i.done = true;
             increaseExp(i.attribute, i.difficulty + i.importance - 1);
             console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
@@ -168,7 +180,11 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
-   const removeCompletion = (habit: string, today: string) => {
+   const removeCompletion = (
+      habit: string,
+      today: string,
+      yesterday: string
+   ) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.id === habit && i.lastCompleted === today) {
             i.history.splice(i.history.length - 1, 1);
@@ -176,7 +192,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
             i.lastCompleted =
                i.history.length === 0 ? "" : i.history[i.history.length - 1];
 
-            i.streak = i.history.length;
+            i.streak = i.lastCompleted === yesterday ? i.history.length : 1;
             i.done = false;
             decreaseExp(i.attribute, i.difficulty + i.importance - 1);
             console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
