@@ -33,7 +33,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
       const newHabits: Habit[] = parsed.map((i) => {
          if (i.lastCompleted !== today) {
-            if (i.lastCompleted === yesterday) {
+            if (i.lastCompleted !== yesterday) {
                i.streak = 0;
             }
             i.done = false;
@@ -165,7 +165,8 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
             i.lastCompleted = i.history[i.history.length - 1];
 
             i.streak += 1;
-            i.highestStreak = i.streak >= i.streak ? i.streak : i.highestStreak;
+            i.highestStreak =
+               i.streak >= i.highestStreak ? i.streak : i.highestStreak;
 
             i.done = true;
             increaseExp(i.attribute, i.difficulty + i.importance - 1);
