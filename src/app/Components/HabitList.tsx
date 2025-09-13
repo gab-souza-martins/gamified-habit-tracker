@@ -14,6 +14,7 @@ import ConfirmRemove from "./ConfirmRemove";
 import ItemForm from "./ItemForm";
 import AttributeName from "../Types/AttributeNameType";
 import EditValues from "../Types/EditValuesType";
+import dateUtils from "../Utils/dateUtils";
 
 interface HabitListProps {
    increaseExp: (attribute: AttributeName, exp: number) => void;
@@ -27,8 +28,14 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
       const saved: string | null = localStorage.getItem("habits");
       const parsed: Habit[] = saved ? JSON.parse(saved) : [];
 
+      const today = dateUtils.getToday();
+      const yesterday = dateUtils.getYesterday();
+
       const newHabits: Habit[] = parsed.map((i) => {
-         if (i.lastCompleted !== new Date().toLocaleDateString()) {
+         if (i.lastCompleted !== today) {
+            if (i.lastCompleted === yesterday) {
+               i.streak = 0;
+            }
             i.done = false;
          }
          return i;
@@ -142,33 +149,22 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
    };
 
    const handleComplete = (habit: string, isDone: boolean) => {
-      const today: Date = new Date();
-
-      const yesterday: Date = today;
-      yesterday.setDate(yesterday.getDate() - 1);
+      const today: string = dateUtils.getToday();
 
       if (isDone) {
-         addCompletion(
-            habit,
-            today.toLocaleDateString(),
-            yesterday.toLocaleDateString()
-         );
+         addCompletion(habit, today);
       } else {
-         removeCompletion(
-            habit,
-            today.toLocaleDateString(),
-            yesterday.toLocaleDateString()
-         );
+         removeCompletion(habit, today);
       }
    };
-   const addCompletion = (habit: string, today: string, yesterday: string) => {
+   const addCompletion = (habit: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.id === habit && i.lastCompleted !== today) {
             i.history = [...i.history, today];
 
             i.lastCompleted = i.history[i.history.length - 1];
 
-            i.streak = i.lastCompleted === yesterday ? i.streak + 1 : 1;
+            i.streak += 1;
             i.highestStreak = i.streak >= i.streak ? i.streak : i.highestStreak;
 
             i.done = true;
@@ -180,11 +176,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
       setHabits(newHabits);
       localStorage.setItem("habits", JSON.stringify(newHabits));
    };
-   const removeCompletion = (
-      habit: string,
-      today: string,
-      yesterday: string
-   ) => {
+   const removeCompletion = (habit: string, today: string) => {
       const newHabits: Habit[] = habits.map((i) => {
          if (i.id === habit && i.lastCompleted === today) {
             i.history.splice(i.history.length - 1, 1);
@@ -192,7 +184,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
             i.lastCompleted =
                i.history.length === 0 ? "" : i.history[i.history.length - 1];
 
-            i.streak = i.lastCompleted === yesterday ? i.history.length : 1;
+            i.streak -= 1;
             i.done = false;
             decreaseExp(i.attribute, i.difficulty + i.importance - 1);
             console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
