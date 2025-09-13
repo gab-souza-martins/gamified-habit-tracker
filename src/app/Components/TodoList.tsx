@@ -128,10 +128,11 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
       const newTodos: Todo[] = todos.map((i) => {
          if (i.id === todo) {
             i.done = isDone;
+
             if (isDone) {
-               increaseExp(i.attribute, 1);
+               increaseExp(i.attribute, i.difficulty + i.importance - 1);
             } else {
-               decreaseExp(i.attribute, 1);
+               decreaseExp(i.attribute, i.difficulty + i.importance - 1);
             }
          }
          return i;

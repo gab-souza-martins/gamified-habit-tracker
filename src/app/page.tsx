@@ -36,7 +36,7 @@ const Home = () => {
          newLevel += 1;
          newExp -= newExpToNextLevel;
 
-         if (newExpToNextLevel < 50) {
+         if (newExpToNextLevel < 100) {
             newExpToNextLevel += 5;
          }
       }
