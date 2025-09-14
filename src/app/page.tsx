@@ -7,6 +7,7 @@ import UserStats from "./Components/UserStats";
 import ResetStats from "./Components/ResetStats";
 import Stats from "./Types/StatsType";
 import AttributeName from "./Types/AttributeNameType";
+import Shop from "./Components/Shop";
 
 const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
@@ -86,6 +87,7 @@ const Home = () => {
          <br />
          <UserStats stats={currentStats} />
          <br />
+         <Shop />
          <HabitList
             giveReward={handleGiveReward}
             removeReward={handleRemoveReward}
