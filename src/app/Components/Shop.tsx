@@ -2,7 +2,11 @@ import React from "react";
 import { FaCoins } from "react-icons/fa6";
 import ShopItem from "../Types/ShopItem";
 
-const Shop = () => {
+interface ShopProps {
+   buyItem: (cost: number) => void;
+}
+
+const Shop: React.FC<ShopProps> = ({ buyItem }) => {
    const [itemList, setItemList] = React.useState<ShopItem[]>([
       { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
       { id: crypto.randomUUID(), name: "Videogame (30 min)", cost: 10 },
@@ -19,7 +23,10 @@ const Shop = () => {
                   <strong>Custo:</strong> {i.cost}
                </span>
                <button
-                  //    onClick={() => setIsAddFormOpen(true)}
+                  onClick={(e) => {
+                     e.preventDefault();
+                     buyItem(i.cost);
+                  }}
                   aria-label="Comprar item"
                   className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
                          bg-amber-300 shadow-sm hover:bg-amber-400 hover:shadow-xl transition duration-75 ease-in-out

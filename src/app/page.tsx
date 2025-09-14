@@ -79,6 +79,16 @@ const Home = () => {
       localStorage.setItem("stats", JSON.stringify(newStats));
    };
 
+   const handleBuyItem = (cost: number) => {
+      const newCoins: number = currentStats.coins - cost;
+      const newStats: Stats = {
+         ...currentStats,
+         coins: newCoins,
+      };
+      setCurrentStats(newStats);
+      localStorage.setItem("stats", JSON.stringify(newStats));
+   };
+
    return (
       <>
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
@@ -87,7 +97,7 @@ const Home = () => {
          <br />
          <UserStats stats={currentStats} />
          <br />
-         <Shop />
+         <Shop buyItem={handleBuyItem} />
          <HabitList
             giveReward={handleGiveReward}
             removeReward={handleRemoveReward}
