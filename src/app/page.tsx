@@ -8,6 +8,7 @@ import ResetStats from "./Components/ResetStats";
 import Stats from "./Types/StatsType";
 import AttributeName from "./Types/AttributeNameType";
 import Shop from "./Components/Shop";
+import BuyingError from "./Components/BuyingError";
 
 const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
@@ -73,24 +74,37 @@ const Home = () => {
             exp: newExp >= 0 ? newExp : 0,
             expToNextLevel: newExpToNextLevel,
          },
-         coins: newCoins,
+         coins: newCoins >= 0 ? newCoins : 0,
       };
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
    };
 
+   const [isBuyingErrorOpen, setIsBuyingErrorOpen] =
+      React.useState<boolean>(false);
+
    const handleBuyItem = (cost: number) => {
-      const newCoins: number = currentStats.coins - cost;
-      const newStats: Stats = {
-         ...currentStats,
-         coins: newCoins,
-      };
-      setCurrentStats(newStats);
-      localStorage.setItem("stats", JSON.stringify(newStats));
+      if (currentStats.coins >= cost) {
+         const newCoins: number = currentStats.coins - cost;
+         const newStats: Stats = {
+            ...currentStats,
+            coins: newCoins,
+         };
+         setCurrentStats(newStats);
+         localStorage.setItem("stats", JSON.stringify(newStats));
+      } else {
+         setIsBuyingErrorOpen(true);
+      }
+   };
+
+   const handleCloseModals = () => {
+      setIsBuyingErrorOpen(false);
    };
 
    return (
       <>
+         {isBuyingErrorOpen && <BuyingError closeError={handleCloseModals} />}
+
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
          <RemoveAllItems />
          <ResetStats />
