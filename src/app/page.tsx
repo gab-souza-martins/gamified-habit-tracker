@@ -13,6 +13,7 @@ const Home = () => {
       body: { level: 1, exp: 0, expToNextLevel: 10 },
       mind: { level: 1, exp: 0, expToNextLevel: 10 },
       spirit: { level: 1, exp: 0, expToNextLevel: 10 },
+      coins: 0,
    });
 
    React.useEffect(() => {
@@ -23,6 +24,7 @@ const Home = () => {
               body: { level: 1, exp: 0, expToNextLevel: 10 },
               mind: { level: 1, exp: 0, expToNextLevel: 10 },
               spirit: { level: 1, exp: 0, expToNextLevel: 10 },
+              coins: 0,
            };
       setCurrentStats(parsed);
    }, []);

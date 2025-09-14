@@ -1,5 +1,6 @@
 import React from "react";
 import Stats from "../Types/StatsType";
+import { FaCoins } from "react-icons/fa6";
 
 interface UserStatsProps {
    stats: Stats;
@@ -19,6 +20,9 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
          <p>
             Espírito {stats.spirit.level}: {stats.spirit.exp}/
             {stats.spirit.expToNextLevel}
+         </p>
+         <p className="flex items-center gap-2">
+            <FaCoins /> {stats.coins}
          </p>
       </>
    );
