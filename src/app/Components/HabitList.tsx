@@ -17,11 +17,11 @@ import EditValues from "../Types/EditValuesType";
 import dateUtils from "../Utils/dateUtils";
 
 interface HabitListProps {
-   increaseExp: (attribute: AttributeName, exp: number) => void;
-   decreaseExp: (attribute: AttributeName, exp: number) => void;
+   giveReward: (attribute: AttributeName, reward: number) => void;
+   removeReward: (attribute: AttributeName, reward: number) => void;
 }
 
-const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
+const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
    const [habits, setHabits] = React.useState<Habit[]>([]);
 
    React.useEffect(() => {
@@ -169,8 +169,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
                i.streak >= i.highestStreak ? i.streak : i.highestStreak;
 
             i.done = true;
-            increaseExp(i.attribute, i.difficulty + i.importance - 1);
-            console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
+            giveReward(i.attribute, i.difficulty + i.importance - 1);
          }
          return i;
       });
@@ -187,8 +186,7 @@ const HabitList: React.FC<HabitListProps> = ({ increaseExp, decreaseExp }) => {
 
             i.streak -= 1;
             i.done = false;
-            decreaseExp(i.attribute, i.difficulty + i.importance - 1);
-            console.log(`${i.lastCompleted} ${i.history}`); //*Para teste
+            removeReward(i.attribute, i.difficulty + i.importance - 1);
          }
          return i;
       });

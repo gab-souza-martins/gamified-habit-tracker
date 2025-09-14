@@ -16,11 +16,11 @@ import AttributeName from "../Types/AttributeNameType";
 import EditValues from "../Types/EditValuesType";
 
 interface TodoListProps {
-   increaseExp: (attribute: AttributeName, exp: number) => void;
-   decreaseExp: (attribute: AttributeName, exp: number) => void;
+   giveReward: (attribute: AttributeName, reward: number) => void;
+   removeReward: (attribute: AttributeName, reward: number) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
+const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
    const [todos, setTodos] = React.useState<Todo[]>([]);
 
    React.useEffect(() => {
@@ -130,9 +130,9 @@ const TodoList: React.FC<TodoListProps> = ({ increaseExp, decreaseExp }) => {
             i.done = isDone;
 
             if (isDone) {
-               increaseExp(i.attribute, i.difficulty + i.importance - 1);
+               giveReward(i.attribute, i.difficulty + i.importance - 1);
             } else {
-               decreaseExp(i.attribute, i.difficulty + i.importance - 1);
+               removeReward(i.attribute, i.difficulty + i.importance - 1);
             }
          }
          return i;

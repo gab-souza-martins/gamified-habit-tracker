@@ -29,10 +29,10 @@ const Home = () => {
       setCurrentStats(parsed);
    }, []);
 
-   const handleIncreaseExp = (attribute: AttributeName, exp: number) => {
+   const handleGiveReward = (attribute: AttributeName, reward: number) => {
       let newLevel: number = currentStats[attribute].level;
       let newExpToNextLevel: number = currentStats[attribute].expToNextLevel;
-      let newExp: number = currentStats[attribute].exp + exp;
+      let newExp: number = currentStats[attribute].exp + reward;
 
       if (newExp >= newExpToNextLevel) {
          newLevel += 1;
@@ -43,6 +43,8 @@ const Home = () => {
          }
       }
 
+      const newCoins: number = currentStats.coins + reward;
+
       const newStats: Stats = {
          ...currentStats,
          [attribute]: {
@@ -50,16 +52,18 @@ const Home = () => {
             exp: newExp,
             expToNextLevel: newExpToNextLevel,
          },
+         coins: newCoins,
       };
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
    };
 
-   const handleDecreaseExp = (attribute: AttributeName, exp: number) => {
+   const handleRemoveReward = (attribute: AttributeName, reward: number) => {
       const newLevel: number = currentStats[attribute].level; // *Aqui para consertar bug
       const newExpToNextLevel: number = currentStats[attribute].expToNextLevel; // *Aqui para consertar bug
 
-      const newExp: number = currentStats[attribute].exp - exp;
+      const newExp: number = currentStats[attribute].exp - reward;
+      const newCoins: number = currentStats.coins - reward;
 
       const newStats: Stats = {
          ...currentStats,
@@ -68,6 +72,7 @@ const Home = () => {
             exp: newExp >= 0 ? newExp : 0,
             expToNextLevel: newExpToNextLevel,
          },
+         coins: newCoins,
       };
       setCurrentStats(newStats);
       localStorage.setItem("stats", JSON.stringify(newStats));
@@ -82,12 +87,12 @@ const Home = () => {
          <UserStats stats={currentStats} />
          <br />
          <HabitList
-            increaseExp={handleIncreaseExp}
-            decreaseExp={handleDecreaseExp}
+            giveReward={handleGiveReward}
+            removeReward={handleRemoveReward}
          />
          <TodoList
-            increaseExp={handleIncreaseExp}
-            decreaseExp={handleDecreaseExp}
+            giveReward={handleGiveReward}
+            removeReward={handleRemoveReward}
          />
       </>
    );
