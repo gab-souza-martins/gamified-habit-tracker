@@ -33,7 +33,7 @@ const BuyingError: React.FC<BuyingErrorProps> = ({ closeError }) => {
             </p>
             <br />
 
-            <div className="flex justify-center">
+            <div className="flex">
                <button
                   onClick={closeError}
                   className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 border-2 border-rose-600 shadow-sm

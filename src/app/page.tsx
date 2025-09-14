@@ -9,6 +9,7 @@ import Stats from "./Types/StatsType";
 import AttributeName from "./Types/AttributeNameType";
 import Shop from "./Components/Shop";
 import BuyingError from "./Components/BuyingError";
+import ConfirmBuy from "./Components/ConfirmBuy";
 
 const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
@@ -82,28 +83,43 @@ const Home = () => {
 
    const [isBuyingErrorOpen, setIsBuyingErrorOpen] =
       React.useState<boolean>(false);
+   const [isConfirmBuyOpen, setIsConfirmBuyOpen] =
+      React.useState<boolean>(false);
+   const [costOfItemToBuy, setCostOfItemToBuy] = React.useState<number>(0);
 
    const handleBuyItem = (cost: number) => {
       if (currentStats.coins >= cost) {
-         const newCoins: number = currentStats.coins - cost;
-         const newStats: Stats = {
-            ...currentStats,
-            coins: newCoins,
-         };
-         setCurrentStats(newStats);
-         localStorage.setItem("stats", JSON.stringify(newStats));
+         setCostOfItemToBuy(cost);
+         setIsConfirmBuyOpen(true);
       } else {
          setIsBuyingErrorOpen(true);
       }
    };
 
+   const handleConfirmBuy = () => {
+      const newCoins: number = currentStats.coins - costOfItemToBuy;
+      const newStats: Stats = {
+         ...currentStats,
+         coins: newCoins,
+      };
+      setCurrentStats(newStats);
+      localStorage.setItem("stats", JSON.stringify(newStats));
+   };
+
    const handleCloseModals = () => {
       setIsBuyingErrorOpen(false);
+      setIsConfirmBuyOpen(false);
    };
 
    return (
       <>
          {isBuyingErrorOpen && <BuyingError closeError={handleCloseModals} />}
+         {isConfirmBuyOpen && (
+            <ConfirmBuy
+               confirmBuy={handleConfirmBuy}
+               closeConfirm={handleCloseModals}
+            />
+         )}
 
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
          <RemoveAllItems />
