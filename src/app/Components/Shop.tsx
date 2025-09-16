@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCoins } from "react-icons/fa6";
 import ShopItem from "../Types/ShopItem";
+import AddBtn from "./Buttons/AddBtn";
 
 interface ShopProps {
    buyItem: (cost: number) => void;
@@ -11,10 +12,38 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
       { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
       { id: crypto.randomUUID(), name: "Videogame (30 min)", cost: 10 },
    ]);
+   const [itemName, setItemName] = React.useState<string>("");
+   const [itemCost, setItemCost] = React.useState<number>(0);
 
    return (
       <>
          <h2 className="text-xl">Loja</h2>
+
+         <form className="flex items-center gap-2">
+            <input
+               onChange={(e) => setItemName(e.target.value)}
+               value={itemName}
+               type="text"
+               className="border rounded-md p-2"
+               aria-label="Nome do item"
+               aria-required
+               placeholder="Nome"
+            />
+            <input
+               onChange={(e) => setItemCost(Number(e.target.value))}
+               value={itemCost}
+               type="number"
+               min={0}
+               className="border rounded-md p-2"
+               aria-label="Custo do item"
+               aria-required
+               placeholder="Custo"
+            />
+            <AddBtn
+               text="Adicionar item"
+               onClickEvent={() => console.log("apertado")}
+            />
+         </form>
 
          {itemList.map((i) => (
             <div key={i.id} className="flex items-center gap-3">
