@@ -1,5 +1,5 @@
 import React from "react";
-import RedOutlineBtn from "./RedOutlineBtn";
+import RedOutlineBtn from "./Buttons/RedOutlineBtn";
 import { FaBan, FaFloppyDisk, FaPlus } from "react-icons/fa6";
 import AttributeName from "../Types/AttributeNameType";
 import EditValues from "../Types/EditValuesType";

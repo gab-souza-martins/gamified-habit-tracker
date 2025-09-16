@@ -1,6 +1,6 @@
 import React from "react";
 import Habit from "../Types/HabitType";
-import { FaBrain, FaHandFist, FaHeart, FaPlus, FaX } from "react-icons/fa6";
+import { FaBrain, FaHandFist, FaHeart, FaX } from "react-icons/fa6";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
    arrayMove,
@@ -15,6 +15,7 @@ import ItemForm from "./ItemForm";
 import AttributeName from "../Types/AttributeNameType";
 import EditValues from "../Types/EditValuesType";
 import dateUtils from "../Utils/dateUtils";
+import AddBtn from "./Buttons/AddBtn";
 
 interface HabitListProps {
    giveReward: (attribute: AttributeName, reward: number) => void;
@@ -264,16 +265,10 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
 
          <h2 className="text-xl">Hábitos</h2>
 
-         <button
-            onClick={() => setIsAddFormOpen(true)}
-            aria-label="Adicionar hábito"
-            className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
-                      bg-cyan-300 shadow-sm hover:bg-cyan-400 hover:shadow-xl transition duration-75 ease-in-out
-                      active:bg-cyan-500 active:shadow-md focus:outline-2 focus:outline-cyan-300 focus:outline-offset-2"
-         >
-            <FaPlus />
-            <span>Adicionar</span>
-         </button>
+         <AddBtn
+            text="Adicionar hábito"
+            onClickEvent={() => setIsAddFormOpen(true)}
+         />
 
          <DndContext
             collisionDetection={closestCenter}

@@ -1,6 +1,6 @@
 import React from "react";
 import ConfirmRemove from "./ConfirmRemove";
-import RedOutlineBtn from "./RedOutlineBtn";
+import RedOutlineBtn from "./Buttons/RedOutlineBtn";
 import { FaTrash } from "react-icons/fa6";
 
 const RemoveAllItems = () => {
