@@ -12,8 +12,25 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
       { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
       { id: crypto.randomUUID(), name: "Videogame (30 min)", cost: 10 },
    ]);
+
+   React.useEffect(() => {
+      const saved: string | null = localStorage.getItem("shop");
+      const parsed: ShopItem[] = saved ? JSON.parse(saved) : [];
+      setItemList(parsed);
+   }, []);
+
    const [itemName, setItemName] = React.useState<string>("");
-   const [itemCost, setItemCost] = React.useState<number>(0);
+   const [itemCost, setItemCost] = React.useState<number>(1);
+   const handleAdd = () => {
+      if (itemName.trim() !== "") {
+         const newShop: ShopItem[] = [
+            ...itemList,
+            { id: crypto.randomUUID(), name: itemName.trim(), cost: itemCost },
+         ];
+         setItemList(newShop);
+         localStorage.setItem("shop", JSON.stringify(newShop));
+      }
+   };
 
    return (
       <>
@@ -33,16 +50,13 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                onChange={(e) => setItemCost(Number(e.target.value))}
                value={itemCost}
                type="number"
-               min={0}
+               min={1}
                className="border rounded-md p-2"
                aria-label="Custo do item"
                aria-required
                placeholder="Custo"
             />
-            <AddBtn
-               text="Adicionar item"
-               onClickEvent={() => console.log("apertado")}
-            />
+            <AddBtn text="Adicionar item" onClickEvent={handleAdd} />
          </form>
 
          {itemList.map((i) => (
