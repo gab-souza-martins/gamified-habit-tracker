@@ -9,10 +9,16 @@ interface UserStatsProps {
 const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <>
-         <p>
-            Corpo {stats.body.level}: {stats.body.exp}/
-            {stats.body.expToNextLevel}
-         </p>
+         <div className="flex items-center gap-2">
+            Corpo {stats.body.level}:
+            <div className="border rounded-md w-40">
+               <div
+                  className={`rounded-md py-1 px-2 bg-yellow-300 w-${stats.body.exp}/${stats.body.expToNextLevel}`}
+               >
+                  {stats.body.exp}/{stats.body.expToNextLevel}
+               </div>
+            </div>
+         </div>
          <p>
             Mente {stats.mind.level}: {stats.mind.exp}/
             {stats.mind.expToNextLevel}
