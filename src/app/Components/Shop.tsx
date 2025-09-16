@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCoins } from "react-icons/fa6";
+import { FaCoins, FaX } from "react-icons/fa6";
 import ShopItem from "../Types/ShopItem";
 import AddBtn from "./Buttons/AddBtn";
 
@@ -32,6 +32,12 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
       }
    };
 
+   const handleRemove = (idToRemove: string) => {
+      const newShop: ShopItem[] = itemList.filter((i) => i.id !== idToRemove);
+      setItemList(newShop);
+      localStorage.setItem("shop", JSON.stringify(newShop));
+   };
+
    return (
       <>
          <h2 className="text-xl">Loja</h2>
@@ -62,9 +68,11 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
          {itemList.map((i) => (
             <div key={i.id} className="flex items-center gap-3">
                <span>{i.name}</span>
+
                <span>
                   <strong>Custo:</strong> {i.cost}
                </span>
+
                <button
                   onClick={(e) => {
                      e.preventDefault();
@@ -77,6 +85,17 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                >
                   <FaCoins />
                   <span>Comprar</span>
+               </button>
+
+               <button
+                  onClick={(e) => {
+                     e.preventDefault();
+                     handleRemove(i.id);
+                  }}
+                  aria-label="Remover item"
+                  className="cursor-pointer p-2"
+               >
+                  <FaX />
                </button>
             </div>
          ))}
