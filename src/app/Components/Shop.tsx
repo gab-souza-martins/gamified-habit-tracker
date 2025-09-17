@@ -39,6 +39,24 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
    const [editName, setEditName] = React.useState<string>("");
    const [editCost, setEditCost] = React.useState<number>(1);
 
+   const handleEdit = () => {
+      if (editName.trim() !== "") {
+         const newShop: ShopItem[] = itemList.map((i) => {
+            if (i.id === editId) {
+               i.name = editName.trim();
+               i.cost = editCost > 0 ? editCost : 1;
+            }
+            return i;
+         });
+         setItemList(newShop);
+         localStorage.setItem("shop", JSON.stringify(newShop));
+         setEditId("");
+      }
+   };
+   const handleCancelEdit = () => {
+      setEditId("");
+   };
+
    const handleRemove = (idToRemove: string) => {
       const newShop: ShopItem[] = itemList.filter((i) => i.id !== idToRemove);
       setItemList(newShop);
@@ -75,7 +93,16 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
          {itemList.map((i) => (
             <div key={i.id} className="flex items-center gap-3">
                {editId === i.id && (
-                  <form>
+                  <form
+                     onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                           handleEdit();
+                        } else if (e.key === "Escape") {
+                           handleCancelEdit();
+                        }
+                     }}
+                     onBlur={handleEdit}
+                  >
                      <input
                         onChange={(e) => setEditName(e.target.value)}
                         value={editName}
