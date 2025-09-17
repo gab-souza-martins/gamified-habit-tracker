@@ -39,6 +39,13 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
    const [editName, setEditName] = React.useState<string>("");
    const [editCost, setEditCost] = React.useState<number>(1);
 
+   const focusRef = React.useRef<HTMLInputElement>(null);
+   React.useEffect(() => {
+      if (editId && focusRef.current) {
+         focusRef.current.focus();
+      }
+   }, [editId]);
+
    const handleEdit = () => {
       if (editName.trim() !== "") {
          const newShop: ShopItem[] = itemList.map((i) => {
@@ -101,11 +108,19 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                            handleCancelEdit();
                         }
                      }}
-                     onBlur={handleEdit}
+                     onBlur={(e) => {
+                        setTimeout(() => {
+                           if (e.relatedTarget === null) {
+                              handleEdit();
+                           }
+                        }, 0);
+                     }}
                   >
                      <input
                         onChange={(e) => setEditName(e.target.value)}
                         value={editName}
+                        ref={focusRef}
+                        tabIndex={-1}
                         type="text"
                         className="border rounded-md p-2"
                         aria-label="Editar nome"
