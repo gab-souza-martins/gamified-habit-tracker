@@ -8,11 +8,6 @@ interface ShopProps {
    buyItem: (cost: number) => void;
 }
 
-interface ShopEditValues {
-   name: string;
-   cost: number;
-}
-
 const Shop: React.FC<ShopProps> = ({ buyItem }) => {
    const [itemList, setItemList] = React.useState<ShopItem[]>([]);
 
@@ -41,7 +36,8 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
    };
 
    const [editId, setEditId] = React.useState<string>("");
-   const [editValues, setEditValues] = React.useState<ShopEditValues>();
+   const [editName, setEditName] = React.useState<string>("");
+   const [editCost, setEditCost] = React.useState<number>(1);
 
    const handleRemove = (idToRemove: string) => {
       const newShop: ShopItem[] = itemList.filter((i) => i.id !== idToRemove);
@@ -78,11 +74,37 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
 
          {itemList.map((i) => (
             <div key={i.id} className="flex items-center gap-3">
-               <span>{i.name}</span>
+               {editId === i.id && (
+                  <form>
+                     <input
+                        onChange={(e) => setEditName(e.target.value)}
+                        value={editName}
+                        type="text"
+                        className="border rounded-md p-2"
+                        aria-label="Editar nome"
+                        placeholder="Editar nome"
+                     />
 
-               <span>
-                  <strong>Custo:</strong> {i.cost}
-               </span>
+                     <input
+                        onChange={(e) => setEditCost(Number(e.target.value))}
+                        value={editCost}
+                        type="number"
+                        min={1}
+                        className="border rounded-md p-2"
+                        aria-label="Editar custo"
+                        placeholder="Editar custo"
+                     />
+                  </form>
+               )}
+
+               {editId !== i.id && (
+                  <>
+                     <span>{i.name}</span>
+                     <span>
+                        <strong>Custo:</strong> {i.cost}
+                     </span>
+                  </>
+               )}
 
                <button
                   onClick={(e) => {
@@ -102,10 +124,8 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                   onClick={(e) => {
                      e.preventDefault();
                      setEditId(i.id);
-                     setEditValues({
-                        name: i.name,
-                        cost: i.cost,
-                     });
+                     setEditName(i.name);
+                     setEditCost(i.cost);
                   }}
                   aria-label="Editar item"
                   className="cursor-pointer p-2"
