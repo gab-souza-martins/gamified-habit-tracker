@@ -15,7 +15,12 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
 
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("shop");
-      const parsed: ShopItem[] = saved ? JSON.parse(saved) : [];
+      const parsed: ShopItem[] = saved
+         ? JSON.parse(saved)
+         : [
+              { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
+              { id: crypto.randomUUID(), name: "Videogame (30 min)", cost: 10 },
+           ];
       setItemList(parsed);
    }, []);
 

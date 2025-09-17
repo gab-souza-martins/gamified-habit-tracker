@@ -10,6 +10,7 @@ const RemoveAllItems = () => {
    const handleRemove = () => {
       localStorage.removeItem("habits");
       localStorage.removeItem("todos");
+      localStorage.removeItem("shop");
       window.location.reload();
    };
    const handleCloseConfirmRemove = () => {
