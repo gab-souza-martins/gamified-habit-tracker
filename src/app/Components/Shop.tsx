@@ -43,6 +43,114 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
       }
    };
 
+   const SortableItem = ({ i }: { i: ShopItem }) => {
+      const { attributes, listeners, setNodeRef, transform, transition } =
+         useSortable({ id: i.id });
+
+      const style = {
+         transition,
+         transform: CSS.Transform.toString(transform),
+      };
+
+      return (
+         <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            className="flex items-center gap-3"
+         >
+            {editId === i.id && (
+               <form
+                  onKeyDown={(e) => {
+                     if (e.key === "Enter") {
+                        handleEdit();
+                     } else if (e.key === "Escape") {
+                        handleCancelEdit();
+                     }
+                  }}
+                  onBlur={(e) => {
+                     setTimeout(() => {
+                        if (e.relatedTarget === null) {
+                           handleEdit();
+                        }
+                     }, 0);
+                  }}
+               >
+                  <input
+                     onChange={(e) => setEditName(e.target.value)}
+                     value={editName}
+                     ref={focusRef}
+                     tabIndex={-1}
+                     type="text"
+                     className="border rounded-md p-2"
+                     aria-label="Editar nome"
+                     placeholder="Editar nome"
+                  />
+
+                  <input
+                     onChange={(e) => setEditCost(Number(e.target.value))}
+                     value={editCost}
+                     type="number"
+                     min={1}
+                     className="border rounded-md p-2"
+                     aria-label="Editar custo"
+                     placeholder="Editar custo"
+                  />
+               </form>
+            )}
+
+            {editId !== i.id && (
+               <>
+                  <span {...listeners} className="cursor-pointer">
+                     {i.name}
+                  </span>
+                  <span {...listeners} className="cursor-pointer">
+                     <strong>Custo:</strong> {i.cost}
+                  </span>
+               </>
+            )}
+
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  buyItem(i.cost);
+               }}
+               aria-label="Comprar item"
+               className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
+                         bg-amber-300 shadow-sm hover:bg-amber-400 hover:shadow-xl transition duration-75 ease-in-out
+                         active:bg-amber-500 active:shadow-md focus:outline-2 focus:outline-amber-300 focus:outline-offset-2"
+            >
+               <FaCoins />
+               <span>Comprar</span>
+            </button>
+
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  setEditId(i.id);
+                  setEditName(i.name);
+                  setEditCost(i.cost);
+               }}
+               aria-label="Editar item"
+               className="cursor-pointer p-2"
+            >
+               <FaEdit />
+            </button>
+
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  handleRemove(i.id);
+               }}
+               aria-label="Remover item"
+               className="cursor-pointer p-2"
+            >
+               <FaX />
+            </button>
+         </div>
+      );
+   };
+
    const [editId, setEditId] = React.useState<string>("");
    const [editName, setEditName] = React.useState<string>("");
    const [editCost, setEditCost] = React.useState<number>(1);
