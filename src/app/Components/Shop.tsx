@@ -2,16 +2,19 @@ import React from "react";
 import { FaCoins, FaX } from "react-icons/fa6";
 import ShopItem from "../Types/ShopItem";
 import AddBtn from "./Buttons/AddBtn";
+import { FaEdit } from "react-icons/fa";
 
 interface ShopProps {
    buyItem: (cost: number) => void;
 }
 
+interface ShopEditValues {
+   name: string;
+   cost: number;
+}
+
 const Shop: React.FC<ShopProps> = ({ buyItem }) => {
-   const [itemList, setItemList] = React.useState<ShopItem[]>([
-      { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
-      { id: crypto.randomUUID(), name: "Videogame (30 min)", cost: 10 },
-   ]);
+   const [itemList, setItemList] = React.useState<ShopItem[]>([]);
 
    React.useEffect(() => {
       const saved: string | null = localStorage.getItem("shop");
@@ -36,6 +39,9 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
          localStorage.setItem("shop", JSON.stringify(newShop));
       }
    };
+
+   const [editId, setEditId] = React.useState<string>("");
+   const [editValues, setEditValues] = React.useState<ShopEditValues>();
 
    const handleRemove = (idToRemove: string) => {
       const newShop: ShopItem[] = itemList.filter((i) => i.id !== idToRemove);
@@ -90,6 +96,21 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                >
                   <FaCoins />
                   <span>Comprar</span>
+               </button>
+
+               <button
+                  onClick={(e) => {
+                     e.preventDefault();
+                     setEditId(i.id);
+                     setEditValues({
+                        name: i.name,
+                        cost: i.cost,
+                     });
+                  }}
+                  aria-label="Editar item"
+                  className="cursor-pointer p-2"
+               >
+                  <FaEdit />
                </button>
 
                <button
