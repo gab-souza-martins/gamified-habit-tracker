@@ -209,7 +209,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
       <>
          <h2 className="text-xl">Loja</h2>
 
-         <form className="flex items-center gap-2">
+         <form className="flex items-center gap-2 flex-wrap">
             <input
                onChange={(e) => setItemName(e.target.value)}
                value={itemName}
@@ -224,7 +224,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                value={itemCost}
                type="number"
                min={1}
-               className="border rounded-md p-2"
+               className="border rounded-md p-2 w-16"
                aria-label="Custo do item"
                aria-required
                placeholder="Custo"
