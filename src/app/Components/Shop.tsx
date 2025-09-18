@@ -111,7 +111,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                       active:bg-amber-500 active:shadow-md focus:outline-2 focus:outline-amber-300 focus:outline-offset-2"
          >
             <FaCoins />
-            <span>Comprar</span>
+            <span className="hidden sm:inline">Comprar</span>
          </button>
 
          <button
