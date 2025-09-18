@@ -90,7 +90,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
             ref={setNodeRef}
             style={style}
             {...attributes}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2"
          >
             <input
                onChange={(e) => handleComplete(i.id, e.target.checked)}

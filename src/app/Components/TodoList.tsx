@@ -71,7 +71,7 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
             ref={setNodeRef}
             style={style}
             {...attributes}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2"
          >
             <input
                onChange={(e) => handleDone(i.id, e.target.checked)}
