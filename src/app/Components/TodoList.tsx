@@ -184,7 +184,7 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
    };
 
    return (
-      <>
+      <div>
          {isAddFormOpen && (
             <ItemForm
                mode="add"
@@ -244,7 +244,7 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
                ))}
             </SortableContext>
          </DndContext>
-      </>
+      </div>
    );
 };
 

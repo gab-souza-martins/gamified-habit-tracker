@@ -124,18 +124,21 @@ const Home = () => {
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
          <RemoveAllItems />
          <ResetStats />
-         <br />
          <UserStats stats={currentStats} />
          <br />
-         <Shop buyItem={handleBuyItem} />
-         <HabitList
-            giveReward={handleGiveReward}
-            removeReward={handleRemoveReward}
-         />
-         <TodoList
-            giveReward={handleGiveReward}
-            removeReward={handleRemoveReward}
-         />
+         <main>
+            <div className="flex items-center justify-around">
+               <HabitList
+                  giveReward={handleGiveReward}
+                  removeReward={handleRemoveReward}
+               />
+               <TodoList
+                  giveReward={handleGiveReward}
+                  removeReward={handleRemoveReward}
+               />
+               <Shop buyItem={handleBuyItem} />
+            </div>
+         </main>
       </>
    );
 };

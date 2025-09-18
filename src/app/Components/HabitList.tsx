@@ -236,7 +236,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
    };
 
    return (
-      <>
+      <div>
          {isAddFormOpen && (
             <ItemForm
                mode="add"
@@ -296,7 +296,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
                ))}
             </SortableContext>
          </DndContext>
-      </>
+      </div>
    );
 };
 

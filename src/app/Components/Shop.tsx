@@ -187,7 +187,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
    };
 
    return (
-      <>
+      <div>
          <h2 className="text-xl">Loja</h2>
 
          <form className="flex items-center gap-2">
@@ -239,7 +239,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                ))}
             </SortableContext>
          </DndContext>
-      </>
+      </div>
    );
 };
 
