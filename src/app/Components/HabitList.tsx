@@ -134,7 +134,8 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
                      setIsEditFormOpen(true);
                   }}
                   aria-label="Editar hábito"
-                  className="cursor-pointer p-2"
+                  className="cursor-pointer py-1.5 pl-1.5 pr-1 rounded-md transition duration-75 ease-in-out
+                           hover:bg-emerald-500 hover:text-white active:bg-emerald-600 active:text-white"
                >
                   <FaEdit />
                </button>
@@ -145,7 +146,8 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
                      setIsConfirmRemoveOpen(true);
                   }}
                   aria-label="Remover hábito"
-                  className="cursor-pointer p-2"
+                  className="cursor-pointer p-1.5 rounded-md transition duration-75 ease-in-out
+                           hover:bg-rose-500 hover:text-white active:bg-rose-600 active:text-white"
                >
                   <FaX />
                </button>
