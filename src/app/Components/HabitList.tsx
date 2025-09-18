@@ -111,7 +111,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
                {i.name}
             </span>
 
-            <span className="text-gray-500">Sequência atual: {i.streak}</span>
+            <span className="text-gray-500">Sequência: {i.streak}</span>
             <span className="text-gray-500">
                Maior sequência: {i.highestStreak}
             </span>
@@ -236,7 +236,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
    };
 
    return (
-      <div>
+      <>
          {isAddFormOpen && (
             <ItemForm
                mode="add"
@@ -296,7 +296,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
                ))}
             </SortableContext>
          </DndContext>
-      </div>
+      </>
    );
 };
 

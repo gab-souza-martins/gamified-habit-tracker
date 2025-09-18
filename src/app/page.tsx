@@ -126,17 +126,26 @@ const Home = () => {
          <ResetStats />
          <UserStats stats={currentStats} />
          <br />
-         <main>
-            <div className="flex items-center justify-around">
-               <HabitList
-                  giveReward={handleGiveReward}
-                  removeReward={handleRemoveReward}
-               />
-               <TodoList
-                  giveReward={handleGiveReward}
-                  removeReward={handleRemoveReward}
-               />
-               <Shop buyItem={handleBuyItem} />
+
+         <main className="p-4">
+            <div className="flex items-start justify-around gap-4">
+               <section className="min-w-1/4 max-w-xl">
+                  <HabitList
+                     giveReward={handleGiveReward}
+                     removeReward={handleRemoveReward}
+                  />
+               </section>
+
+               <section className="min-w-1/4 max-w-xl">
+                  <TodoList
+                     giveReward={handleGiveReward}
+                     removeReward={handleRemoveReward}
+                  />
+               </section>
+
+               <section className="min-w-1/4 max-w-xl">
+                  <Shop buyItem={handleBuyItem} />
+               </section>
             </div>
          </main>
       </>
