@@ -126,17 +126,20 @@ const SortableItem: React.FC<SortableItemProps> = ({
                   setEditCost(i.cost);
                }}
                aria-label="Editar item"
-               className="cursor-pointer p-2"
+               className="cursor-pointer py-1.5 pl-1.5 pr-1 rounded-md transition duration-75 ease-in-out
+                        hover:bg-emerald-500 hover:text-white active:bg-emerald-600 active:text-white"
             >
                <FaEdit />
             </button>
+
             <button
                onClick={(e) => {
                   e.preventDefault();
                   handleRemove(i.id);
                }}
                aria-label="Remover item"
-               className="cursor-pointer p-2"
+               className="cursor-pointer p-1.5 rounded-md transition duration-75 ease-in-out
+                        hover:bg-rose-500 hover:text-white active:bg-rose-600 active:text-white"
             >
                <FaX />
             </button>
