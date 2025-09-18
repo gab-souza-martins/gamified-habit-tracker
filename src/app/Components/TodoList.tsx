@@ -73,54 +73,57 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
             {...attributes}
             className="flex items-center gap-2"
          >
-            <input
-               onChange={(e) => handleDone(i.id, e.target.checked)}
-               checked={i.done}
-               aria-label="Marcar como concluído"
-               type="checkbox"
-            />
+            <div className="flex items-center gap-2">
+               <input
+                  onChange={(e) => handleDone(i.id, e.target.checked)}
+                  checked={i.done}
+                  aria-label="Marcar como concluído"
+                  type="checkbox"
+               />
+               <span
+                  {...listeners}
+                  className={`cursor-pointer flex items-center gap-2 ${
+                     i.done ? "text-gray-400 line-through" : ""
+                  }`}
+               >
+                  {i.attribute === "body" && <FaHandFist />}
+                  {i.attribute === "mind" && <FaBrain />}
+                  {i.attribute === "spirit" && <FaHeart />}
 
-            <span
-               {...listeners}
-               className={`cursor-pointer flex items-center gap-2 ${
-                  i.done ? "text-gray-400 line-through" : ""
-               }`}
-            >
-               {i.attribute === "body" && <FaHandFist />}
-               {i.attribute === "mind" && <FaBrain />}
-               {i.attribute === "spirit" && <FaHeart />}
-               {i.name}
-            </span>
+                  {i.name}
+               </span>
+            </div>
 
-            <button
-               onClick={(e) => {
-                  e.preventDefault();
-                  setEditId(i.id);
-                  setEditValues({
-                     name: i.name,
-                     attribute: i.attribute,
-                     difficulty: i.difficulty,
-                     importance: i.importance,
-                  });
-                  setIsEditFormOpen(true);
-               }}
-               aria-label="Editar afazer"
-               className="cursor-pointer p-2"
-            >
-               <FaEdit />
-            </button>
-
-            <button
-               onClick={(e) => {
-                  e.preventDefault();
-                  setIdToRemove(i.id);
-                  setIsConfirmRemoveOpen(true);
-               }}
-               aria-label="Remover afazer"
-               className="cursor-pointer p-2"
-            >
-               <FaX />
-            </button>
+            <div className="flex items-center">
+               <button
+                  onClick={(e) => {
+                     e.preventDefault();
+                     setEditId(i.id);
+                     setEditValues({
+                        name: i.name,
+                        attribute: i.attribute,
+                        difficulty: i.difficulty,
+                        importance: i.importance,
+                     });
+                     setIsEditFormOpen(true);
+                  }}
+                  aria-label="Editar afazer"
+                  className="cursor-pointer p-2"
+               >
+                  <FaEdit />
+               </button>
+               <button
+                  onClick={(e) => {
+                     e.preventDefault();
+                     setIdToRemove(i.id);
+                     setIsConfirmRemoveOpen(true);
+                  }}
+                  aria-label="Remover afazer"
+                  className="cursor-pointer p-2"
+               >
+                  <FaX />
+               </button>
+            </div>
          </div>
       );
    };

@@ -94,8 +94,11 @@ const SortableItem: React.FC<SortableItemProps> = ({
                <span {...listeners} className="cursor-pointer">
                   {i.name}
                </span>
-               <span {...listeners} className="cursor-pointer">
-                  <strong>Custo:</strong> {i.cost}
+               <span
+                  {...listeners}
+                  className="cursor-pointer flex items-center gap-1"
+               >
+                  <FaCoins /> {i.cost}
                </span>
             </>
          )}
@@ -114,29 +117,30 @@ const SortableItem: React.FC<SortableItemProps> = ({
             <span className="hidden sm:inline">Comprar</span>
          </button>
 
-         <button
-            onClick={(e) => {
-               e.preventDefault();
-               setEditId(i.id);
-               setEditName(i.name);
-               setEditCost(i.cost);
-            }}
-            aria-label="Editar item"
-            className="cursor-pointer p-2"
-         >
-            <FaEdit />
-         </button>
-
-         <button
-            onClick={(e) => {
-               e.preventDefault();
-               handleRemove(i.id);
-            }}
-            aria-label="Remover item"
-            className="cursor-pointer p-2"
-         >
-            <FaX />
-         </button>
+         <div className="flex items-center">
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  setEditId(i.id);
+                  setEditName(i.name);
+                  setEditCost(i.cost);
+               }}
+               aria-label="Editar item"
+               className="cursor-pointer p-2"
+            >
+               <FaEdit />
+            </button>
+            <button
+               onClick={(e) => {
+                  e.preventDefault();
+                  handleRemove(i.id);
+               }}
+               aria-label="Remover item"
+               className="cursor-pointer p-2"
+            >
+               <FaX />
+            </button>
+         </div>
       </div>
    );
 };
