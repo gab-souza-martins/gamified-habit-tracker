@@ -125,10 +125,9 @@ const Home = () => {
             />
          )}
 
-         <h1 className="text-3xl font-bold">Quest Tracker</h1>
-         <RemoveAllItems />
-         <ResetStats />
          <header>
+            <h1 className="text-3xl font-bold">Quest Tracker</h1>
+
             <UserStats stats={currentStats} />
          </header>
 
@@ -153,6 +152,13 @@ const Home = () => {
                </section>
             </div>
          </main>
+
+         <footer>
+            <div className="flex item-centers justify-center gap-4">
+               <RemoveAllItems />
+               <ResetStats />
+            </div>
+         </footer>
       </>
    );
 };
