@@ -62,6 +62,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
       >
          {editId === i.id ? (
             <form
+               className="flex items-center gap-2"
                onKeyDown={(e) => {
                   if (e.key === "Enter") {
                      handleEdit();
@@ -75,7 +76,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                   value={editName}
                   ref={focusRef}
                   type="text"
-                  className="border rounded-md p-2"
+                  className="border rounded-md p-1"
                   aria-label="Editar nome"
                   placeholder="Editar nome"
                />
@@ -84,7 +85,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                   value={editCost}
                   type="number"
                   min={1}
-                  className="border rounded-md p-2"
+                  className="border rounded-md p-1 w-16"
                   aria-label="Editar custo"
                   placeholder="Editar custo"
                />
@@ -221,7 +222,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                onChange={(e) => setItemName(e.target.value)}
                value={itemName}
                type="text"
-               className="border rounded-md p-2"
+               className="border rounded-md p-1"
                aria-label="Nome do item"
                aria-required
                placeholder="Nome"
@@ -231,7 +232,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
                value={itemCost}
                type="number"
                min={1}
-               className="border rounded-md p-2 w-16"
+               className="border rounded-md p-1 w-16"
                aria-label="Custo do item"
                aria-required
                placeholder="Custo"
