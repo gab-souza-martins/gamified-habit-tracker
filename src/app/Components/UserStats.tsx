@@ -8,11 +8,17 @@ interface UserStatsProps {
 
 const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
-      <div className="flex items-center gap-2 divide-x-2 divide-solid divide-neutral-400">
-         <div className="flex items-center gap-3 pr-2 divide-x-2 divide-solid divide-neutral-400">
-            <div className="flex items-center gap-2 pr-3">
+      <div
+         className="flex gap-2 flex-col 
+                    lg:flex-row lg:items-center lg:divide-x-2 lg:divide-solid lg:divide-neutral-400"
+      >
+         <div
+            className="flex flex-col gap-3 
+                       md:flex-row md:items-center md:pr-2 md:divide-x-2 md:divide-solid md:divide-neutral-400"
+         >
+            <div className="flex items-center gap-1 pr-3">
                <FaHandFist /> Corpo {stats.body.level}
-               <div className="border rounded-md w-40">
+               <div className="border rounded-md w-30 lg:w-40">
                   <div
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
@@ -24,9 +30,9 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                </div>
             </div>
 
-            <div className="flex items-center gap-2 pr-3">
+            <div className="flex items-center gap-1 pr-3">
                <FaBrain /> Mente {stats.mind.level}
-               <div className="border rounded-md w-40">
+               <div className="border rounded-md w-30 lg:w-40">
                   <div
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
@@ -38,9 +44,9 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                </div>
             </div>
 
-            <div className="flex items-center gap-2 pr-3">
+            <div className="flex items-center gap-1 pr-3">
                <FaHeart /> Espírito {stats.spirit.level}
-               <div className="border rounded-md w-40">
+               <div className="border rounded-md w-30 lg:w-40">
                   <div
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
@@ -53,7 +59,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
             </div>
          </div>
 
-         <p className="flex items-center gap-2 pl-2">
+         <p className="flex items-center gap-2 lg:pl-2">
             <FaCoins /> {stats.coins}
          </p>
       </div>
