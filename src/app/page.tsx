@@ -112,7 +112,7 @@ const Home = () => {
    };
 
    return (
-      <>
+      <body className="p-4">
          {isBuyingErrorOpen && <BuyingError closeError={handleCloseModals} />}
          {isConfirmBuyOpen && (
             <ConfirmBuy
@@ -124,11 +124,11 @@ const Home = () => {
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
          <RemoveAllItems />
          <ResetStats />
-         <header className="p-4">
+         <header>
             <UserStats stats={currentStats} />
          </header>
 
-         <main className="p-4">
+         <main>
             <div className="flex flex-col lg:flex-row items-start justify-around gap-4">
                <section className="min-w-1/4 max-w-lg">
                   <HabitList
@@ -149,7 +149,7 @@ const Home = () => {
                </section>
             </div>
          </main>
-      </>
+      </body>
    );
 };
 
