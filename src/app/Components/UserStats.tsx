@@ -1,6 +1,6 @@
 import React from "react";
 import Stats from "../Types/StatsType";
-import { FaCoins } from "react-icons/fa6";
+import { FaBrain, FaCoins, FaHandFist, FaHeart } from "react-icons/fa6";
 
 interface UserStatsProps {
    stats: Stats;
@@ -10,10 +10,10 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <>
          <div className="flex items-center gap-2">
-            Corpo {stats.body.level}:
+            <FaHandFist /> Corpo {stats.body.level}
             <div className="border rounded-md w-40">
                <div
-                  className="rounded-md py-1 px-2 bg-yellow-300"
+                  className="rounded-md p-1 bg-yellow-300"
                   style={{
                      width: `calc(${stats.body.exp} / ${stats.body.expToNextLevel} * 100%)`,
                   }}
@@ -24,10 +24,10 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
          </div>
 
          <div className="flex items-center gap-2">
-            Mente {stats.mind.level}:
+            <FaBrain /> Mente {stats.mind.level}
             <div className="border rounded-md w-40">
                <div
-                  className="rounded-md py-1 px-2 bg-yellow-300"
+                  className="rounded-md p-1 bg-yellow-300"
                   style={{
                      width: `calc(${stats.mind.exp} / ${stats.mind.expToNextLevel} * 100%)`,
                   }}
@@ -38,10 +38,10 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
          </div>
 
          <div className="flex items-center gap-2">
-            Espírito {stats.spirit.level}:
+            <FaHeart /> Espírito {stats.spirit.level}
             <div className="border rounded-md w-40">
                <div
-                  className="rounded-md py-1 px-2 bg-yellow-300"
+                  className="rounded-md p-1 bg-yellow-300"
                   style={{
                      width: `calc(${stats.spirit.exp} / ${stats.spirit.expToNextLevel} * 100%)`,
                   }}

@@ -124,8 +124,9 @@ const Home = () => {
          <h1 className="text-3xl font-bold">Quest Tracker</h1>
          <RemoveAllItems />
          <ResetStats />
-         <UserStats stats={currentStats} />
-         <br />
+         <header className="p-4">
+            <UserStats stats={currentStats} />
+         </header>
 
          <main className="p-4">
             <div className="flex flex-col lg:flex-row items-start justify-around gap-4">
