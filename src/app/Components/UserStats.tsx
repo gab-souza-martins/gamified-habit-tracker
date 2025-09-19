@@ -10,13 +10,13 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <div
          className="flex gap-2 flex-col 
-                    lg:flex-row lg:items-center lg:divide-x-2 lg:divide-solid lg:divide-neutral-400"
+                    md:flex-row md:items-center md:divide-x-2 md:divide-solid md:divide-neutral-400"
       >
          <div
             className="flex flex-col gap-3 
                        md:flex-row md:items-center md:pr-2 md:divide-x-2 md:divide-solid md:divide-neutral-400"
          >
-            <div className="flex items-center gap-1 pr-3">
+            <div className="flex items-center gap-1 pr-2">
                <FaHandFist /> Corpo {stats.body.level}
                <div className="border rounded-md w-30 lg:w-40">
                   <div
@@ -30,7 +30,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                </div>
             </div>
 
-            <div className="flex items-center gap-1 pr-3">
+            <div className="flex items-center gap-1 pr-2">
                <FaBrain /> Mente {stats.mind.level}
                <div className="border rounded-md w-30 lg:w-40">
                   <div
@@ -44,7 +44,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                </div>
             </div>
 
-            <div className="flex items-center gap-1 pr-3">
+            <div className="flex items-center gap-1 pr-2">
                <FaHeart /> Espírito {stats.spirit.level}
                <div className="border rounded-md w-30 lg:w-40">
                   <div
@@ -59,7 +59,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
             </div>
          </div>
 
-         <p className="flex items-center gap-2 lg:pl-2">
+         <p className="flex items-center gap-2 md:pl-2">
             <FaCoins /> {stats.coins}
          </p>
       </div>
