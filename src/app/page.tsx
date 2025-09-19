@@ -125,13 +125,15 @@ const Home = () => {
             />
          )}
 
-         <header>
-            <h1 className="text-3xl font-bold">Quest Tracker</h1>
+         <header className="mb-5">
+            <div className="mb-5">
+               <h1 className="text-3xl font-bold">Quest Tracker</h1>
+            </div>
 
             <UserStats stats={currentStats} />
          </header>
 
-         <main>
+         <main className="mb-10">
             <div className="flex flex-col lg:flex-row items-start justify-evenly gap-4">
                <section className="min-w-1/4 max-w-md">
                   <HabitList
