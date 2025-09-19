@@ -58,7 +58,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
          ref={setNodeRef}
          style={style}
          {...attributes}
-         className="flex items-center gap-2"
+         className="flex items-center gap-1 flex-wrap"
       >
          {editId === i.id ? (
             <form
@@ -158,7 +158,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
          ? JSON.parse(saved)
          : [
               { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
-              { id: crypto.randomUUID(), name: "Videogame (30 min)", cost: 10 },
+              { id: crypto.randomUUID(), name: "Jogar (30 min)", cost: 10 },
            ];
       setItemList(parsed);
    }, []);

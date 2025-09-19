@@ -129,7 +129,7 @@ const Home = () => {
          </header>
 
          <main>
-            <div className="flex flex-col lg:flex-row items-start justify-around gap-4">
+            <div className="flex flex-col lg:flex-row items-start justify-evenly gap-4">
                <section className="min-w-1/4 max-w-[25rem]">
                   <HabitList
                      giveReward={handleGiveReward}
