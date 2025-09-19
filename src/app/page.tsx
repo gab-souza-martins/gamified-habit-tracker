@@ -111,8 +111,12 @@ const Home = () => {
       setIsConfirmBuyOpen(false);
    };
 
+   React.useEffect(() => {
+      document.body.classList.add("p-4");
+   }, []);
+
    return (
-      <body className="p-4">
+      <>
          {isBuyingErrorOpen && <BuyingError closeError={handleCloseModals} />}
          {isConfirmBuyOpen && (
             <ConfirmBuy
@@ -149,7 +153,7 @@ const Home = () => {
                </section>
             </div>
          </main>
-      </body>
+      </>
    );
 };
 
