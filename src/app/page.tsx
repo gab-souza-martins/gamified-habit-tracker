@@ -134,21 +134,21 @@ const Home = () => {
 
          <main>
             <div className="flex flex-col lg:flex-row items-start justify-evenly gap-4">
-               <section className="min-w-1/4 max-w-[25rem]">
+               <section className="min-w-1/4 max-w-md">
                   <HabitList
                      giveReward={handleGiveReward}
                      removeReward={handleRemoveReward}
                   />
                </section>
 
-               <section className="min-w-1/4 max-w-[25rem]">
+               <section className="min-w-1/4 max-w-md">
                   <TodoList
                      giveReward={handleGiveReward}
                      removeReward={handleRemoveReward}
                   />
                </section>
 
-               <section className="min-w-1/4 max-w-[25rem]">
+               <section className="min-w-1/4 max-w-md">
                   <Shop buyItem={handleBuyItem} />
                </section>
             </div>

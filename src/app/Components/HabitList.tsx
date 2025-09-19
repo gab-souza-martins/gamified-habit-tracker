@@ -116,7 +116,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
             <div className="flex items-center gap-2">
                <span className="text-gray-500">Sequência: {i.streak}</span>
                <span className="text-gray-500">
-                  Maior sequência: {i.highestStreak}
+                  Maior seq.: {i.highestStreak}
                </span>
             </div>
 
