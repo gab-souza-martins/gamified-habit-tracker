@@ -15,7 +15,7 @@
 * {
    transition: background-color 250ms ease-in-out,
       border-color 250ms ease-in-out, color 250ms ease-in-out,
-      translate 300ms ease-in-out;
+      text-shadow 250ms ease-in-out, translate 300ms ease-in-out;
 }
 
 @theme inline {

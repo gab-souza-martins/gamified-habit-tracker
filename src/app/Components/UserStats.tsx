@@ -20,8 +20,10 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                <FaHandFist /> Corpo {stats.body.level}
                <div className="border rounded-md w-30 lg:w-40">
                   <div
-                     className="rounded-md p-1 bg-yellow-300"
+                     className="rounded-md p-1 bg-yellow-300 text-shadow-lg"
                      style={{
+                        textShadow:
+                           "-1px -1px 1px var(--background), 1px -1px 1px var(--background), -1px 1px 1px var(--background), 1px 1px 1px var(--background)",
                         width: `calc(${stats.body.exp} / ${stats.body.expToNextLevel} * 100%)`,
                         transition: "width 200ms ease-in-out",
                      }}
@@ -37,6 +39,8 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                   <div
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
+                        textShadow:
+                           "-1px -1px 1px var(--background), 1px -1px 1px var(--background), -1px 1px 1px var(--background), 1px 1px 1px var(--background)",
                         width: `calc(${stats.mind.exp} / ${stats.mind.expToNextLevel} * 100%)`,
                         transition: "width 200ms ease-in-out",
                      }}
@@ -52,6 +56,8 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                   <div
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
+                        textShadow:
+                           "-1px -1px 1px var(--background), 1px -1px 1px var(--background), -1px 1px 1px var(--background), 1px 1px 1px var(--background)",
                         width: `calc(${stats.spirit.exp} / ${stats.spirit.expToNextLevel} * 100%)`,
                         transition: "width 200ms ease-in-out",
                      }}
