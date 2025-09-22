@@ -222,6 +222,7 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
             text="Adicionar afazer"
             onClickEvent={() => setIsAddFormOpen(true)}
          />
+         <br />
 
          <DndContext
             collisionDetection={closestCenter}

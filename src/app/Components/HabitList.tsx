@@ -276,6 +276,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
             text="Adicionar hábito"
             onClickEvent={() => setIsAddFormOpen(true)}
          />
+         <br />
 
          <DndContext
             collisionDetection={closestCenter}

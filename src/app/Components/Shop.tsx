@@ -239,6 +239,7 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
             />
             <AddBtn text="Adicionar item" onClickEvent={handleAdd} />
          </form>
+         <br />
 
          <DndContext
             collisionDetection={closestCenter}
