@@ -6,6 +6,18 @@
    --light-foreground: var(--color-gray-700);
 }
 
+[data-theme="dark"] {
+   --background: #171717;
+   --foreground: #ffffff;
+   --light-foreground: var(--color-gray-400);
+}
+
+* {
+   transition: background-color 250ms ease-in-out,
+      border-color 250ms ease-in-out, color 250ms ease-in-out,
+      translate 300ms ease-in-out;
+}
+
 @theme inline {
    --color-background: var(--background);
    --color-foreground: var(--foreground);
