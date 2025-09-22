@@ -23,6 +23,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
                         width: `calc(${stats.body.exp} / ${stats.body.expToNextLevel} * 100%)`,
+                        transition: "width 200ms ease-in-out",
                      }}
                   >
                      {stats.body.exp}/{stats.body.expToNextLevel}
@@ -37,6 +38,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
                         width: `calc(${stats.mind.exp} / ${stats.mind.expToNextLevel} * 100%)`,
+                        transition: "width 200ms ease-in-out",
                      }}
                   >
                      {stats.mind.exp}/{stats.mind.expToNextLevel}
@@ -51,6 +53,7 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
                      className="rounded-md p-1 bg-yellow-300"
                      style={{
                         width: `calc(${stats.spirit.exp} / ${stats.spirit.expToNextLevel} * 100%)`,
+                        transition: "width 200ms ease-in-out",
                      }}
                   >
                      {stats.spirit.exp}/{stats.spirit.expToNextLevel}
