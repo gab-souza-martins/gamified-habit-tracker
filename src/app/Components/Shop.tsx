@@ -159,6 +159,8 @@ const Shop: React.FC<ShopProps> = ({ buyItem }) => {
          : [
               { id: crypto.randomUUID(), name: "Guloseima", cost: 5 },
               { id: crypto.randomUUID(), name: "Jogar (30 min)", cost: 10 },
+              { id: crypto.randomUUID(), name: "Assistir filme", cost: 20 },
+              { id: crypto.randomUUID(), name: "Nova roupa", cost: 50 },
            ];
       setItemList(parsed);
    }, []);
