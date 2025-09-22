@@ -128,7 +128,8 @@ const SortableItem: React.FC<SortableItemProps> = ({
                }}
                aria-label="Editar item"
                className="cursor-pointer py-1.5 pl-1.5 pr-1 rounded-md transition duration-75 ease-in-out
-                        hover:bg-emerald-500 hover:text-white active:bg-emerald-600 active:text-white"
+                        hover:bg-emerald-500 hover:text-white active:bg-emerald-600 active:text-white
+                        focus:outline-2 focus:outline-emerald-500 focus:outline-offset-2"
             >
                <FaEdit />
             </button>
@@ -140,7 +141,8 @@ const SortableItem: React.FC<SortableItemProps> = ({
                }}
                aria-label="Remover item"
                className="cursor-pointer p-1.5 rounded-md transition duration-75 ease-in-out
-                        hover:bg-rose-500 hover:text-white active:bg-rose-600 active:text-white"
+                        hover:bg-rose-500 hover:text-white active:bg-rose-600 active:text-white
+                        focus:outline-2 focus:outline-rose-500 focus:outline-offset-2"
             >
                <FaX />
             </button>

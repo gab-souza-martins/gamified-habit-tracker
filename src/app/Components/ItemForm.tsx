@@ -220,7 +220,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
                         e.preventDefault();
                         handleAdd();
                      }}
-                     className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
+                     className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 text-black
                                bg-cyan-300 shadow-sm hover:bg-cyan-400 hover:shadow-xl transition duration-75 ease-in-out
                                active:bg-cyan-500 active:shadow-md focus:outline-2 focus:outline-cyan-300 focus:outline-offset-2"
                   >
