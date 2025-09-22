@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBrain, FaHandFist, FaHeart, FaX } from "react-icons/fa6";
+import { FaBrain, FaHandFist, FaHeart, FaTrash, FaX } from "react-icons/fa6";
 import Todo from "../Types/TodoType";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
@@ -15,6 +15,7 @@ import ItemForm from "./ItemForm";
 import AttributeName from "../Types/AttributeNameType";
 import EditValues from "../Types/EditValuesType";
 import AddBtn from "./Buttons/AddBtn";
+import RedOutlineBtn from "./Buttons/RedOutlineBtn";
 
 interface TodoListProps {
    giveReward: (attribute: AttributeName, reward: number) => void;
@@ -175,6 +176,8 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
 
    const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
       React.useState<boolean>(false);
+   const [isRemovingDoneTodos, setIsRemovingTodos] =
+      React.useState<boolean>(false);
    const [idToRemove, setIdToRemove] = React.useState<string>("");
 
    const handleRemove = () => {
@@ -182,10 +185,18 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
       setTodos(newTodos);
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
+
+   const handleRemoveDone = () => {
+      const newTodos: Todo[] = todos.filter((i) => i.done === false);
+      setTodos(newTodos);
+      localStorage.setItem("todos", JSON.stringify(newTodos));
+   };
+
    const handleCloseModal = () => {
       setIsAddFormOpen(false);
       setIsEditFormOpen(false);
       setIsConfirmRemoveOpen(false);
+      setIsRemovingTodos(false);
    };
 
    return (
@@ -216,12 +227,27 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
             />
          )}
 
+         {isRemovingDoneTodos && (
+            <ConfirmRemove
+               confirmRemove={handleRemoveDone}
+               closeRemove={handleCloseModal}
+            />
+         )}
+
          <h2 className="text-xl">Afazeres</h2>
 
-         <AddBtn
-            text="Adicionar afazer"
-            onClickEvent={() => setIsAddFormOpen(true)}
-         />
+         <div className="flex gap-2 flex-col items-start sm:flex-row sm:items-center">
+            <AddBtn
+               text="Adicionar afazer"
+               onClickEvent={() => setIsAddFormOpen(true)}
+            />
+
+            <RedOutlineBtn
+               btnIcon={<FaTrash />}
+               btnText="Remover concluídos"
+               onClickEvent={() => setIsRemovingTodos(true)}
+            />
+         </div>
          <br />
 
          <DndContext
