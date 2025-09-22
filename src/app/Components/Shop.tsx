@@ -110,7 +110,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
                buyItem(i.cost);
             }}
             aria-label="Comprar item"
-            className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2
+            className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 text-black
                       bg-amber-300 shadow-sm hover:bg-amber-400 hover:shadow-xl transition duration-75 ease-in-out
                       active:bg-amber-500 active:shadow-md focus:outline-2 focus:outline-amber-300 focus:outline-offset-2"
          >
