@@ -102,7 +102,7 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
                <span
                   {...listeners}
                   className={`cursor-pointer flex items-center gap-2 ${
-                     i.done ? "text-gray-400 line-through" : ""
+                     i.done ? "text-[var(--light-foreground)] line-through" : ""
                   }`}
                >
                   {i.attribute === "body" && <FaHandFist />}
@@ -114,8 +114,10 @@ const HabitList: React.FC<HabitListProps> = ({ giveReward, removeReward }) => {
             </div>
 
             <div className="flex items-center gap-2">
-               <span className="text-gray-500">Sequência: {i.streak}</span>
-               <span className="text-gray-500">
+               <span style={{ color: "var(--light-foreground)" }}>
+                  Sequência: {i.streak}
+               </span>
+               <span style={{ color: "var(--light-foreground)" }}>
                   Maior seq.: {i.highestStreak}
                </span>
             </div>

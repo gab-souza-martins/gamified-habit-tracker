@@ -83,7 +83,7 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
                <span
                   {...listeners}
                   className={`cursor-pointer flex items-center gap-2 ${
-                     i.done ? "text-gray-400 line-through" : ""
+                     i.done ? "text-[var(--light-foreground)] line-through" : ""
                   }`}
                >
                   {i.attribute === "body" && <FaHandFist />}
