@@ -10,6 +10,7 @@ import AttributeName from "./Types/AttributeNameType";
 import Shop from "./Components/Shop";
 import BuyingError from "./Components/BuyingError";
 import ConfirmBuy from "./Components/ConfirmBuy";
+import ThemeToggleBtn from "./Components/Buttons/ThemeToggleBtn";
 
 const Home = () => {
    const [currentStats, setCurrentStats] = React.useState<Stats>({
@@ -126,8 +127,10 @@ const Home = () => {
          )}
 
          <header className="mb-5">
-            <div className="mb-5">
+            <div className="flex justify-between mb-5">
                <h1 className="text-3xl font-bold">Quest Tracker</h1>
+
+               <ThemeToggleBtn />
             </div>
 
             <UserStats stats={currentStats} />
