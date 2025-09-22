@@ -10,11 +10,11 @@ const UserStats: React.FC<UserStatsProps> = ({ stats }) => {
    return (
       <div
          className="flex gap-2 flex-col 
-                    md:flex-row md:items-center md:divide-x-2 md:divide-solid md:divide-neutral-400"
+                    md:flex-row md:items-center md:divide-x-2 md:divide-solid md:divide-gray-400"
       >
          <div
             className="flex flex-col gap-3 
-                       md:flex-row md:items-center md:pr-2 md:divide-x-2 md:divide-solid md:divide-neutral-400"
+                       md:flex-row md:items-center md:pr-2 md:divide-x-2 md:divide-solid md:divide-gray-400"
          >
             <div className="flex items-center gap-1 pr-2">
                <FaHandFist /> Corpo {stats.body.level}
