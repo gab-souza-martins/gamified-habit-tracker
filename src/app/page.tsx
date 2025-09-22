@@ -156,14 +156,15 @@ const Home = () => {
                   <Shop buyItem={handleBuyItem} />
                </section>
             </div>
+
+            <br />
+            <section className="flex items-center justify-center gap-4 flex-col sm:flex-row">
+               <RemoveAllItems />
+               <ResetStats />
+            </section>
          </main>
 
          <footer>
-            <div className="flex item-centers justify-center gap-4">
-               <RemoveAllItems />
-               <ResetStats />
-            </div>
-            <br />
             <p className="text-center text-sm mb-13 xs:mb-0">
                2025 &copy; Gabriel de Souza - Todos os direitos reservados
             </p>
