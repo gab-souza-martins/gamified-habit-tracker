@@ -176,8 +176,6 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
 
    const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] =
       React.useState<boolean>(false);
-   const [isRemovingDoneTodos, setIsRemovingTodos] =
-      React.useState<boolean>(false);
    const [idToRemove, setIdToRemove] = React.useState<string>("");
 
    const handleRemove = () => {
@@ -186,6 +184,8 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
       localStorage.setItem("todos", JSON.stringify(newTodos));
    };
 
+   const [isRemovingDoneTodos, setIsRemovingTodos] =
+      React.useState<boolean>(false);
    const handleRemoveDone = () => {
       const newTodos: Todo[] = todos.filter((i) => i.done === false);
       setTodos(newTodos);
