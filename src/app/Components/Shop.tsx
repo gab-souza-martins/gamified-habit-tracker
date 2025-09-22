@@ -58,7 +58,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
          ref={setNodeRef}
          style={style}
          {...attributes}
-         className="flex items-center gap-1 flex-wrap"
+         className="flex items-center gap-1 flex-wrap mb-2"
       >
          {editId === i.id ? (
             <form

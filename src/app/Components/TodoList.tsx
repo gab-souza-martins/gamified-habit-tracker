@@ -71,7 +71,7 @@ const TodoList: React.FC<TodoListProps> = ({ giveReward, removeReward }) => {
             ref={setNodeRef}
             style={style}
             {...attributes}
-            className="flex items-center gap-2 flex-wrap"
+            className="flex items-center gap-2 flex-wrap mb-2"
          >
             <div className="flex items-center gap-2">
                <input
