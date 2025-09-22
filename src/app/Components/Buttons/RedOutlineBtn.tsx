@@ -17,9 +17,10 @@ const RedOutlineBtn: React.FC<RedOutlineBtnProps> = ({
             e.preventDefault();
             onClickEvent();
          }}
-         className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 border-2 border-rose-600 shadow-sm
-                   text-rose-600 hover:bg-rose-600 hover:text-white hover:shadow-xl transition duration-75 ease-in-out
-                   active:bg-rose-700 active:text-white active:border-rose-700 active:shadow-md"
+         className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 border-2 border-[var(--custom-rose)] shadow-sm
+                   text-[var(--custom-rose)] hover:bg-[var(--custom-rose)] hover:text-white hover:shadow-xl 
+                   active:bg-rose-700 active:text-white active:border-rose-700 active:shadow-md
+                   transition duration-75 ease-in-out"
       >
          {btnIcon}
          <span className="font-semibold">{btnText}</span>

@@ -4,12 +4,14 @@
    --background: #ffffff;
    --foreground: #171717;
    --light-foreground: var(--color-gray-700);
+   --custom-rose: var(--color-rose-600);
 }
 
 [data-theme="dark"] {
    --background: #171717;
    --foreground: #ffffff;
    --light-foreground: var(--color-gray-400);
+   --custom-rose: var(--color-rose-500);
 }
 
 * {

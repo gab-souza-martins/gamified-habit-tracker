@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBan, FaTrash } from "react-icons/fa";
+import RedOutlineBtn from "./Buttons/RedOutlineBtn";
 
 interface ConfirmRemoveProps {
    confirmRemove: () => void;
@@ -33,7 +34,7 @@ const ConfirmRemove: React.FC<ConfirmRemoveProps> = ({
             }}
          >
             <p
-               className="text-rose-500"
+               className="text-[var(--custom-rose)]"
                role="alert"
                aria-live="assertive"
                ref={focusRef}
@@ -56,15 +57,11 @@ const ConfirmRemove: React.FC<ConfirmRemoveProps> = ({
                   <span className="font-semibold">Confirmar</span>
                </button>
 
-               <button
-                  onClick={closeRemove}
-                  className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 border-2 border-rose-600 shadow-sm
-                            text-rose-600 hover:bg-rose-600 hover:text-white hover:shadow-xl transition duration-75 ease-in-out
-                            active:bg-rose-700 active:text-white active:border-rose-700 active:shadow-md"
-               >
-                  <FaBan />
-                  <span className="font-semibold">Cancelar</span>
-               </button>
+               <RedOutlineBtn
+                  btnIcon={<FaBan />}
+                  btnText="Cancelar"
+                  onClickEvent={closeRemove}
+               />
             </div>
          </div>
       </div>
