@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBan } from "react-icons/fa6";
+import RedOutlineBtn from "./Buttons/RedOutlineBtn";
 
 interface BuyingErrorProps {
    closeError: () => void;
@@ -23,7 +24,7 @@ const BuyingError: React.FC<BuyingErrorProps> = ({ closeError }) => {
             }}
          >
             <p
-               className="text-rose-500"
+               className="text-[var(--custom-rose)]"
                role="alert"
                aria-live="assertive"
                ref={focusRef}
@@ -34,15 +35,11 @@ const BuyingError: React.FC<BuyingErrorProps> = ({ closeError }) => {
             <br />
 
             <div className="flex">
-               <button
-                  onClick={closeError}
-                  className="cursor-pointer rounded-md flex items-center gap-2 py-1 px-2 border-2 border-rose-600 shadow-sm
-                                text-rose-600 hover:bg-rose-600 hover:text-white hover:shadow-xl transition duration-75 ease-in-out
-                                active:bg-rose-700 active:text-white active:border-rose-700 active:shadow-md"
-               >
-                  <FaBan />
-                  <span className="font-semibold">Cancelar</span>
-               </button>
+               <RedOutlineBtn
+                  btnIcon={<FaBan />}
+                  btnText="Cancelar"
+                  onClickEvent={closeError}
+               />
             </div>
          </div>
       </div>
