@@ -62,7 +62,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
             className="border p-6 rounded-lg shadow-lg w-70 sm:w-96"
             style={{
                backgroundColor: "var(--background)",
-               //    borderColor: "var(--light-foreground)",
+               borderColor: "var(--light-foreground)",
             }}
          >
             <form className="flex flex-col gap-3">
@@ -77,123 +77,141 @@ const ItemForm: React.FC<ItemFormProps> = ({
                />
 
                {/* Atributos */}
-               <div className="flex items-center gap-3">
+               <div className="flex items-center flex-col gap-1 sm:flex-row sm:gap-3">
                   <label htmlFor="attributeSelect" className="font-semibold">
                      Atributo
                   </label>
 
-                  <label>
-                     <input
-                        onChange={(e) =>
-                           setAttribute(e.target.value as AttributeName)
-                        }
-                        checked={attribute === "body"}
-                        value="body"
-                        type="radio"
-                        name="attributeSelect"
-                     />
-                     Corpo
-                  </label>
-                  <label>
-                     <input
-                        onChange={(e) =>
-                           setAttribute(e.target.value as AttributeName)
-                        }
-                        checked={attribute === "mind"}
-                        value="mind"
-                        type="radio"
-                        name="attributeSelect"
-                     />
-                     Mente
-                  </label>
-                  <label>
-                     <input
-                        onChange={(e) =>
-                           setAttribute(e.target.value as AttributeName)
-                        }
-                        checked={attribute === "spirit"}
-                        value="spirit"
-                        type="radio"
-                        name="attributeSelect"
-                     />
-                     Espírito
-                  </label>
+                  <div className="flex items-center gap-2">
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setAttribute(e.target.value as AttributeName)
+                           }
+                           checked={attribute === "body"}
+                           value="body"
+                           type="radio"
+                           name="attributeSelect"
+                        />
+                        Corpo
+                     </label>
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setAttribute(e.target.value as AttributeName)
+                           }
+                           checked={attribute === "mind"}
+                           value="mind"
+                           type="radio"
+                           name="attributeSelect"
+                        />
+                        Mente
+                     </label>
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setAttribute(e.target.value as AttributeName)
+                           }
+                           checked={attribute === "spirit"}
+                           value="spirit"
+                           type="radio"
+                           name="attributeSelect"
+                        />
+                        Espírito
+                     </label>
+                  </div>
                </div>
 
                {/* Dificuldade */}
-               <div className="flex items-center gap-3">
+               <div className="flex items-center flex-col gap-1 sm:flex-row sm:gap-3">
                   <label htmlFor="difficultySelect" className="font-semibold">
                      Dificuldade
                   </label>
 
-                  <label>
-                     <input
-                        onChange={(e) => setDifficulty(Number(e.target.value))}
-                        checked={difficulty === 1}
-                        value={1}
-                        type="radio"
-                        name="difficultySelect"
-                     />
-                     Fácil
-                  </label>
-                  <label>
-                     <input
-                        onChange={(e) => setDifficulty(Number(e.target.value))}
-                        checked={difficulty === 2}
-                        value={2}
-                        type="radio"
-                        name="difficultySelect"
-                     />
-                     Médio
-                  </label>
-                  <label>
-                     <input
-                        onChange={(e) => setDifficulty(Number(e.target.value))}
-                        checked={difficulty === 3}
-                        value={3}
-                        type="radio"
-                        name="difficultySelect"
-                     />
-                     Difícil
-                  </label>
+                  <div className="flex items-center gap-2">
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setDifficulty(Number(e.target.value))
+                           }
+                           checked={difficulty === 1}
+                           value={1}
+                           type="radio"
+                           name="difficultySelect"
+                        />
+                        Fácil
+                     </label>
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setDifficulty(Number(e.target.value))
+                           }
+                           checked={difficulty === 2}
+                           value={2}
+                           type="radio"
+                           name="difficultySelect"
+                        />
+                        Médio
+                     </label>
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setDifficulty(Number(e.target.value))
+                           }
+                           checked={difficulty === 3}
+                           value={3}
+                           type="radio"
+                           name="difficultySelect"
+                        />
+                        Difícil
+                     </label>
+                  </div>
                </div>
 
                {/* Importância */}
-               <div className="flex items-center gap-3">
+               <div className="flex items-center flex-col gap-1 sm:flex-row sm:gap-3">
                   <label htmlFor="importanceSelect" className="font-semibold">
                      Importância
                   </label>
 
-                  <label>
-                     <input
-                        onChange={(e) => setImportance(Number(e.target.value))}
-                        checked={importance === 1}
-                        value={1}
-                        type="radio"
-                        name="importanceSelect"
-                     />
-                     Trivial
-                  </label>
-                  <label>
-                     <input
-                        onChange={(e) => setImportance(Number(e.target.value))}
-                        checked={importance === 2}
-                        value={2}
-                        type="radio"
-                        name="importanceSelect"
-                     />
-                     Importante
-                  </label>
-                  <label>
-                     <input
-                        onChange={(e) => setImportance(Number(e.target.value))}
-                        checked={importance === 3}
-                        value={3}
-                        type="radio"
-                        name="importanceSelect"
-                     />
-                     Urgente
-                  </label>
+                  <div className="flex items-center gap-1.5">
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setImportance(Number(e.target.value))
+                           }
+                           checked={importance === 1}
+                           value={1}
+                           type="radio"
+                           name="importanceSelect"
+                        />
+                        Trivial
+                     </label>
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setImportance(Number(e.target.value))
+                           }
+                           checked={importance === 2}
+                           value={2}
+                           type="radio"
+                           name="importanceSelect"
+                        />
+                        Importante
+                     </label>
+                     <label>
+                        <input
+                           onChange={(e) =>
+                              setImportance(Number(e.target.value))
+                           }
+                           checked={importance === 3}
+                           value={3}
+                           type="radio"
+                           name="importanceSelect"
+                        />
+                        Urgente
+                     </label>
+                  </div>
                </div>
 
                <div className="flex gap-2">
