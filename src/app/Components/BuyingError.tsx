@@ -20,7 +20,7 @@ const BuyingError: React.FC<BuyingErrorProps> = ({ closeError }) => {
             className="border p-6 rounded-lg shadow-lg w-70 sm:w-96"
             style={{
                backgroundColor: "var(--background)",
-               //    borderColor: "var(--light-foreground)",
+               borderColor: "var(--light-foreground)",
             }}
          >
             <p
