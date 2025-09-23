@@ -11,6 +11,7 @@ Este é um aplicativo web para gerenciamento de hábitos e afazeres com funçõe
    -  [Afazeres](#afazeres)
    -  [Loja](#loja)
    -  [Editando e removendo itens](#editando-e-removendo-itens)
+   -  [Remover tudo](#remover-tudo)
 -  [Posfácio](#posfácio)
    -  [Autor](#autor)
 
@@ -77,6 +78,10 @@ Para hábitos e afazeres, o botão de editar abre a janela do formulário de adi
 Já para itens da loja, editar muda o item para caixas de texto em que o usuário pode digitar, e o botão de remover faz isso imediatamente.
 
 <!-- TODO editar item -->
+
+### Remover tudo
+
+No fim da tela, você encontrará botões para remover todos os itens e para resetar os atributos (incluindo moedas). Eles abrem uma confirmação antes de realizar a ação, porém ainda tenha em mente que esta é uma ação irreversível.
 
 ## Posfácio
 
