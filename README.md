@@ -35,6 +35,8 @@ Corpo é para tarefas que contribuem para sua força e saúde física. Mente é 
 
 Ao criar um hábito ou afazer, você pode escolher qual atributo este estará relacionado. Ao completá-lo, você recebe experiência no atributo escolhido dependendo da dificuldade e importância da tarefa.
 
+Ao completar tarefas o suficiente, o nível do atributo aumenta, junto de quanta experiência é necessária para aumentar outra vez.
+
 <!-- TODO imagem mostrando atributos com diferentes níveis e exp -->
 
 ### Hábitos
