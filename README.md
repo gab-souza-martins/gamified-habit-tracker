@@ -17,15 +17,14 @@ Este é um aplicativo web para gerenciamento de hábitos e afazeres com funçõe
 
 ## Previews
 
-<!-- TODO previews completas no mobile e desktop -->
+![alt text](<public/img/Screenshot 2025-09-23 at 11-58-19 Quest Tracker.png>)
+![alt text](<public/img/Screenshot 2025-09-23 at 11-58-04 Quest Tracker.png>)
 
 ## Como usar
 
 O site pode ser acessado no seguinte link: https://gamified-habit-tracker-lilac.vercel.app/
 
 Ao acessar pela primeira vez, você se encontrará com a tela inicial. Você pode alterar entre modo claro e escuro à vontade.
-
-<!-- TODO tela inicial clara e escura -->
 
 ### Atributos
 
@@ -37,19 +36,11 @@ Ao criar um hábito ou afazer, você pode escolher qual atributo este estará re
 
 Ao completar tarefas o suficiente, o nível do atributo aumenta, junto de quanta experiência é necessária para aumentar outra vez.
 
-<!-- TODO imagem mostrando atributos com diferentes níveis e exp -->
-
 ### Hábitos
 
 A primeira coisa abaixo dos atributos é a lista de hábitos. No início, ela está vazia, mas você pode clicar no botão de adicionar para abrir um formulário.
 
-<!-- TODO imagem do formulário vazio -->
-
 Com ele, você pode escolher o nome, atributo, dificuldade e importância do seu hábito. Note que o que é difícil ou importante varia com cada pessoa e caso. Passar tempo com amigos pode não parecer ter benefício material em comparação com estudar para uma prova, porém ambos são importantes para sua saúde.
-
-Abaixo estão exemplos de três hábitos.
-
-<!-- TODO três hábitos no ItemForm -->
 
 Cada hábito possui uma caixa para marcá-lo como concluído, seu atributo, nome, e sequências atual e maior (quantas vezes você o realizou em seguida). Você também pode arrastar e soltar cada hábito onde desejar.
 
@@ -57,17 +48,11 @@ Cada hábito possui uma caixa para marcá-lo como concluído, seu atributo, nome
 
 Afazeres funcionam de forma parecida com hábitos, porém eles são feitos para serem marcados somente uma vez. São tarefas simples como jogar o lixo fora, arrumar a cama, ou cozinhar para uma festa. Por isso, não possuem sequências como hábitos, e há um botão no início da lista para apagar todos os afazeres concluídos de uma vez.
 
-<!-- TODO afazeres -->
-
 ### Loja
 
 Cada hábito ou afazer concluído fornece moedas. Essas moedas podem ser usadas na loja para comprar recompensas. Afinal, trabalhar e trabalhar sem fim não é modo de viver.
 
-<!-- TODO loja -->
-
 A loja vem com quatro itens padrões: guloseima, jogar por 30 minutos, ver um filme, e comprar uma nova roupa. Porém você também pode adicionar itens à sua escolha.
-
-<!-- TODO adicionar item -->
 
 ### Editando e removendo itens
 
@@ -75,11 +60,7 @@ Do lado de cada item, seja hábito, afazer ou item de loja, há um botão para e
 
 Para hábitos e afazeres, o botão de editar abre a janela do formulário de adicionar, porém agora para editar; e o botão de remover abre uma confirmação.
 
-<!-- TODO editar e remover item -->
-
 Já para itens da loja, editar muda o item para caixas de texto em que o usuário pode digitar, e o botão de remover faz isso imediatamente.
-
-<!-- TODO editar item -->
 
 ### Remover tudo
 
