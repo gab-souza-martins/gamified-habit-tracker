@@ -43,6 +43,8 @@ const ItemForm: React.FC<ItemFormProps> = ({
       }
    }, [initialEditValues]);
 
+   const [error, setError] = React.useState<boolean>(false);
+
    const handleAdd = () => {
       if (mode === "add") {
          onAdd(name, attribute, difficulty, importance);
@@ -51,6 +53,7 @@ const ItemForm: React.FC<ItemFormProps> = ({
       }
 
       if (name.trim() === "") {
+         setError(true);
          return;
       }
       closeForm();
@@ -70,11 +73,21 @@ const ItemForm: React.FC<ItemFormProps> = ({
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   type="text"
-                  className="border rounded-md p-2"
+                  className={`border rounded-md p-2 ${
+                     error
+                        ? "border-[var(--custom-rose)] text-[var(--custom-rose)]"
+                        : ""
+                  }`}
                   aria-label="Nome"
                   aria-required
                   placeholder="Nome"
                />
+
+               {error && (
+                  <span className="text-[var(--custom-rose)]">
+                     Nome não deve estar vazio.
+                  </span>
+               )}
 
                {/* Atributos */}
                <div className="flex items-center flex-col gap-1 sm:flex-row sm:gap-3">
