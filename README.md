@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gerenciador de hábitos gamificado
 
-## Getting Started
+Este é um aplicativo web para gerenciamento de hábitos e afazeres com funções de gamificação. Permite que o usuário aumente atributos de Corpo, Mente e Espiríto enquanto ganha moedas para se recompensar por um trabalho bem feito. Criado com Next, React, TypeScript e Tailwind, e faz uso do pacote [dnd-kit](https://dndkit.com/).
 
-First, run the development server:
+## Índice
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-  [Previews](#previews)
+-  [Como usar](#como-usar)
+   -  [Atributos](#atributos)
+   -  [Hábitos](#hábitos)
+   -  [Afazeres](#afazeres)
+   -  [Loja](#loja)
+   -  [Editando e removendo itens](#editando-e-removendo-itens)
+-  [Posfácio](#posfácio)
+   -  [Autor](#autor)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Previews
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- TODO previews completas no mobile e desktop -->
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Como usar
 
-## Learn More
+O site pode ser acessado no seguinte link: https://gamified-habit-tracker-lilac.vercel.app/
 
-To learn more about Next.js, take a look at the following resources:
+Ao acessar pela primeira vez, você se encontrará com a tela inicial. Você pode alterar entre modo claro e escuro à vontade.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- TODO tela inicial clara e escura -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Atributos
 
-## Deploy on Vercel
+No topo da tela você verá os seus atributos: Corpo, Mente e Espírito, além de suas moedas, que serão explicadas em breve.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Corpo é para tarefas que contribuem para sua força e saúde física. Mente é para o seu conhecimento e raciocínio. E Espírito é para seus relacionamentos e saúde emocional.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ao criar um hábito ou afazer, você pode escolher qual atributo este estará relacionado. Ao completá-lo, você recebe experiência no atributo escolhido dependendo da dificuldade e importância da tarefa.
+
+<!-- TODO imagem mostrando atributos com diferentes níveis e exp -->
+
+### Hábitos
+
+A primeira coisa abaixo dos atributos é a lista de hábitos. No início, ela está vazia, mas você pode clicar no botão de adicionar para abrir um formulário.
+
+<!-- TODO imagem do formulário vazio -->
+
+Com ele, você pode escolher o nome, atributo, dificuldade e importância do seu hábito. Note que o que é difícil ou importante varia com cada pessoa e caso. Passar tempo com amigos pode não parecer ter benefício material em comparação com estudar para uma prova, porém ambos são importantes para sua saúde.
+
+Abaixo estão exemplos de três hábitos.
+
+<!-- TODO três hábitos no ItemForm -->
+
+Cada hábito possui uma caixa para marcá-lo como concluído, seu atributo, nome, e sequências atual e maior (quantas vezes você o realizou em seguida). Você também pode arrastar e soltar cada hábito onde desejar.
+
+### Afazeres
+
+Afazeres funcionam de forma parecida com hábitos, porém eles são feitos para serem marcados somente uma vez. São tarefas simples como jogar o lixo fora, arrumar a cama, ou cozinhar para uma festa. Por isso, não possuem sequências como hábitos, e há um botão no início da lista para apagar todos os afazeres concluídos de uma vez.
+
+<!-- TODO afazeres -->
+
+### Loja
+
+Cada hábito ou afazer concluído fornece moedas. Essas moedas podem ser usadas na loja para comprar recompensas. Afinal, trabalhar e trabalhar sem fim não é modo de viver.
+
+<!-- TODO loja -->
+
+A loja vem com quatro itens padrões: guloseima, jogar por 30 minutos, ver um filme, e comprar uma nova roupa. Porém você também pode adicionar itens à sua escolha.
+
+<!-- TODO adicionar item -->
+
+### Editando e removendo itens
+
+Do lado de cada item, seja hábito, afazer ou item de loja, há um botão para editar e um para remover.
+
+Para hábitos e afazeres, o botão de editar abre a janela do formulário de adicionar, porém agora para editar; e o botão de remover abre uma confirmação.
+
+<!-- TODO editar e remover item -->
+
+Já para itens da loja, editar muda o item para caixas de texto em que o usuário pode digitar, e o botão de remover faz isso imediatamente.
+
+<!-- TODO editar item -->
+
+## Posfácio
+
+Repositório: https://github.com/gab-souza-martins/gamified-habit-tracker
+
+### Autor
+
+GitHub: https://github.com/gab-souza-martins
+
+Portifólio: https://gab-souza-martins.github.io/portifolio-junior/
